@@ -6,6 +6,93 @@
     <link rel="stylesheet" href="./assets/style/style.css">
     <title>Clever Cloud Morocco</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="./config.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Logo scroll animation */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        #logoScroll {
+            display: flex;
+            gap: 4rem;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+
+        @media (max-width: 1024px) {
+            #logoScroll {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #logoScroll {
+                gap: 2rem;
+            }
+        }
+
+        #logoScroll:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-track {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .logo-track img {
+            height: 60px;
+            min-width: 120px;
+            max-width: 180px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        .logo-track img:hover {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .logo-track {
+                gap: 3rem;
+            }
+            .logo-track img {
+                height: 50px;
+                min-width: 100px;
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-track {
+                gap: 2rem;
+            }
+            .logo-track img {
+                height: 40px;
+                min-width: 80px;
+                max-width: 120px;
+            }
+        }
+    </style>
 </head>
 <body class="bg-[#F9F9FB] ">
     <!-- Header -->
@@ -13,13 +100,43 @@
         <a href="#">
             <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="h-10 lg:h-12">
         </a>
-        <nav class="flex items-center">
+        <nav class="flex items-center gap-4">
             <ul class="hidden lg:flex items-center gap-10">
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200">Home</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200">About Us</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200">Services</a></li>
-                <li><a href="#" class="bg-[#3a3871] !text-white !px-6 !py-3 font-semibold hover:bg-[#5754aa] transition-all duration-200 inline-flex items-center justify-center" style="height: 3rem;">Contact</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
+                <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.services">Services</a></li>
+                <li><a href="#application-form" class="bg-[#3a3871] !text-white !px-6 !py-3 font-semibold hover:bg-[#5754aa] transition-all duration-200 inline-flex items-center justify-center" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
             </ul>
+
+            <!-- Language Selector -->
+            <div class="relative">
+                <button id="langBtn" class="flex items-center gap-3 px-4 py-2 hover:bg-[#F9F9FB] transition-colors duration-200 bg-white" style="border-radius: 4px;">
+                    <span id="currentFlag" class="w-6 h-6 flex-shrink-0"></span>
+                    <span id="currentLang" class="text-base font-medium text-gray-700">EN</span>
+                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white shadow-lg" style="border-radius: 8px; z-index: 100; overflow: hidden; padding: 8px;">
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="en" data-name="EN">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#00247d"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#cf142b" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/></svg>
+                        <span class="text-base font-medium text-gray-700">English</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="fr" data-name="FR">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect width="900" height="600" fill="#ED2939"/><rect width="600" height="600" fill="#fff"/><rect width="300" height="600" fill="#002395"/></svg>
+                        <span class="text-base font-medium text-gray-700">Français</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="ar" data-name="AR">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect width="900" height="600" style="fill:#c1272d"/><path d="M 449.96875,200 427.53125,269.28125 354.75,269.34375 413.59375,312.15625 391.15625,381.5 C 406.32078,370.37811 433.78167,350.44542 450,338.6875 L 508.90625,381.46875 486.40625,312.1875 545.25,269.3125 472.53125,269.3125 449.96875,200 z M 449.96875,247.4375 457.125,269.28125 442.875,269.3125 449.96875,247.4375 z M 422.75,283.9375 418.375,297.53125 399.78125,284 422.75,283.9375 z M 438.125,283.9375 461.875,283.9375 469.21875,306.5625 450,320.5625 430.78125,306.5625 438.125,283.9375 z M 477.25,283.9375 500.1875,283.9375 481.65625,297.53125 477.25,283.9375 z M 426.03125,321.25 437.59375,329.59375 419,343.125 426.03125,321.25 z M 474.03125,321.25 481.0625,343.125 462.5,329.625 462.5,329.59375 474.03125,321.25 z" id="star" style="fill:#006233"/></svg>
+                        <span class="text-base font-medium text-gray-700">العربية</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="ber" data-name="ⵣ">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="#0090DA" width="900" height="200"/><rect fill="#78BE20" y="200" width="900" height="200"/><rect fill="#FEDD00" y="400" width="900" height="200"/><polygon fill="#CC0033" points="429.675,477.64 458.13,507.721 466.26,97.9695 450,80.8966 "/><path fill="#CC0033" d="M657.315 515.851l54.4711 -23.5769c-104.877,-104.064 -165.039,-142.275 -264.225,-144.714 -126.015,8.94308 -208.128,59.3489 -243.087,159.348l24.3898 -4.87785c99.9991,-123.576 156.909,-109.755 220.323,-117.072 67.4791,2.43908 136.584,46.3409 208.128,130.893l0 -0.000307692z"/><path fill="#CC0033" d="M289.839 93.0917l-52.032 13.8209c50.4058,89.4298 122.763,143.901 215.445,147.966 122.763,0.812923 193.494,-82.1129 242.274,-156.909l-41.4631 12.1951c-78.8609,111.381 -164.226,115.446 -202.437,109.755 -64.2271,-4.87785 -117.072,-57.7231 -161.787,-126.828z"/></svg>
+                        <span class="text-base font-medium text-gray-700">Amazigh</span>
+                    </button>
+                </div>
+            </div>
+
             <button id="menuBtn" class="lg:hidden cursor-pointer p-1" aria-label="Menu">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -34,71 +151,88 @@
     <!-- Mobile Dropdown Menu -->
     <div id="sidebar" class="fixed left-0 right-0 bg-white shadow-lg transition-all duration-300 ease-in-out lg:hidden border-b border-gray-200" style="top: 76px; max-height: 0; overflow: hidden; z-index: 60; opacity: 0;">
         <ul class="flex flex-col items-center !px-8 !py-10">
-            <li class="w-full text-center !mb-6"><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200">Home</a></li>
-            <li class="w-full text-center !mb-6"><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200">About Us</a></li>
-            <li class="w-full text-center !mb-6"><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200">Services</a></li>
-            <li class="w-full flex justify-center !mt-4"><a href="#" class="bg-[#3a3871] !text-white !px-8 !py-3 font-semibold inline-flex items-center justify-center hover:bg-[#5754aa] transition-all duration-200" style="height: 3rem;">Contact</a></li>
+            <li class="w-full text-center !mb-6"><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.home">Home</a></li>
+            <li class="w-full text-center !mb-6"><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+            <li class="w-full text-center !mb-6"><a href="#services" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.services">Services</a></li>
+            <li class="w-full flex justify-center !mt-4"><a href="#application-form" class="bg-[#3a3871] !text-white !px-8 !py-3 font-semibold inline-flex items-center justify-center hover:bg-[#5754aa] transition-all duration-200" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
         </ul>
     </div>
     <!-- Hero section -->
-    <section class="w-full !px-6 md:!px-12 lg:!px-20 !pt-12 md:!pt-16 lg:!pt-20 flex flex-col justify-center items-center">
-        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl">About Clever Cloud Morocco</h2>
-        <h1 class="text-[#1c2045] text-3xl md:text-4xl lg:text-6xl">Who is <b class="font-bold">Clever Cloud</b></h1>
+    <section id="about-us" class="w-full !px-6 md:!px-12 lg:!px-20 !pt-12 md:!pt-16 lg:!pt-20 flex flex-col justify-center items-center">
+        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl" data-translate="hero.subtitle">About Clever Cloud Morocco</h2>
+        <h1 class="text-[#1c2045] text-3xl md:text-4xl lg:text-6xl" data-translate="hero.title">Who is <b class="font-bold">Clever Cloud</b></h1>
         <div class="w-full md:max-w-3xl lg:max-w-4xl !my-20">
-            <p class="text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 !mb-8 md:!mb-10">Clever Cloud provides a <a class="links" href="#">Platform as a Service service</a>, based in Europe. The PaaS helps development teams to put digital applications and services into production on a reliable infrastructure, with automatic scalability and transparent pricing.</p>
+            <p class="text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 !mb-8 text-center md:!mb-10" data-translate="hero.description">Morocco's Sovereign Cloud Platform secure Platform as a Service service infrastructure, locally operated in partnership with Clever Cloud. Your data stays in Morocco.</p>
             <div class="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center items-center">
-                <a href="#" class="bg-[#3a3871] !text-white border border-[#3a3871] !px-8 md:!px-10 font-semibold text-md md:text-lg hover:bg-[#5754aa] hover:border-[#5754aa] transition-all duration-200 w-full sm:w-auto text-center inline-flex items-center justify-center" style="height: 4rem;">Get Started</a>
-                <a href="#" class="bg-white !text-[#3a3871] border border-[#3a3871] !px-8 md:!px-10 font-semibold text-md md:text-lg hover:border-[#5754aa] hover:!text-[#5754aa] transition-all duration-200 w-full sm:w-auto text-center inline-flex items-center justify-center" style="height: 4rem;">Learn More</a>
+                <a href="#application-form" class="bg-[#3a3871] !text-white border border-[#3a3871] !px-8 md:!px-10 font-semibold text-md md:text-lg hover:bg-[#5754aa] hover:border-[#5754aa] transition-all duration-200 w-full sm:w-auto text-center inline-flex items-center justify-center" style="height: 4rem;" data-translate="hero.cta1">Join Priority List</a>
+                <a href="#team" class="bg-white !text-[#3a3871] border border-[#3a3871] !px-8 md:!px-10 font-semibold text-md md:text-lg hover:border-[#5754aa] hover:!text-[#5754aa] transition-all duration-200 w-full sm:w-auto text-center inline-flex items-center justify-center" style="height: 4rem;" data-translate="hero.cta2">Talk to Our Team</a>
             </div>
         </div>
     </section>
+
+    <!-- Trusted By Section -->
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 flex flex-col justify-center items-center bg-white">
+        <h2 class="text-[#1c2045] text-center font-bold text-2xl md:text-3xl lg:text-4xl !mb-12 md:!mb-16" data-translate="trusted.title">Trusted By Leading Organizations</h2>
+
+        <div class="w-full overflow-hidden relative">
+            <!-- Gradient overlays for smooth edges -->
+            <div class="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-white to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-white to-transparent z-10"></div>
+
+            <!-- Scrolling container - will be populated by JavaScript -->
+            <div id="logoScroll">
+                <!-- Logos will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <!-- Morocco Accelerates -->
     <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-white">
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-6">Morocco Accelerates Digital Transformation</h1>
-        <p class="text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl text-center text-gray-700 !mb-16 md:!mb-20">The digital landscape is evolving rapidly. Organizations need local infrastructure that meets sovereignty requirements while delivering enterprise-grade performance.</p>
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-6" data-translate="morocco.title">Morocco Accelerates Digital Transformation</h1>
+        <p class="text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl text-center text-gray-700 !mb-16 md:!mb-20" data-translate="morocco.subtitle">The digital landscape is evolving rapidly. Organizations need local infrastructure that meets sovereignty requirements while delivering enterprise-grade performance.</p>
 
         <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
             <div class="flex flex-col !p-6 md:!p-8 border border-[#deddee]">
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3">Data Sovereignty</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Growing requirements for local data governance and control</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3" data-translate="morocco.card1.title">Data Sovereignty</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="morocco.card1.text">Growing requirements for local data governance and control</p>
             </div>
 
             <div class="flex flex-col !p-6 md:!p-8 border border-[#deddee]">
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3">Resilient Infrastructure</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Public and private sectors demand reliable cloud platforms</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3" data-translate="morocco.card2.title">Resilient Infrastructure</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="morocco.card2.text">Public and private sectors demand reliable cloud platforms</p>
             </div>
 
             <div class="flex flex-col !p-6 md:!p-8 border border-[#deddee]">
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3">Digital Acceleration</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">SaaS, e-services, and platforms drive innovation forward</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3" data-translate="morocco.card3.title">Digital Acceleration</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="morocco.card3.text">SaaS, e-services, and platforms drive innovation forward</p>
             </div>
 
             <div class="flex flex-col !p-6 md:!p-8 border border-[#deddee]">
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3">Local Expertise</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Need for structured local operators with proven technology</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-3" data-translate="morocco.card4.title">Local Expertise</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="morocco.card4.text">Need for structured local operators with proven technology</p>
             </div>
         </div>
     </section>
     <!-- The team -->
-    <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
-        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl">THE TEAM</h2>
-        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl">Discover our executive committee</b></h1>
+    <section id="team" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
+        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl" data-translate="team.label">THE TEAM</h2>
+        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl" data-translate="team.title">Discover our executive committee</b></h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !my-20 gap-4 md:gap-6 lg:gap-8 my-6 px- max-w-7xl">
             <!-- Ismael Faouri -->
             <div class="col-span-1 border border-[#deddee]">
                 <img src="./assets/images/ismael-faouri.png" alt="Ismael Faouri" class="w-full h-64 object-cover">
                 <div class="flex flex-col gap-4 items-center !my-6">
-                    <a href="#" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismael Faouri</a>
+                    <a href="https://www.linkedin.com/in/jifaouri/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismael Faouri</a>
                     <p class="text-md md:text-lg lg:text-lg">CEO</p>
                 </div>
             </div>
             <!--  -->
-            <!-- Ismael Faouri -->
+            <!-- Ismail Kabbaj -->
             <div class="col-span-1 border border-[#deddee]">
                 <img src="./assets/images/ismail-kabbaj.png" alt="Ismail Kabbaj" class="w-full h-64 object-cover">
                 <div class="flex flex-col gap-4 items-center !my-6">
-                    <a href="#" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismail Kabbaj</a>
-                    <p class="text-md md:text-lg lg:text-lg">CEO</p>
+                    <a href="https://www.linkedin.com/in/ismail-kabbaj-530a0a177/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismail Kabbaj</a>
+                    <p class="text-md md:text-lg lg:text-lg">CTO</p>
                 </div>
             </div>
             <!--  -->
@@ -106,41 +240,98 @@
             <div class="col-span-1 border border-[#deddee]">
                 <img src="./assets/images/charaf-karcha.png" alt="Charaf Karcha" class="w-full h-64 object-cover">
                 <div class="flex flex-col gap-4 items-center !my-6">
-                    <a href="#" class="text-xl md:text-2xl lg:text-2xl font-bold links">Charaf Karcha</a>
-                    <p class="text-md md:text-lg lg:text-lg">CEO</p>
+                    <a href="https://www.linkedin.com/in/cdk0/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Charaf Karcha</a>
+                    <p class="text-md md:text-lg lg:text-lg">VP</p>
                 </div>
             </div>
             <!--  -->
-            <!-- Charaf Karcha -->
+            <!-- Ayman Sedqi -->
             <div class="col-span-1 border border-[#deddee]">
                 <img src="./assets/images/ayman-sedqi.png" alt="Ayman Sedqi" class="w-full h-64 object-cover">
                 <div class="flex flex-col gap-4 items-center !my-6">
-                    <a href="#" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ayman Sedqi</a>
-                    <p class="text-md md:text-lg lg:text-lg">CEO</p>
+                    <a href="https://www.linkedin.com/in/sedqi-ayman/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ayman Sedqi</a>
+                    <p class="text-md md:text-lg lg:text-lg">DevRel</p>
                 </div>
             </div>
             <!--  -->
-            <!-- Charaf Karcha -->
+            <!-- Ahmed Taha Sabri -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/ahmed-taha.png" alt="Ahmed Taha" class="w-full h-64 object-cover">
+                <img src="./assets/images/ahmed-taha.png" alt="Ahmed Taha Sabri" class="w-full h-64 object-cover">
                 <div class="flex flex-col gap-4 items-center !my-6">
-                    <a href="#" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ahmed Taha</a>
-                    <p class="text-md md:text-lg lg:text-lg">CEO</p>
+                    <a href="https://www.linkedin.com/in/tahatsatya/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ahmed Taha Sabri</a>
+                    <p class="text-md md:text-lg lg:text-lg">Cloud Architect</p>
+                </div>
+            </div>
+            <!--  -->
+            <!-- Amine Karcha -->
+            <div class="col-span-1 border border-[#deddee]">
+                <img src="./assets/images/amine-karcha.png" alt="Amine Karcha" class="w-full h-64 object-cover">
+                <div class="flex flex-col gap-4 items-center !my-6">
+                    <a href="https://www.linkedin.com/in/med-amine-karcha-64b074254/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Amine Karcha</a>
+                    <p class="text-md md:text-lg lg:text-lg">AI Engineer</p>
                 </div>
             </div>
             <!--  -->
         </div>
     </section>
+    <!-- Strategic Pillars -->
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-white">
+        <!-- Header -->
+        <div class="w-full md:max-w-4xl lg:max-w-5xl text-center !mb-16 md:!mb-20">
+            <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-6" data-translate="pillars.title">Built on Three Strategic Pillars</h1>
+            <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="pillars.subtitle">Clever Cloud Morocco combines sovereignty, security, and automation. This foundation ensures your infrastructure meets both local requirements and global standards.</p>
+        </div>
+
+        <!-- Grid Content - Row 1 -->
+        <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 !mb-8 md:!mb-10 lg:!mb-12">
+            <!-- Sovereignty & Compliance Card -->
+            <div class="flex flex-col !p-6 md:!p-8 lg:!p-10 border border-[#deddee]" style="background-color: #E63F48;">
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-5" style="color: #FFFFFF;" data-translate="pillars.sovereignty.title">Sovereignty & Compliance</h3>
+                <ul class="list-disc !pl-5 text-md md:text-lg lg:text-xl space-y-3" style="color: #FFFFFF !important;">
+                    <li style="color: #FFFFFF !important;" data-translate="pillars.sovereignty.item1">Data hosted locally in Morocco</li>
+                    <li style="color: #FFFFFF !important;" data-translate="pillars.sovereignty.item2">Clear governance frameworks</li>
+                    <li style="color: #FFFFFF !important;" data-translate="pillars.sovereignty.item3">Aligned with regulatory requirements</li>
+                </ul>
+            </div>
+
+            <!-- Why Local Hosting Matters Card -->
+            <div class="flex flex-col !p-6 md:!p-8 lg:!p-10 border border-[#deddee] bg-white">
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-5 text-[#1c2045]" data-translate="pillars.local.title">Why Local Hosting Matters</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !mb-5" data-translate="pillars.local.text1">Your data never leaves Moroccan territory. This ensures compliance with local regulations while giving you complete control over your digital assets.</p>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="pillars.local.text2">Our governance model provides transparency and accountability at every level.</p>
+            </div>
+        </div>
+
+        <!-- Grid Content - Row 2 -->
+        <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+            <!-- Security & Resilience Card -->
+            <div class="flex flex-col !p-6 md:!p-8 lg:!p-10 border border-[#deddee] bg-white">
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-5 text-[#1c2045]" data-translate="pillars.security.title">Security & Resilience</h3>
+                <ul class="list-disc !pl-5 text-gray-700 text-md md:text-lg lg:text-xl space-y-3">
+                    <li data-translate="pillars.security.item1">Robust, monitored infrastructure</li>
+                    <li data-translate="pillars.security.item2">Integrated DevSecOps practices</li>
+                    <li data-translate="pillars.security.item3">High availability architecture</li>
+                </ul>
+            </div>
+
+            <!-- Enterprise-Grade Protection Card -->
+            <div class="flex flex-col !p-6 md:!p-8 lg:!p-10 border border-[#deddee]" style="background-color: #E63F48;">
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-5" style="color: #FFFFFF;" data-translate="pillars.enterprise.title">Enterprise-Grade Protection</h3>
+                <p class="text-md md:text-lg lg:text-xl leading-relaxed !mb-5" style="color: #FFFFFF;" data-translate="pillars.enterprise.text1">Security is embedded in every layer. Our infrastructure combines advanced monitoring with automated threat detection.</p>
+                <p class="text-md md:text-lg lg:text-xl leading-relaxed" style="color: #FFFFFF;" data-translate="pillars.enterprise.text2">Downtime is not an option. We architect for resilience from day one.</p>
+            </div>
+        </div>
+    </section>
     <!-- Partnership -->
     <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center">
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-16 md:!mb-20">A Structured Technology Partnership</h1>
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-16 md:!mb-20" data-translate="partnership.title">A Structured Technology Partnership</h1>
 
         <div class="w-full md:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16">
             <!-- Left Column -->
             <div class="flex flex-col justify-center">
-                <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl !mb-6 text-[#1c2045]">Proven Expertise Meets Local Operations</h2>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !mb-5">Our partnership with Clever Cloud France brings battle-tested PaaS technology to Morocco. Over a decade of European cloud experience now operates locally.</p>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">This collaboration combines international standards with deep local market understanding.</p>
+                <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl !mb-6 text-[#1c2045]" data-translate="partnership.left.title">Proven Expertise Meets Local Operations</h2>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !mb-5" data-translate="partnership.left.text1">Our partnership with Clever Cloud France brings battle-tested PaaS technology to Morocco. Over a decade of European cloud experience now operates locally.</p>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="partnership.left.text2">This collaboration combines international standards with deep local market understanding.</p>
             </div>
 
             <!-- Right Column -->
@@ -148,31 +339,31 @@
                 <div class="flex gap-5 items-start border border-[#deddee] !p-5 md:!p-6">
                     <div class="flex-shrink-0 w-12 h-12 bg-[#3a3871] flex items-center justify-center !text-white font-bold text-xl">01</div>
                     <div>
-                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2">Established PaaS Provider</h3>
-                        <p class="text-gray-700 text-md md:text-lg">Clever Cloud's proven European platform</p>
+                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2" data-translate="partnership.step1.title">Established PaaS Provider</h3>
+                        <p class="text-gray-700 text-md md:text-lg" data-translate="partnership.step1.text">Clever Cloud's proven European platform</p>
                     </div>
                 </div>
 
                 <div class="flex gap-5 items-start border border-[#deddee] !p-5 md:!p-6">
                     <div class="flex-shrink-0 w-12 h-12 bg-[#3a3871] flex items-center justify-center !text-white font-bold text-xl">02</div>
                     <div>
-                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2">Local Infrastructure</h3>
-                        <p class="text-gray-700 text-md md:text-lg">Operated entirely within Morocco</p>
+                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2" data-translate="partnership.step2.title">Local Infrastructure</h3>
+                        <p class="text-gray-700 text-md md:text-lg" data-translate="partnership.step2.text">Operated entirely within Morocco</p>
                     </div>
                 </div>
 
                 <div class="flex gap-5 items-start border border-[#deddee] !p-5 md:!p-6">
                     <div class="flex-shrink-0 w-12 h-12 bg-[#3a3871] flex items-center justify-center !text-white font-bold text-xl">03</div>
                     <div>
-                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2">Combined Expertise</h3>
-                        <p class="text-gray-700 text-md md:text-lg">International tech meets local insights</p>
+                        <h3 class="font-bold text-lg md:text-xl lg:text-2xl !mb-2" data-translate="partnership.step3.title">Combined Expertise</h3>
+                        <p class="text-gray-700 text-md md:text-lg" data-translate="partnership.step3.text">International tech meets local insights</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Important Information -->
-    <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
+    <section id="services" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
         <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl">Discover our executive committee</b></h1>
         <p class="!mt-8 !mb-12 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center">Nous avons à coeur d'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement écnomique du pays.</p>
         <!-- Items -->
@@ -245,109 +436,217 @@
     </section>
     <!-- Who Benefits -->
     <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 flex-col justify-center items-center">
-        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center">WHO BENEFITS</h2>
-        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl !mt-2">Who Benefits from Our Platform?</h1>
-        <p class="!mt-8 !mb-16 md:!mb-20 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center">Clever Cloud Morocco serves organizations at every stage. From startups to government agencies, our infrastructure adapts to your specific requirements.</p>
+        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center" data-translate="benefits.label">WHO BENEFITS</h2>
+        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl !mt-2" data-translate="benefits.title">Who Benefits from Our Platform?</h1>
+        <p class="!mt-8 !mb-16 md:!mb-20 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center" data-translate="benefits.subtitle">Clever Cloud Morocco serves organizations at every stage. From startups to government agencies, our infrastructure adapts to your specific requirements.</p>
 
         <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
             <!-- Startups -->
             <div class="flex flex-col !p-6 md:!p-8 bg-white border border-[#deddee]">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v20M2 12l10-10 10 10-10 10L2 12z"></path>
-                        <path d="M12 2L2 12l10 10V2z" fill="white" fill-opacity="0.2"></path>
+                    <svg width="28" height="28" viewBox="214.92 4.5 593.66 1015.5" fill="none" stroke="white" stroke-width="45" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 792.85,712.071 C 809.465,588.975 809.609,581.158 807.855,573.252 C 804.009,565.545 794.965,554.066 703.407,451.93 L 679.254,428.566"></path>
+                        <path d="M 346.37,445.253 C 344.403,399.962 343.103,326.37 344.467,295.458 C 348.463,264.499 356.949,225.509 367.961,191.138 Q 383.31,156.429 401.644,121.467"></path>
+                        <path d="M 225.143,558.454 C 219.118,566.667 216.495,571.612 214.945,577.728 Q 214.333,586.662 231.918,712.356"></path>
+                        <path d="M 401.644,121.467 C 413.63,102.134 430.125,78.968 445.73,59.673 C 463.853,40.239 483.375,21.229 498.073,9.079 C 508.371,4.497 513.534,4.0 517.952,4.829 C 523.016,6.875 529.01,10.98 556.224,35.737 C 576.891,57.111 597.45,82.184 612.576,103.927 C 627.285,128.624 643.069,159.998 656.041,189.794"></path>
+                        <path d="M 656.041,189.794 C 666.291,220.954 675.122,258.514 680.165,293.764 L 681.628,322.757"></path>
+                        <path d="M 680.334,383.002 C 678.892,419.899 679.254,428.566 669.742,512.804 Q 661.223,563.221 643.602,644.815"></path>
+                        <path d="M 792.85,712.071 L 643.602,644.815"></path>
+                        <path d="M 379.983,644.7 L 345.446,423.815"></path>
+                        <path d="M 379.983,644.7 L 231.918,712.356"></path>
+                        <path d="M 640.383,658.853 L 383.413,660.123"></path>
+                        <path d="M 342.982,427.36 L 225.143,558.454"></path>
+                        <path d="M 681.628,322.757 L 680.334,383.002"></path>
+                        <circle cx="512.066" cy="304.858" r="85.611"></circle>
+                        <path d="M 583.021,725.613 C 627.077,769.902 616.837,826.407 589.38,875.328"></path>
+                        <path d="M 439.087,727.643 C 386.899,792.214 413.239,838.370 451.352,905.902"></path>
+                        <path d="M 589.38,875.328 L 511.789,1016.218"></path>
+                        <path d="M 451.352,905.902 L 511.855,1020.0"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Startups</h3>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Startups & Scale-ups</h3>
                 <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Launch fast with zero infrastructure management. Our platform scales automatically as your user base grows, letting you focus on building your product.</p>
             </div>
 
             <!-- Enterprises -->
             <div class="flex flex-col !p-6 md:!p-8 bg-white border border-[#deddee]">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                        <line x1="9" y1="6" x2="15" y2="6"></line>
-                        <line x1="9" y1="10" x2="15" y2="10"></line>
-                        <line x1="9" y1="14" x2="15" y2="14"></line>
-                        <line x1="9" y1="18" x2="15" y2="18"></line>
+                    <svg width="28" height="28" viewBox="4 40 1016 944" fill="none" stroke="white" stroke-width="45" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 640.374,192.187 C 593.17,191.127 547.656,191.859 538.779,194.838 Q 534.644,198.002 525.037,209.224"></path>
+                        <path d="M 649.746,316.997 C 638.561,323.631 629.175,326.705 623.935,327.28 C 552.193,327.148 541.873,324.885 536.901,322.157 C 532.571,318.245 529.176,313.542 525.779,303.362 Q 525.166,293.33 525.037,209.224"></path>
+                        <path d="M 883.247,326.476 C 891.887,313.207 894.012,307.709 895.563,296.835 C 895.525,219.873 893.782,209.118 891.202,203.682 C 887.241,198.861 882.186,195.073 876.771,192.738 C 871.477,191.538 801.637,191.475 781.59,193.608"></path>
+                        <path d="M 883.247,326.476 C 796.555,326.833 786.059,323.946 781.187,320.83 C 777.066,316.711 774.156,311.875 772.348,306.82 Q 771.115,296.691 771.167,209.121"></path>
+                        <path d="M 250.399,576.929 C 257.847,565.224 261.337,555.447 261.608,470.025 C 259.75,461.405 257.738,456.848 252.819,450.679 Q 247.014,447.405 237.537,445.301"></path>
+                        <path d="M 160.829,445.438 Q 152.889,446.607 139.528,451.873"></path>
+                        <path d="M 161.281,577.124 C 151.626,575.364 145.536,572.126 140.295,565.706 C 136.734,556.714 135.84,544.209 135.917,469.688 L 139.528,451.873"></path>
+                        <path d="M 643.58,576.163 C 649.215,562.879 651.392,553.399 651.788,548.033 C 651.507,471.014 650.742,465.778 648.876,460.488 C 645.677,455.425 641.209,451.104 636.065,448.045 C 630.752,446.281 620.44,445.277 546.472,445.85 Q 540.951,447.088 525.07,453.313"></path>
+                        <path d="M 891.287,447.794 C 864.716,445.43 798.263,445.448 785.702,448.033 L 773.587,453.856"></path>
+                        <path d="M 891.287,447.794 C 894.907,467.378 895.605,476.155 895.515,547.981 C 895.07,553.327 892.724,562.987 886.797,576.462"></path>
+                        <path d="M 141.907,817.67 C 138.876,809.729 137.153,796.604 137.213,724.224 C 137.942,717.252 140.892,708.499 142.996,705.075 C 147.474,700.716 153.393,697.947 163.677,696.678 C 240.798,697.184 250.469,700.901 254.936,704.191 Q 260.002,711.264 262.091,720.845"></path>
+                        <path d="M 261.941,803.348 C 259.774,813.81 255.646,819.647 247.601,824.77 C 238.847,827.539 166.402,827.854 145.488,824.788"></path>
+                        <path d="M 534.293,701.942 C 528.501,710.64 525.439,719.83 525.021,723.363 C 525.241,806.336 527.176,813.357 532.591,820.683 Q 539.688,825.675 549.131,827.99"></path>
+                        <path d="M 626.426,827.906 C 634.416,826.343 638.873,824.577 645.48,819.844 C 649.34,814.022 650.563,810.661 652.083,803.579 C 652.643,795.37 652.567,728.596 651.051,715.513 C 649.0,709.819 645.226,704.379 638.828,699.801 L 629.279,696.924"></path>
+                        <path d="M 895.526,813.057 C 887.427,821.542 883.418,824.116 873.651,827.408 C 866.277,828.086 796.85,827.978 786.372,825.673 C 779.026,821.222 774.28,814.807 772.558,810.668 L 771.022,803.169"></path>
+                        <path d="M 771.057,721.023 C 773.426,711.114 778.146,704.74 782.357,701.512 C 791.551,697.954 873.087,697.211 881.25,699.527 L 894.228,707.312"></path>
+                        <path d="M 508.097,983.625 C 492.586,983.049 479.995,981.569 471.085,979.745 C 459.802,976.22 450.334,971.978 438.831,965.141 C 429.965,958.042 421.434,949.56 415.02,941.416 C 408.384,930.769 403.485,920.391 399.656,909.091 Q 396.747,890.996 396.213,857.524"></path>
+                        <path d="M 396.379,145.089 C 396.713,132.411 398.892,119.77 402.401,108.025 C 408.218,95.197 416.079,82.743 422.657,74.892 C 433.745,64.18 444.051,56.831 461.861,47.949 C 474.163,43.909 484.125,41.841 506.389,40.505 L 567.894,40.501"></path>
+                        <path d="M 901.047,40.445 C 928.868,41.73 941.571,44.293 954.817,48.609 C 967.322,54.608 978.397,61.945 988.69,71.115 C 996.912,80.235 1003.624,89.436 1009.391,99.847 C 1013.976,111.355 1017.734,124.991 1019.707,140.96 L 1019.659,182.013"></path>
+                        <path d="M 1019.659,182.013 L 1019.625,258.854"></path>
+                        <path d="M 1019.79,430.253 L 1019.568,507.286"></path>
+                        <path d="M 1019.639,824.965 C 1019.889,879.087 1018.521,896.786 1016.31,907.343 C 1011.931,920.225 1004.743,935.303 1001.127,940.227"></path>
+                        <path d="M 99.069,310.702 C 76.407,312.149 67.038,314.112 57.034,317.699 C 47.013,322.783 39.518,327.665 31.592,334.206 C 24.656,341.72 18.653,350.108 13.334,359.72 C 9.117,370.035 6.348,379.832 4.067,397.88 L 4.115,428.696"></path>
+                        <path d="M 651.598,207.844 L 640.374,192.187"></path>
+                        <path d="M 651.598,207.844 L 649.746,316.997"></path>
+                        <path d="M 781.59,193.608 L 771.167,209.121"></path>
+                        <path d="M 314.917,310.77 L 99.069,310.702"></path>
+                        <path d="M 237.537,445.301 L 160.829,445.438"></path>
+                        <path d="M 250.399,576.929 L 161.281,577.124"></path>
+                        <path d="M 643.58,576.163 L 530.386,575.567"></path>
+                        <path d="M 530.386,575.567 L 525.07,453.313"></path>
+                        <path d="M 262.091,720.845 L 261.941,803.348"></path>
+                        <path d="M 549.131,827.99 L 626.426,827.906"></path>
+                        <path d="M 629.279,696.924 L 538.43,697.477"></path>
+                        <path d="M 886.797,576.462 L 778.903,575.812"></path>
+                        <path d="M 778.903,575.812 L 773.587,453.856"></path>
+                        <path d="M 771.022,803.169 L 771.057,721.023"></path>
+                        <path d="M 1019.625,258.854 L 1019.79,430.253"></path>
+                        <path d="M 141.907,817.67 L 145.488,824.788"></path>
+                        <path d="M 1019.568,507.286 L 1019.639,824.965"></path>
+                        <path d="M 534.293,701.942 L 538.43,697.477"></path>
+                        <path d="M 895.526,813.057 L 894.228,707.312"></path>
+                        <path d="M 897.63,983.617 L 508.097,983.625"></path>
+                        <path d="M 396.213,857.524 L 396.379,145.089"></path>
+                        <path d="M 567.894,40.501 L 901.047,40.445"></path>
+                        <path d="M 4.115,428.696 L 4.364,884.859"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Enterprises</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Deploy mission-critical applications with enterprise-grade security and compliance. Benefit from dedicated support and custom infrastructure configurations.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Large Enterprises</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Meet compliance requirements while maintaining agility. Secure, sovereign infrastructure.</p>
             </div>
 
             <!-- Developers -->
             <div class="flex flex-col !p-6 md:!p-8 bg-white border border-[#deddee]">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                    <svg width="28" height="28" viewBox="65 4 893 1016" fill="none" stroke="white" stroke-width="45" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 355.609,67.879 C 339.586,84.861 327.002,100.858 313.984,121.13 C 303.57,141.617 295.853,161.667 290.283,181.801 C 286.691,201.93 284.491,226.238 284.55,246.283 C 286.874,270.461 290.74,290.837 297.737,315.155 C 307.522,339.42 318.179,359.813 331.389,380.039 C 344.487,396.435 359.176,411.756 375.186,425.569 C 391.628,437.22 411.984,448.98 428.111,456.464 C 448.583,463.62 472.859,469.305 493.12,471.864 C 517.468,472.457 537.762,470.898 558.104,467.507 C 578.538,462.16 598.813,454.755 619.284,444.916 C 639.589,432.321 656.145,419.497 672.442,404.107 C 686.602,387.861 700.928,367.448 712.26,347.066 C 721.214,326.629 729.233,302.115 733.896,281.679 C 737.257,257.282 738.282,232.9 736.985,208.489 C 733.242,184.12 727.952,163.619 720.47,143.489 C 710.396,123.074 697.59,102.743 684.962,86.457 C 669.564,69.94 652.935,55.139 632.215,40.12 C 611.81,28.327 591.642,19.187 571.558,12.338 C 547.065,6.762 526.855,4.415 506.866,4.086 C 479.75,6.505 455.42,11.372 435.312,17.722 C 414.88,26.458 394.953,37.473 374.8,51.422 L 355.609,67.879"></path>
+                        <path d="M 624.855,516.168 C 619.702,541.71 619.347,587.802 617.541,596.323 C 613.98,604.339 610.935,609.092 604.271,616.396 C 597.923,621.582 591.456,625.425 585.269,628.22 Q 576.346,630.936 560.552,632.681"></path>
+                        <path d="M 442.739,630.309 C 428.785,624.668 419.797,618.632 410.873,608.955 C 405.532,598.41 403.155,586.875 402.776,539.437 L 397.975,516.799"></path>
+                        <path d="M 96.419,712.765 C 99.43,692.581 105.828,672.016 115.797,652.694 C 128.095,636.355 143.045,622.085 158.977,611.148 Q 171.106,605.047 207.815,589.722"></path>
+                        <path d="M 65.542,1019.778 L 96.419,712.765"></path>
+                        <path d="M 637.625,516.018 L 849.997,604.469"></path>
+                        <path d="M 958.458,1018.83 L 65.542,1019.778"></path>
+                        <path d="M 386.459,516.443 L 397.975,516.799"></path>
+                        <path d="M 637.625,516.018 L 624.855,516.168"></path>
+                        <path d="M 707.691,688.237 L 707.903,939.054"></path>
+                        <path d="M 706.636,771.797 L 706.351,774.531"></path>
+                        <path d="M 706.351,774.531 L 707.733,778.45"></path>
+                        <path d="M 707.733,778.45 L 713.375,774.917"></path>
+                        <path d="M 628.403,774.89 L 708.556,771.577"></path>
+                        <path d="M 708.556,771.577 L 784.6,774.962"></path>
+                        <path d="M 560.552,632.681 L 442.739,630.309"></path>
+                        <path d="M 207.815,589.722 L 386.459,516.443"></path>
+                        <path d="M 929.232,732.234 L 958.458,1018.83"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Developers</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Deploy from Git with instant rollbacks and preview environments. Work with your favorite frameworks and tools without configuration hassle.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Public & Para-Public Sector</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Data sovereignty meets public service excellence. Built for government standards.</p>
             </div>
 
             <!-- Integrators -->
             <div class="flex flex-col !p-6 md:!p-8 bg-white border border-[#deddee]">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
+                    <svg width="28" height="28" viewBox="3 24 1018 976" fill="none" stroke="white" stroke-width="45" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 300.409,987.733 C 294.632,991.6 285.937,995.879 277.385,998.311 Q 269.105,999.273 69.376,999.499"></path>
+                        <path d="M 1004.145,323.731 C 992.027,334.137 985.39,337.942 976.911,341.155 Q 964.293,343.478 941.593,343.738"></path>
+                        <path d="M 299.872,37.321 C 290.024,31.358 281.816,28.0 272.46,25.792 Q 264.961,25.141 69.376,25.216"></path>
+                        <path d="M 862.812,755.831 C 850.442,756.299 839.208,759.194 827.396,766.504 C 819.985,774.131 813.078,785.983 810.467,795.278 Q 809.648,806.743 809.601,827.499"></path>
+                        <path d="M 809.841,968.82 C 812.354,981.223 817.528,989.615 825.228,995.698 C 833.651,998.644 846.167,999.443 950.241,998.896 C 958.794,997.138 967.472,993.373 975.667,987.451 C 979.28,983.829 985.06,975.614 988.728,966.719 Q 990.609,957.983 991.228,949.59"></path>
+                        <path d="M 990.702,799.762 C 989.709,791.373 986.965,782.693 977.894,767.751"></path>
+                        <path d="M 4.003,747.1 C 5.122,730.786 8.893,718.528 16.245,706.05 C 26.996,695.027 39.444,687.172 52.305,682.643 Q 62.46,681.663 91.57,681.547"></path>
+                        <path d="M 258.026,681.358 C 274.463,682.341 286.812,686.019 299.885,693.774 C 311.243,705.128 318.96,717.772 323.056,730.319 Q 324.432,742.876 324.527,767.852"></path>
+                        <path d="M 324.216,938.477 C 322.567,951.079 320.008,959.682 313.57,972.724 L 305.734,983.908"></path>
+                        <path d="M 698.729,89.263 C 699.8,74.617 704.755,58.646 711.644,47.777 C 722.126,37.576 732.857,31.177 745.909,26.758 Q 757.105,25.19 782.074,24.837"></path>
+                        <path d="M 1019.787,286.171 C 1018.056,297.257 1014.591,307.555 1007.135,320.593 L 1004.145,323.731"></path>
+                        <path d="M 69.376,25.216 C 52.434,26.447 37.943,31.647 25.509,39.843 C 14.515,51.576 7.861,63.822 4.708,75.849 Q 4.065,84.035 4.059,113.129"></path>
+                        <path d="M 258.026,343.401 C 274.576,342.291 287.304,338.4 300.232,330.653 C 311.477,319.333 319.147,306.53 323.277,293.555 Q 324.596,280.961 324.56,256.003"></path>
+                        <path d="M 324.387,85.387 C 322.761,72.829 320.073,64.191 315.852,55.564 L 305.168,40.992"></path>
+                        <path d="M 972.502,764.354 L 862.812,755.831"></path>
+                        <path d="M 972.502,764.354 L 977.894,767.751"></path>
+                        <path d="M 512.265,854.04 L 512.523,680.278"></path>
+                        <path d="M 300.409,987.733 L 305.734,983.908"></path>
+                        <path d="M 299.872,37.321 L 305.168,40.992"></path>
+                        <path d="M 510.66,511.892 L 512.898,167.467"></path>
+                        <path d="M 159.354,512.678 L 510.66,511.892"></path>
+                        <path d="M 868.306,512.682 L 714.589,513.307"></path>
+                        <path d="M 714.589,513.307 L 713.505,677.409"></path>
+                        <path d="M 631.217,678.63 L 713.505,677.409"></path>
+                        <path d="M 4.091,917.662 L 4.003,747.1"></path>
+                        <path d="M 941.593,343.738 L 766.815,343.809"></path>
+                        <path d="M 91.57,681.547 L 258.026,681.358"></path>
+                        <path d="M 809.601,827.499 L 809.841,968.82"></path>
+                        <path d="M 991.228,949.59 L 990.702,799.762"></path>
+                        <path d="M 699.172,265.998 L 698.729,89.263"></path>
+                        <path d="M 782.074,24.837 L 956.035,24.517"></path>
+                        <path d="M 324.527,767.852 L 324.216,938.477"></path>
+                        <path d="M 4.059,113.129 L 4.053,279.529"></path>
+                        <path d="M 87.409,343.256 L 258.026,343.401"></path>
+                        <path d="M 324.56,256.003 L 324.387,85.387"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Integrators</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Manage multiple client projects seamlessly with advanced organization tools. White-label solutions and dedicated technical support for your team.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Integrators & IT Service Providers</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Partner with proven technology. Deliver sovereign cloud solutions to your clients.</p>
             </div>
         </div>
     </section>
     <!-- Demo section -->
-    <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 !pb-12 justify-center flex-col items-center">
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-4">Application Form</h1>
-        <p class="text-gray-700 text-center text-md md:text-lg max-w-2xl !mb-12 md:!mb-16">Complete the form below and we'll get back to you shortly.</p>
+    <section id="application-form" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 !pb-12 justify-center flex-col items-center">
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-4" data-translate="form.title">Application Form</h1>
+        <p class="text-gray-700 text-center text-md md:text-lg max-w-2xl !mb-12 md:!mb-16" data-translate="form.subtitle">Complete the form below and we'll get back to you shortly.</p>
         <div class="w-full md:max-w-2xl lg:max-w-3xl">
-            <form action="" class="bg-white border border-[#deddee] !p-6 md:!p-8">
+            <!-- Success/Error Message -->
+            <div id="formMessage" class="hidden !mb-6 !p-6 md:!p-8 border-2 text-md md:text-lg font-medium flex items-start gap-4" style="border-radius: 4px;"></div>
+
+            <form id="applicationForm" class="bg-white border border-[#deddee] !p-6 md:!p-8">
                 <!-- Contact Information -->
                 <div class="!mb-8">
-                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4">Contact Information</h2>
+                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.contact.heading">Contact Information</h2>
                     <div class="flex flex-col gap-4">
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Full Name <span class="!text-[#5754aa]">*</span></label>
-                            <input type="text" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.contact.fullName">Full Name <span class="!text-[#5754aa]">*</span></label>
+                            <input type="text" name="full_name" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Professional Email <span class="!text-[#5754aa]">*</span></label>
-                            <input type="email" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.contact.email">Professional Email <span class="!text-[#5754aa]">*</span></label>
+                            <input type="email" name="email" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Phone Number</label>
-                            <input type="tel" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.contact.phone">Phone Number</label>
+                            <input type="tel" name="phone" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                     </div>
                 </div>
 
                 <!-- Organization Details -->
                 <div class="!mb-8">
-                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4">Organization Details</h2>
+                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.organization.heading">Organization Details</h2>
                     <div class="flex flex-col gap-4">
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Organization Name <span class="!text-[#5754aa]">*</span></label>
-                            <input type="text" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.name">Organization Name <span class="!text-[#5754aa]">*</span></label>
+                            <input type="text" name="organization_name" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Job Function/Title <span class="!text-[#5754aa]">*</span></label>
-                            <input type="text" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.jobTitle">Job Function/Title <span class="!text-[#5754aa]">*</span></label>
+                            <input type="text" name="job_title" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div class="relative">
-                            <label class="block text-gray-700 text-sm font-medium !mb-2">Organization Size <span class="!text-[#5754aa]">*</span></label>
-                            <select required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 bg-white appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%233a3871%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem;">
-                                <option value="">Select organization size</option>
-                                <option value="startup">Startup (1-50 employees)</option>
-                                <option value="sme">SME (51-250 employees)</option>
-                                <option value="mid-market">Mid-Market (251-1000 employees)</option>
-                                <option value="large">Large Enterprise (1000+ employees)</option>
-                                <option value="public">Public/Government Sector</option>
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.size">Organization Size <span class="!text-[#5754aa]">*</span></label>
+                            <select name="organization_size" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 bg-white appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%233a3871%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem;">
+                                <option value="" data-translate="form.organization.selectSize">Select organization size</option>
+                                <option value="Startup (1-50 employees)" data-translate="form.organization.startup">Startup (1-50 employees)</option>
+                                <option value="SME (51-250 employees)" data-translate="form.organization.sme">SME (51-250 employees)</option>
+                                <option value="Mid-Market (251-1000 employees)" data-translate="form.organization.midMarket">Mid-Market (251-1000 employees)</option>
+                                <option value="Large Enterprise (1000+ employees)" data-translate="form.organization.enterprise">Large Enterprise (1000+ employees)</option>
+                                <option value="Public/Government Sector" data-translate="form.organization.public">Public/Government Sector</option>
                             </select>
                         </div>
                     </div>
@@ -355,21 +654,30 @@
 
                 <!-- Technical Information -->
                 <div class="!mb-6">
-                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4">Technical Information</h2>
+                    <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.technical.heading">Technical Information</h2>
                     <div>
-                        <label class="block text-gray-700 text-sm font-medium !mb-2">Primary use case or project description <span class="!text-[#5754aa]">*</span></label>
-                        <textarea required rows="4" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 resize-none"></textarea>
+                        <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.technical.useCase">Primary use case or project description <span class="!text-[#5754aa]">*</span></label>
+                        <textarea name="use_case" required rows="4" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 resize-none"></textarea>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-[#3a3871] !text-white border border-[#3a3871] font-semibold text-md md:text-lg hover:bg-[#5754aa] hover:border-[#5754aa] transition-all duration-200 cursor-pointer inline-flex items-center justify-center" style="height: 4rem;">Submit Application</button>
+                <button type="submit" id="submitBtn" class="w-full bg-[#3a3871] border border-[#3a3871] font-semibold text-md md:text-lg hover:bg-[#5754aa] hover:border-[#5754aa] transition-all duration-200 cursor-pointer inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" style="height: 4rem; color: #FFFFFF !important;">
+                    <span id="btnText" style="color: #FFFFFF !important;" data-translate="form.submit">Submit Application</span>
+                    <span id="btnLoader" class="hidden flex items-center" style="color: #FFFFFF !important;">
+                        <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24" style="color: #FFFFFF !important;">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span data-translate="form.sending">Sending...</span>
+                    </span>
+                </button>
             </form>
         </div>
     </section>
     <!-- Get in Touch -->
-    <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 !pb-16 flex-col justify-center items-center">
-        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center">GET IN TOUCH</h2>
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mt-2">Contact Information</h1>
+    <section id="contact" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 !pb-16 flex-col justify-center items-center">
+        <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center" data-translate="contact.label">GET IN TOUCH</h2>
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mt-2" data-translate="contact.title">Contact Information</h1>
 
         <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 !mt-16">
             <!-- Phone -->
@@ -379,8 +687,8 @@
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl !mb-3">Phone</h3>
-                <a href="tel:+212520000000" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">+212 5 20 00 00 00</a>
+                <h3 class="font-bold text-xl md:text-2xl !mb-3" data-translate="contact.phone">Phone</h3>
+                <a href="tel:+212643128182" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">+212 643 128 182</a>
             </div>
 
             <!-- Email -->
@@ -391,7 +699,7 @@
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl !mb-3">Email</h3>
+                <h3 class="font-bold text-xl md:text-2xl !mb-3" data-translate="contact.email">Email</h3>
                 <a href="mailto:contact@clevercloud.ma" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">contact@clevercloud.ma</a>
             </div>
 
@@ -403,33 +711,18 @@
                         <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl !mb-3">Location</h3>
-                <p class="text-gray-700 text-md md:text-lg">Casablanca, Morocco</p>
+                <h3 class="font-bold text-xl md:text-2xl !mb-3" data-translate="contact.location">Location</h3>
+                <p class="text-gray-700 text-md md:text-lg" data-translate="contact.address">Casablanca, Morocco</p>
             </div>
         </div>
 
         <!-- Social Media -->
         <div class="!mt-12 md:!mt-16 flex flex-col items-center">
-            <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-6">Follow Us</h3>
+            <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-6" data-translate="contact.followUs">Follow Us</h3>
             <div class="flex gap-5 md:gap-6">
-                <a href="#" class="w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-[#deddee] rounded-full flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-                <a href="#" class="w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-[#deddee] rounded-full flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                    </svg>
-                </a>
-                <a href="#" class="w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-[#deddee] rounded-full flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
+                <a href="https://www.linkedin.com/company/clever-cloud-morocco/posts/?feedView=all" target="_blank" class="w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-[#deddee] rounded-full flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="#" class="w-12 h-12 md:w-14 md:h-14 bg-white border-2 border-[#deddee] rounded-full flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
-                        <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
                     </svg>
                 </a>
             </div>
@@ -437,71 +730,71 @@
     </section>
     <!-- FAQ -->
     <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-white">
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-16 md:!mb-20">Frequently Asked Questions</h1>
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-16 md:!mb-20" data-translate="faq.title">Frequently Asked Questions</h1>
 
         <div class="w-full md:max-w-4xl lg:max-w-5xl flex flex-col gap-4">
             <!-- Question 1 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4">When is the official launch planned?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q1">When is the official launch planned?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6">Platform launch is scheduled for Q2 2024. Early access partners begin onboarding in Q1.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a1">Platform launch is scheduled for Q2 2024. Early access partners begin onboarding in Q1.</p>
                 </div>
             </div>
 
             <!-- Question 2 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4">Where will data be hosted?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q2">Where will data be hosted?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6">All data resides in Morocco. Our infrastructure operates entirely within Moroccan territory, ensuring complete sovereignty.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a2">All data resides in Morocco. Our infrastructure operates entirely within Moroccan territory, ensuring complete sovereignty.</p>
                 </div>
             </div>
 
             <!-- Question 3 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4">Is the service compliant with local requirements?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q3">Is the service compliant with local requirements?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6">Yes. We align with Moroccan regulatory frameworks. Our governance model ensures ongoing compliance.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a3">Yes. We align with Moroccan regulatory frameworks. Our governance model ensures ongoing compliance.</p>
                 </div>
             </div>
 
             <!-- Question 4 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4">Can I become an integration partner?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q4">Can I become an integration partner?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6">Absolutely. We're building a partner ecosystem. Contact our partnerships team to discuss collaboration opportunities.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a4">Absolutely. We're building a partner ecosystem. Contact our partnerships team to discuss collaboration opportunities.</p>
                 </div>
             </div>
 
             <!-- Question 5 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4">How does early access selection work?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q5">How does early access selection work?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6">We evaluate applications based on use case, readiness to deploy, and strategic fit. Priority goes to organizations committed to launching within our first quarter of operations.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a5">We evaluate applications based on use case, readiness to deploy, and strategic fit. Priority goes to organizations committed to launching within our first quarter of operations.</p>
                 </div>
             </div>
         </div>
@@ -512,18 +805,427 @@
         <nav>
             <ul class="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 text-center !my-10">
                 <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Home</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">About Us</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Services</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Contact</a></li>
+                <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">About Us</a></li>
+                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Services</a></li>
+                <li><a href="#application-form" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Contact</a></li>
             </ul>
         </nav>
         <div class="border-t border-[#deddee] w-full !pt-6 !pb-2 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
-            <p class="text-gray-700 text-sm md:text-md lg:text-base text-center">&copy; 2024 Clever Cloud Morocco. All rights reserved.</p>
-            <a href="#" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-md lg:text-base font-medium transition-colors duration-200">Politique de confidentialité</a>
+            <p class="text-gray-700 text-sm md:text-md lg:text-base text-center" data-translate="footer.copyright">&copy; 2024 Clever Cloud Morocco. All rights reserved.</p>
+            <a href="#" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-md lg:text-base font-medium transition-colors duration-200" data-translate="footer.privacy">Politique de confidentialité</a>
         </div>
     </footer>
 
     <script>
+        // Smooth Scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+
+                // If it's just "#", prevent default and do nothing (for Home link)
+                if (href === '#') {
+                    e.preventDefault();
+                    return;
+                }
+
+                // For other anchor links, scroll smoothly
+                e.preventDefault();
+                const target = document.querySelector(href);
+
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if it's open
+                    if (isOpen) {
+                        toggleMenu();
+                    }
+                }
+            });
+        });
+
+        // Partner Logos Configuration
+        // Add your logo filenames here (they will be loaded from assets/images/logo/)
+        const partnerLogos = [
+            { filename: 'altcode.png', name: 'AltCode' },
+            { filename: 'apebi.jpg', name: 'APEBI' },
+            { filename: 'azulcomputing.jpeg', name: 'Azul Computing' },
+            { filename: 'cgem.jpg', name: 'CGEM' },
+            { filename: 'ecsi.png', name: 'ECSI' },
+            { filename: 'edukaskills.png', name: 'Eduka Skills' },
+            { filename: 'geeksblabla.png', name: 'GeeksBlaBla' },
+            { filename: 'greenard.png', name: 'Greenard' },
+            { filename: 'mdc.png', name: 'MDC' },
+            { filename: 'mtnra.png', name: 'MTNRA' },
+            { filename: 'ocp.png', name: 'OCP' },
+            { filename: 'phpmorocco.jpeg', name: 'PHP Morocco' },
+            { filename: 'technopark.png', name: 'Technopark' },
+            { filename: 'ump6.png', name: 'UMP6' }
+        ];
+
+        // Generate logo carousel
+        function generateLogoCarousel() {
+            const logoScroll = document.getElementById('logoScroll');
+            if (!logoScroll) return;
+
+            // Clear existing content
+            logoScroll.innerHTML = '';
+
+            // Create logo HTML for each image
+            const logoHTML = partnerLogos.map(logo => `
+                <img src="./assets/images/logo/${logo.filename}"
+                     alt="${logo.name}"
+                     title="${logo.name}">
+            `).join('');
+
+            // Create first track
+            const firstTrack = document.createElement('div');
+            firstTrack.className = 'logo-track';
+            firstTrack.innerHTML = logoHTML;
+
+            // Create duplicate track for seamless infinite loop
+            const secondTrack = document.createElement('div');
+            secondTrack.className = 'logo-track';
+            secondTrack.innerHTML = logoHTML;
+
+            // Append both tracks
+            logoScroll.appendChild(firstTrack);
+            logoScroll.appendChild(secondTrack);
+        }
+
+        // Initialize carousel on page load
+        generateLogoCarousel();
+
+        // Language Switcher
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+        const langOptions = document.querySelectorAll('.lang-option');
+
+        // Toggle dropdown
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            langDropdown.classList.add('hidden');
+        });
+
+        // Language selection
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                const langName = option.getAttribute('data-name');
+
+                // Update button
+                currentFlag.innerHTML = option.querySelector('svg').outerHTML;
+                currentLang.textContent = langName;
+
+                // Apply translations
+                applyTranslations(lang);
+
+                // Close dropdown
+                langDropdown.classList.add('hidden');
+
+                // Save preference
+                localStorage.setItem('language', lang);
+            });
+        });
+
+        // Initialize with saved language or default to English
+        const savedLang = localStorage.getItem('language') || 'en';
+        const savedOption = document.querySelector(`[data-lang="${savedLang}"]`);
+        if (savedOption) {
+            currentFlag.innerHTML = savedOption.querySelector('svg').outerHTML;
+            currentLang.textContent = savedOption.getAttribute('data-name');
+            applyTranslations(savedLang);
+        }
+
+        function applyTranslations(lang) {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        // Translations object
+        const translations = {
+            en: {
+                // Navigation
+                'nav.home': 'Home',
+                'nav.about': 'About Us',
+                'nav.services': 'Services',
+                'nav.contact': 'Contact',
+
+                // Hero Section
+                'hero.subtitle': 'About Clever Cloud Morocco',
+                'hero.title': 'Who is <b class="font-bold">Clever Cloud</b>',
+                'hero.description': 'Morocco\'s Sovereign Cloud Platform secure Platform as a Service service infrastructure, locally operated in partnership with Clever Cloud. Your data stays in Morocco.',
+                'hero.cta1': 'Join Priority List',
+                'hero.cta2': 'Talk to Our Team',
+
+                // Trusted By Section
+                'trusted.title': 'Trusted By Leading Organizations',
+
+                // Morocco Accelerates Section
+                'morocco.title': 'Morocco Accelerates Digital Transformation',
+                'morocco.subtitle': 'The digital landscape is evolving rapidly. Organizations need local infrastructure that meets sovereignty requirements while delivering enterprise-grade performance.',
+                'morocco.card1.title': 'Data Sovereignty',
+                'morocco.card1.text': 'Growing requirements for local data governance and control',
+                'morocco.card2.title': 'Resilient Infrastructure',
+                'morocco.card2.text': 'Public and private sectors demand reliable cloud platforms',
+                'morocco.card3.title': 'Digital Acceleration',
+                'morocco.card3.text': 'SaaS, e-services, and platforms drive innovation forward',
+                'morocco.card4.title': 'Local Expertise',
+                'morocco.card4.text': 'Need for structured local operators with proven technology',
+
+                // Strategic Pillars Section
+                'pillars.title': 'Built on Three Strategic Pillars',
+                'pillars.subtitle': 'Clever Cloud Morocco combines sovereignty, security, and automation. This foundation ensures your infrastructure meets both local requirements and global standards.',
+                'pillars.pillar1.title': 'Sovereignty & Compliance',
+                'pillars.pillar1.item1': 'Data hosted locally in Morocco',
+                'pillars.pillar1.item2': 'Clear governance frameworks',
+                'pillars.pillar1.item3': 'Aligned with regulatory requirements',
+                'pillars.pillar1.detail.title': 'Why Local Hosting Matters',
+                'pillars.pillar1.detail.text1': 'Your data never leaves Moroccan territory. This ensures compliance with local regulations while giving you complete control over your digital assets.',
+                'pillars.pillar1.detail.text2': 'Our governance model provides transparency and accountability at every level.',
+                'pillars.pillar2.title': 'Security & Resilience',
+                'pillars.pillar2.item1': 'Robust, monitored infrastructure',
+                'pillars.pillar2.item2': 'Integrated DevSecOps practices',
+                'pillars.pillar2.item3': 'High availability architecture',
+                'pillars.pillar2.detail.title': 'Enterprise-Grade Protection',
+                'pillars.pillar2.detail.text1': 'Security is embedded in every layer. Our infrastructure combines advanced monitoring with automated threat detection.',
+                'pillars.pillar2.detail.text2': 'Downtime is not an option. We architect for resilience from day one.',
+
+                // Partnership Section
+                'partnership.title': 'A Structured Technology Partnership',
+                'partnership.left.title': 'Proven Expertise Meets Local Operations',
+                'partnership.left.text1': 'Our partnership with Clever Cloud France brings battle-tested PaaS technology to Morocco. Over a decade of European cloud experience now operates locally.',
+                'partnership.left.text2': 'This collaboration combines international standards with deep local market understanding.',
+                'partnership.step1.title': 'Established PaaS Provider',
+                'partnership.step1.text': 'Clever Cloud\'s proven European platform',
+                'partnership.step2.title': 'Local Infrastructure',
+                'partnership.step2.text': 'Operated entirely within Morocco',
+                'partnership.step3.title': 'Combined Expertise',
+                'partnership.step3.text': 'International tech meets local insights',
+
+                // Team Section
+                'team.label': 'THE TEAM',
+                'team.title': 'Discover our executive committee',
+
+                // FAQ Section
+                'faq.title': 'Frequently Asked Questions',
+                'faq.q1': 'When is the official launch planned?',
+                'faq.a1': 'Platform launch is scheduled for Q2 2024. Early access partners begin onboarding in Q1.',
+                'faq.q2': 'Where will data be hosted?',
+                'faq.a2': 'All data resides in Morocco. Our infrastructure operates entirely within Moroccan territory, ensuring complete sovereignty.',
+                'faq.q3': 'Is the service compliant with local requirements?',
+                'faq.a3': 'Yes. We align with Moroccan regulatory frameworks. Our governance model ensures ongoing compliance.',
+                'faq.q4': 'Can I become an integration partner?',
+                'faq.a4': 'Absolutely. We\'re building a partner ecosystem. Contact our partnerships team to discuss collaboration opportunities.',
+                'faq.q5': 'How does early access selection work?',
+                'faq.a5': 'We evaluate applications based on use case, readiness to deploy, and strategic fit. Priority goes to organizations committed to launching within our first quarter of operations.',
+
+                // Application Form Section
+                'form.title': 'Application Form',
+                'form.subtitle': 'Complete the form below and we\'ll get back to you shortly.',
+                'form.section1': 'Contact Information',
+                'form.fullname': 'Full Name',
+                'form.email': 'Professional Email',
+                'form.phone': 'Phone Number',
+                'form.section2': 'Organization Details',
+                'form.org': 'Organization Name',
+                'form.job': 'Job Function/Title',
+                'form.size': 'Organization Size',
+                'form.size.select': 'Select organization size',
+                'form.size.startup': 'Startup (1-50 employees)',
+                'form.size.sme': 'SME (51-250 employees)',
+                'form.size.mid': 'Mid-Market (251-1000 employees)',
+                'form.size.large': 'Large Enterprise (1000+ employees)',
+                'form.size.public': 'Public/Government Sector',
+                'form.section3': 'Technical Information',
+                'form.usecase': 'Primary use case or project description',
+                'form.submit': 'Submit Application',
+                'form.sending': 'Sending...',
+                'form.success.title': 'Success!',
+                'form.success.message': 'Thank you! Your application has been submitted successfully. We\'ll contact you soon.',
+                'form.error.title': 'Error!',
+                'form.error.message': 'Oops! Something went wrong. Please try again or contact us directly at contact@clevercloud.ma',
+
+                // Contact Section
+                'contact.label': 'GET IN TOUCH',
+                'contact.title': 'Contact Information',
+                'contact.phone': 'Phone',
+                'contact.email': 'Email',
+                'contact.location': 'Location',
+                'contact.location.text': 'Casablanca, Morocco',
+                'contact.social': 'Follow Us',
+
+                // Footer
+                'footer.copyright': '© 2024 Clever Cloud Morocco. All rights reserved.',
+                'footer.privacy': 'Privacy Policy'
+            },
+            fr: {
+                // Navigation
+                'nav.home': 'Accueil',
+                'nav.about': 'À propos',
+                'nav.services': 'Services',
+                'nav.contact': 'Contact',
+
+                // Hero Section
+                'hero.subtitle': 'À propos de Clever Cloud Maroc',
+                'hero.title': 'Qui est <b class="font-bold">Clever Cloud</b>',
+                'hero.description': 'Plateforme Cloud Souveraine du Maroc, infrastructure Platform as a Service sécurisée, exploitée localement en partenariat avec Clever Cloud. Vos données restent au Maroc.',
+                'hero.cta1': 'Rejoindre la liste prioritaire',
+                'hero.cta2': 'Parler à notre équipe',
+
+                // Trusted By Section
+                'trusted.title': 'Ils nous font confiance',
+
+                // Morocco Accelerates Section
+                'morocco.title': 'Le Maroc accélère sa transformation digitale',
+                'morocco.subtitle': 'Le paysage numérique évolue rapidement. Les organisations ont besoin d\'une infrastructure locale qui répond aux exigences de souveraineté tout en offrant des performances de niveau entreprise.',
+                'morocco.card1.title': 'Souveraineté des données',
+                'morocco.card1.text': 'Exigences croissantes en matière de gouvernance et de contrôle des données locales',
+                'morocco.card2.title': 'Infrastructure résiliente',
+                'morocco.card2.text': 'Les secteurs public et privé exigent des plateformes cloud fiables',
+                'morocco.card3.title': 'Accélération digitale',
+                'morocco.card3.text': 'SaaS, e-services et plateformes stimulent l\'innovation',
+                'morocco.card4.title': 'Expertise locale',
+                'morocco.card4.text': 'Besoin d\'opérateurs locaux structurés avec une technologie éprouvée',
+
+                // Strategic Pillars Section
+                'pillars.title': 'Construit sur trois piliers stratégiques',
+                'pillars.subtitle': 'Clever Cloud Maroc combine souveraineté, sécurité et automatisation. Cette fondation garantit que votre infrastructure répond aux exigences locales et aux normes mondiales.',
+                'pillars.pillar1.title': 'Souveraineté & Conformité',
+                'pillars.pillar1.item1': 'Données hébergées localement au Maroc',
+                'pillars.pillar1.item2': 'Cadres de gouvernance clairs',
+                'pillars.pillar1.item3': 'Aligné avec les exigences réglementaires',
+                'pillars.pillar1.detail.title': 'Pourquoi l\'hébergement local est important',
+                'pillars.pillar1.detail.text1': 'Vos données ne quittent jamais le territoire marocain. Cela garantit la conformité avec les réglementations locales tout en vous donnant un contrôle total sur vos actifs numériques.',
+                'pillars.pillar1.detail.text2': 'Notre modèle de gouvernance assure transparence et responsabilité à tous les niveaux.',
+                'pillars.pillar2.title': 'Sécurité & Résilience',
+                'pillars.pillar2.item1': 'Infrastructure robuste et surveillée',
+                'pillars.pillar2.item2': 'Pratiques DevSecOps intégrées',
+                'pillars.pillar2.item3': 'Architecture haute disponibilité',
+                'pillars.pillar2.detail.title': 'Protection de niveau entreprise',
+                'pillars.pillar2.detail.text1': 'La sécurité est intégrée à chaque couche. Notre infrastructure combine surveillance avancée et détection automatique des menaces.',
+                'pillars.pillar2.detail.text2': 'Les temps d\'arrêt ne sont pas une option. Nous concevons pour la résilience dès le premier jour.',
+
+                // Partnership Section
+                'partnership.title': 'Un partenariat technologique structuré',
+                'partnership.left.title': 'L\'expertise éprouvée rencontre les opérations locales',
+                'partnership.left.text1': 'Notre partenariat avec Clever Cloud France apporte au Maroc une technologie PaaS éprouvée. Plus d\'une décennie d\'expérience cloud européenne opère désormais localement.',
+                'partnership.left.text2': 'Cette collaboration combine les normes internationales avec une compréhension approfondie du marché local.',
+                'partnership.step1.title': 'Fournisseur PaaS établi',
+                'partnership.step1.text': 'La plateforme européenne éprouvée de Clever Cloud',
+                'partnership.step2.title': 'Infrastructure locale',
+                'partnership.step2.text': 'Exploitée entièrement au Maroc',
+                'partnership.step3.title': 'Expertise combinée',
+                'partnership.step3.text': 'Technologie internationale et connaissances locales',
+
+                // Team Section
+                'team.label': 'L\'ÉQUIPE',
+                'team.title': 'Découvrez notre comité exécutif',
+
+                // FAQ Section
+                'faq.title': 'Questions fréquemment posées',
+                'faq.q1': 'Quand est prévu le lancement officiel ?',
+                'faq.a1': 'Le lancement de la plateforme est prévu pour le T2 2024. Les partenaires à accès anticipé commencent l\'intégration au T1.',
+                'faq.q2': 'Où seront hébergées les données ?',
+                'faq.a2': 'Toutes les données résident au Maroc. Notre infrastructure fonctionne entièrement sur le territoire marocain, garantissant une souveraineté totale.',
+                'faq.q3': 'Le service est-il conforme aux exigences locales ?',
+                'faq.a3': 'Oui. Nous sommes alignés avec les cadres réglementaires marocains. Notre modèle de gouvernance garantit une conformité continue.',
+                'faq.q4': 'Puis-je devenir partenaire d\'intégration ?',
+                'faq.a4': 'Absolument. Nous construisons un écosystème de partenaires. Contactez notre équipe partenariats pour discuter des opportunités de collaboration.',
+                'faq.q5': 'Comment fonctionne la sélection pour l\'accès anticipé ?',
+                'faq.a5': 'Nous évaluons les candidatures en fonction du cas d\'usage, de la préparation au déploiement et de l\'adéquation stratégique. La priorité va aux organisations engagées à se lancer au cours de notre premier trimestre d\'exploitation.',
+
+                // Application Form Section
+                'form.title': 'Formulaire de candidature',
+                'form.subtitle': 'Complétez le formulaire ci-dessous et nous vous contacterons rapidement.',
+                'form.section1': 'Informations de contact',
+                'form.fullname': 'Nom complet',
+                'form.email': 'Email professionnel',
+                'form.phone': 'Numéro de téléphone',
+                'form.section2': 'Détails de l\'organisation',
+                'form.org': 'Nom de l\'organisation',
+                'form.job': 'Fonction/Titre',
+                'form.size': 'Taille de l\'organisation',
+                'form.size.select': 'Sélectionnez la taille de l\'organisation',
+                'form.size.startup': 'Startup (1-50 employés)',
+                'form.size.sme': 'PME (51-250 employés)',
+                'form.size.mid': 'Marché intermédiaire (251-1000 employés)',
+                'form.size.large': 'Grande entreprise (1000+ employés)',
+                'form.size.public': 'Secteur public/gouvernemental',
+                'form.section3': 'Informations techniques',
+                'form.usecase': 'Principal cas d\'usage ou description du projet',
+                'form.submit': 'Soumettre la candidature',
+                'form.sending': 'Envoi en cours...',
+                'form.success.title': 'Succès !',
+                'form.success.message': 'Merci ! Votre candidature a été soumise avec succès. Nous vous contacterons bientôt.',
+                'form.error.title': 'Erreur !',
+                'form.error.message': 'Oups ! Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement à contact@clevercloud.ma',
+
+                // Contact Section
+                'contact.label': 'NOUS CONTACTER',
+                'contact.title': 'Informations de contact',
+                'contact.phone': 'Téléphone',
+                'contact.email': 'Email',
+                'contact.location': 'Emplacement',
+                'contact.location.text': 'Casablanca, Maroc',
+                'contact.social': 'Suivez-nous',
+
+                // Footer
+                'footer.copyright': '© 2024 Clever Cloud Maroc. Tous droits réservés.',
+                'footer.privacy': 'Politique de confidentialité'
+            },
+            ar: {
+                // Navigation
+                'nav.home': 'الرئيسية',
+                'nav.about': 'من نحن',
+                'nav.services': 'خدماتنا',
+                'nav.contact': 'اتصل بنا',
+
+                // Hero Section
+                'hero.subtitle': 'حول كليفر كلاود المغرب',
+                'hero.title': 'من هو كليفر كلاود',
+                'hero.description': 'منصة السحابة السيادية في المغرب، بنية تحتية آمنة لخدمة المنصة كخدمة، تدار محليًا بالشراكة مع Clever Cloud. بياناتك تبقى في المغرب.',
+                'hero.cta1': 'انضم إلى القائمة المفضلة',
+                'hero.cta2': 'تحدث إلى فريقنا'
+            },
+            ber: {
+                // Navigation
+                'nav.home': 'ⴰⵙⵏⵓⴱⴳ',
+                'nav.about': 'ⵅⴼ ⵏⵖ',
+                'nav.services': 'ⵜⵉⵎⵙⴰⵔⵉⵏ',
+                'nav.contact': 'ⵎⵢⴰⵡⴰⴹ',
+
+                // Hero Section
+                'hero.subtitle': 'ⵅⴼ Clever Cloud ⵍⵎⵖⵔⵉⴱ',
+                'hero.title': 'ⵎⴰⵏ ⵉⴳⴰ Clever Cloud',
+                'hero.description': 'ⵜⴰⵙⵏⵙⵍⵜ ⵏ ⵜⴳⵏⵙⵉⵜ ⵏ ⵍⵎⵖⵔⵉⴱ, ⴰⴱⵏⵉⵇ ⵏ ⵜⴰⵖⵔⴷⴰⵙⵜ ⵜⴰⵖⵍⵙⴰⵏⵜ, ⵉⵜⵜⵓⵙⵖⵓⴷⴰⵏ ⴷⵉⴳⵙ ⵙ ⵜⵎⴰⵣⵉⵔⵜ ⴰⴽⴷ Clever Cloud. ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⴰⴷ ⵇⵇⵉⵎⵏ ⴷⴳ ⵍⵎⵖⵔⵉⴱ.',
+                'hero.cta1': 'ⴰⵔⵏⵓ ⵖⵔ ⵜⵍⴳⴰⵎⵜ',
+                'hero.cta2': 'ⵎⵙⴰⵡⴰⵍ ⴰⴽⴷ ⵜⵔⴰⴱⴱⵓⵜ'
+            }
+        };
+
         // Mobile Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
@@ -560,12 +1262,6 @@
 
         menuBtn.addEventListener('click', toggleMenu);
 
-        sidebar.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (isOpen) toggleMenu();
-            });
-        });
-
         // FAQ Accordion
         const faqQuestions = document.querySelectorAll('.faq-question');
 
@@ -599,6 +1295,102 @@
                 }
             });
         });
+
+        // EmailJS Configuration (loaded from config.js)
+        // Make sure config.js exists with your credentials
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+
+        // Form Submission Handler
+        const form = document.getElementById('applicationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+
+            // Send email via EmailJS
+            emailjs.sendForm(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, form)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+
+                    // Show success message
+                    showMessage('success', 'Thank you! Your application has been submitted successfully. We\'ll contact you soon.');
+
+                    // Reset form
+                    form.reset();
+
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
+                }, function(error) {
+                    console.log('FAILED...', error);
+
+                    // Show error message
+                    showMessage('error', 'Oops! Something went wrong. Please try again or contact us directly at contact@clevercloud.ma');
+
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
+                });
+        });
+
+        // Show message function
+        function showMessage(type, message) {
+            formMessage.classList.remove('hidden');
+
+            if (type === 'success') {
+                // Success style - Green background with your brand colors
+                formMessage.classList.remove('bg-red-50', 'border-red-500', 'text-red-800');
+                formMessage.classList.add('bg-green-50', 'border-green-500', 'text-green-900');
+                formMessage.style.backgroundColor = '#f0fdf4';
+                formMessage.style.borderColor = '#22c55e';
+
+                formMessage.innerHTML = `
+                    <svg class="w-6 h-6 md:w-7 md:h-7 flex-shrink-0" style="color: #22c55e;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-lg md:text-xl !mb-2" style="color: #15803d;">Success!</p>
+                        <p style="color: #166534;">${message}</p>
+                    </div>
+                `;
+            } else {
+                // Error style - Red background matching your #E63F48 color
+                formMessage.classList.remove('bg-green-50', 'border-green-500', 'text-green-900');
+                formMessage.classList.add('bg-red-50', 'border-red-500', 'text-red-900');
+                formMessage.style.backgroundColor = '#fef2f2';
+                formMessage.style.borderColor = '#E63F48';
+
+                formMessage.innerHTML = `
+                    <svg class="w-6 h-6 md:w-7 md:h-7 flex-shrink-0" style="color: #E63F48;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <p class="font-bold text-lg md:text-xl !mb-2" style="color: #E63F48;">Error!</p>
+                        <p style="color: #991b1b;">${message}</p>
+                    </div>
+                `;
+            }
+
+            // Scroll to message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Hide message after 10 seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 10000);
+        }
     </script>
 </body>
 </html>
