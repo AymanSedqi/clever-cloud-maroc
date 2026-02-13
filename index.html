@@ -160,7 +160,7 @@
             <ul class="hidden lg:flex items-center gap-10">
                 <li><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
                 <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.about">About Us</a></li>
-                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.services">Services</a></li>
+                <li><a href="#benefits" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
                 <li><a href="#application-form" class="bg-[#3a3871] !text-white !px-6 !py-3 font-semibold hover:bg-[#5754aa] transition-all duration-200 inline-flex items-center justify-center" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
             </ul>
 
@@ -209,7 +209,7 @@
         <ul class="flex flex-col items-center !px-8 !py-10">
             <li class="w-full text-center !mb-6"><a href="#" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.home">Home</a></li>
             <li class="w-full text-center !mb-6"><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.about">About Us</a></li>
-            <li class="w-full text-center !mb-6"><a href="#services" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.services">Services</a></li>
+            <li class="w-full text-center !mb-6"><a href="#benefits" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
             <li class="w-full flex justify-center !mt-4"><a href="#application-form" class="bg-[#3a3871] !text-white !px-8 !py-3 font-semibold inline-flex items-center justify-center hover:bg-[#5754aa] transition-all duration-200" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
         </ul>
     </div>
@@ -491,7 +491,7 @@
         </div>
     </section>
     <!-- Who Benefits -->
-    <section class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 flex-col justify-center items-center">
+    <section id="benefits" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-20 md:!pt-24 lg:!pt-28 flex-col justify-center items-center">
         <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center" data-translate="benefits.label">WHO BENEFITS</h2>
         <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl !mt-2" data-translate="benefits.title">Who Benefits from Our Platform?</h1>
         <p class="!mt-8 !mb-16 md:!mb-20 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center" data-translate="benefits.subtitle">Clever Cloud Morocco serves organizations at every stage. From startups to government agencies, our infrastructure adapts to your specific requirements.</p>
@@ -756,7 +756,10 @@
                     </svg>
                 </div>
                 <h3 class="font-bold text-xl md:text-2xl !mb-3" data-translate="contact.email">Email</h3>
-                <a href="mailto:contact@clevercloud.ma" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">contact@clevercloud.ma</a>
+                <div class="flex flex-col gap-2">
+                    <a href="mailto:ismael.faouri@groupe-agel.com" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">ismael.faouri@groupe-agel.com</a>
+                    <a href="mailto:ismail.kabbaj@groupe-agel.com" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">ismail.kabbaj@groupe-agel.com</a>
+                </div>
             </div>
 
             <!-- Location -->
@@ -862,7 +865,7 @@
             <ul class="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 text-center !my-10">
                 <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
                 <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.about">About Us</a></li>
-                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.services">Services</a></li>
+                <li><a href="#benefits" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
                 <li><a href="#application-form" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.contact">Contact</a></li>
             </ul>
         </nav>
@@ -960,7 +963,7 @@
                 // Navigation
                 'nav.home': 'Home',
                 'nav.about': 'About Us',
-                'nav.services': 'Services',
+                'nav.benefits': 'Benefits',
                 'nav.contact': 'Contact',
 
                 // Hero Section
@@ -1082,7 +1085,7 @@
                 'form.success.title': 'Success!',
                 'form.success.message': 'Thank you! Your application has been submitted successfully. We\'ll contact you soon.',
                 'form.error.title': 'Error!',
-                'form.error.message': 'Oops! Something went wrong. Please try again or contact us directly at contact@clevercloud.ma',
+                'form.error.message': 'Oops! Something went wrong. Please try again or contact us directly at ismael.faouri@groupe-agel.com or ismail.kabbaj@groupe-agel.com',
 
                 // WHO BENEFITS Section
                 'benefits.label': 'WHO BENEFITS',
@@ -1114,7 +1117,7 @@
                 // Navigation
                 'nav.home': 'Accueil',
                 'nav.about': 'À propos',
-                'nav.services': 'Services',
+                'nav.benefits': 'Avantages',
                 'nav.contact': 'Contact',
 
                 // Hero Section
@@ -1249,7 +1252,7 @@
                 'form.success.title': 'Succès !',
                 'form.success.message': 'Merci ! Votre candidature a été envoyée avec succès. Nous vous contacterons prochainement.',
                 'form.error.title': 'Erreur !',
-                'form.error.message': 'Oups ! Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement à contact@clevercloud.ma',
+                'form.error.message': 'Oups ! Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement à ismael.faouri@groupe-agel.com ou ismail.kabbaj@groupe-agel.com',
 
                 // Contact Section
                 'contact.label': 'NOUS CONTACTER',
@@ -1268,7 +1271,7 @@
                 // Navigation
                 'nav.home': 'الرئيسية',
                 'nav.about': 'من نحن',
-                'nav.services': 'خدماتنا',
+                'nav.benefits': 'الفوائد',
                 'nav.contact': 'اتصل بنا',
 
                 // Hero Section
@@ -1403,7 +1406,7 @@
                 'form.success.title': 'نجح!',
                 'form.success.message': 'شكراً لك! تم إرسال طلبك بنجاح. سنتواصل معك قريباً.',
                 'form.error.title': 'خطأ!',
-                'form.error.message': 'عذراً! حدث خطأ ما. يرجى المحاولة مرة أخرى أو الاتصال بنا مباشرة على contact@clevercloud.ma',
+                'form.error.message': 'عذراً! حدث خطأ ما. يرجى المحاولة مرة أخرى أو الاتصال بنا مباشرة على ismael.faouri@groupe-agel.com أو ismail.kabbaj@groupe-agel.com',
 
                 // Contact Section
                 'contact.label': 'تواصل معنا',
@@ -1422,7 +1425,7 @@
                 // Navigation
                 'nav.home': 'ⴰⵙⵏⵓⴱⴳ',
                 'nav.about': 'ⵅⴼ ⵏⵖ',
-                'nav.services': 'ⵜⵉⵎⵙⴰⵔⵉⵏ',
+                'nav.benefits': 'ⵜⵉⵏⴼⵓⵜⵉⵏ',
                 'nav.contact': 'ⵎⵢⴰⵡⴰⴹ',
 
                 // Hero Section
@@ -1557,7 +1560,7 @@
                 'form.success.title': 'ⵢⵓⴼⴰ!',
                 'form.success.message': 'ⵜⴰⵏⵎⵎⵉⵔⵜ! ⴰⵙⵓⵜⵔ ⵏⵏⴽ ⵉⵜⵜⵓⵣⴰⵏ ⵙ ⵜⵖⵉⴷⵉ. ⴰⴷ ⵏⵎⵢⴰⵡⴰⴹ ⴰⴽⴷ ⵢⴰⵜ.',
                 'form.error.title': 'ⵜⴰⵣⴳⴳⵯⴰⵍⵜ!',
-                'form.error.message': 'ⵙⵙⵓⵔⴼ! ⵢⵓⵎⵥ ⵓⵙⴰⴳⵡⴰⴷ. ⴰⵔⵎ ⵙ ⵢⴰⵜ ⵏⵖ ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵙⵔⵉⴷ ⴳ contact@clevercloud.ma',
+                'form.error.message': 'ⵙⵙⵓⵔⴼ! ⵢⵓⵎⵥ ⵓⵙⴰⴳⵡⴰⴷ. ⴰⵔⵎ ⵙ ⵢⴰⵜ ⵏⵖ ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵙⵔⵉⴷ ⴳ ismael.faouri@groupe-agel.com ⵏⵖ ismail.kabbaj@groupe-agel.com',
 
                 // Contact Section
                 'contact.label': 'ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ',
@@ -1805,7 +1808,7 @@
                     console.log('FAILED...', error);
 
                     // Show error message
-                    showMessage('error', 'Oops! Something went wrong. Please try again or contact us directly at contact@clevercloud.ma');
+                    showMessage('error', 'Oops! Something went wrong. Please try again or contact us directly at ismael.faouri@groupe-agel.com or ismail.kabbaj@groupe-agel.com');
 
                     // Reset button state
                     submitBtn.disabled = false;
