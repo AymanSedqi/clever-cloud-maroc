@@ -28,6 +28,7 @@
             gap: 4rem;
             animation: scroll 30s linear infinite;
             width: fit-content;
+            direction: ltr !important;
         }
 
         @media (max-width: 1024px) {
@@ -91,6 +92,70 @@
                 min-width: 80px;
                 max-width: 120px;
             }
+        }
+
+        /* RTL Support for Arabic and Berber - Text direction only, keep layout LTR */
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="rtl"] body {
+            text-align: right;
+        }
+
+        /* Keep logo carousel in LTR for infinite scroll */
+        [dir="rtl"] #logoScroll,
+        [dir="rtl"] .logo-track {
+            direction: ltr !important;
+        }
+
+        /* Text only - keep components in same position */
+        [dir="rtl"] p,
+        [dir="rtl"] h1,
+        [dir="rtl"] h2,
+        [dir="rtl"] h3,
+        [dir="rtl"] h4,
+        [dir="rtl"] h5,
+        [dir="rtl"] h6,
+        [dir="rtl"] span,
+        [dir="rtl"] li {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Lists - text RTL, layout LTR */
+        [dir="rtl"] ul, [dir="rtl"] ol {
+            text-align: right;
+        }
+
+        [dir="rtl"] ul li, [dir="rtl"] ol li {
+            direction: rtl;
+        }
+
+        /* Text alignments */
+        [dir="rtl"] .text-left {
+            text-align: right !important;
+        }
+
+        [dir="rtl"] .text-right {
+            text-align: left !important;
+        }
+
+        [dir="rtl"] .text-center {
+            text-align: center !important;
+        }
+
+        /* Forms - text direction only */
+        [dir="rtl"] input,
+        [dir="rtl"] textarea,
+        [dir="rtl"] select {
+            text-align: right;
+            direction: rtl;
+        }
+
+        /* Buttons - keep centered */
+        [dir="rtl"] button {
+            direction: rtl;
         }
     </style>
 </head>
@@ -220,55 +285,55 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !my-20 gap-4 md:gap-6 lg:gap-8 my-6 px- max-w-7xl">
             <!-- Ismael Faouri -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/ismael-faouri.png" alt="Ismael Faouri" class="w-full h-64 object-cover">
+                <img src="./assets/images/ismael-faouri.png" alt="Ismael Faouri" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/jifaouri/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismael Faouri</a>
-                    <p class="text-md md:text-lg lg:text-lg">CEO</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.ceo">CEO</p>
                 </div>
             </div>
             <!--  -->
             <!-- Ismail Kabbaj -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/ismail-kabbaj.png" alt="Ismail Kabbaj" class="w-full h-64 object-cover">
+                <img src="./assets/images/ismail-kabbaj.png" alt="Ismail Kabbaj" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/ismail-kabbaj-530a0a177/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ismail Kabbaj</a>
-                    <p class="text-md md:text-lg lg:text-lg">CTO</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.cto">CTO</p>
                 </div>
             </div>
             <!--  -->
             <!-- Charaf Karcha -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/charaf-karcha.png" alt="Charaf Karcha" class="w-full h-64 object-cover">
+                <img src="./assets/images/charaf-karcha.png" alt="Charaf Karcha" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/cdk0/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Charaf Karcha</a>
-                    <p class="text-md md:text-lg lg:text-lg">VP</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.vp">VP Engineering</p>
                 </div>
             </div>
             <!--  -->
             <!-- Ayman Sedqi -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/ayman-sedqi.png" alt="Ayman Sedqi" class="w-full h-64 object-cover">
+                <img src="./assets/images/ayman-sedqi.png" alt="Ayman Sedqi" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/sedqi-ayman/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ayman Sedqi</a>
-                    <p class="text-md md:text-lg lg:text-lg">DevRel</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.devrel">DevRel</p>
                 </div>
             </div>
             <!--  -->
             <!-- Ahmed Taha Sabri -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/ahmed-taha.png" alt="Ahmed Taha Sabri" class="w-full h-64 object-cover">
+                <img src="./assets/images/ahmed-taha.png" alt="Ahmed Taha Sabri" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/tahatsatya/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Ahmed Taha Sabri</a>
-                    <p class="text-md md:text-lg lg:text-lg">Cloud Architect</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.cloudarchitect">Cloud Architect</p>
                 </div>
             </div>
             <!--  -->
             <!-- Amine Karcha -->
             <div class="col-span-1 border border-[#deddee]">
-                <img src="./assets/images/amine-karcha.png" alt="Amine Karcha" class="w-full h-64 object-cover">
+                <img src="./assets/images/amine-karcha.png" alt="Amine Karcha" class="w-full h-64 md:h-72 lg:h-80 object-contain bg-gray-50">
                 <div class="flex flex-col gap-4 items-center !my-6">
                     <a href="https://www.linkedin.com/in/med-amine-karcha-64b074254/" target="_blank" class="text-xl md:text-2xl lg:text-2xl font-bold links">Amine Karcha</a>
-                    <p class="text-md md:text-lg lg:text-lg">AI Engineer</p>
+                    <p class="text-md md:text-lg lg:text-lg" data-translate="team.aiengineer">AI Engineer</p>
                 </div>
             </div>
             <!--  -->
@@ -364,8 +429,8 @@
     </section>
     <!-- Important Information -->
     <section id="services" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
-        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl">Discover our executive committee</b></h1>
-        <p class="!mt-8 !mb-12 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center">Nous avons à coeur d'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement écnomique du pays.</p>
+        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl" data-translate="services.title">Discover our executive committee</b></h1>
+        <p class="!mt-8 !mb-12 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center" data-translate="services.subtitle">Nous avons à coeur d'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement écnomique du pays.</p>
         <!-- Items -->
         <div class="w-full md:max-w-4xl lg:max-w-6xl flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-8 lg:gap-10">
             <div class="flex flex-col">
@@ -377,11 +442,11 @@
                         <line x1="6" y1="18" x2="6.01" y2="18"></line>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4">Technologie</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.tech.title">Technologie</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li>Adapter Clever Cloud aux besoins de l'ecosystem marocain.</li>
-                    <li>Créer des centres R&D local (IA, Cloud,Green IT).</li>
-                    <li>Soutenir et contribuer à des projets open source stratégiques.</li>
+                    <li data-translate="services.tech.item1">Adapter Clever Cloud aux besoins de l'ecosystem marocain.</li>
+                    <li data-translate="services.tech.item2">Créer des centres R&D local (IA, Cloud,Green IT).</li>
+                    <li data-translate="services.tech.item3">Soutenir et contribuer à des projets open source stratégiques.</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -393,11 +458,11 @@
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4">Innovation</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.innovation.title">Innovation</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li>Accompagner et soutenir les startups marocaines</li>
-                    <li>Intégrer et renforcer l'écosystéme d'incubation et d'accélération</li>
-                    <li>Contruire des ponts avec les écosystémes mondiaux (Europe, Afrique)</li>
+                    <li data-translate="services.innovation.item1">Accompagner et soutenir les startups marocaines</li>
+                    <li data-translate="services.innovation.item2">Intégrer et renforcer l'écosystéme d'incubation et d'accélération</li>
+                    <li data-translate="services.innovation.item3">Contruire des ponts avec les écosystémes mondiaux (Europe, Afrique)</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -410,11 +475,11 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4">Talents digitaux</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.talent.title">Talents digitaux</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li>Animer et soutenir les communautés de développeurs locales</li>
-                    <li>Recrutement de talents et montée en compétence locale</li>
-                    <li>Déployer un programme de certifications et formations spécialisées</li>
+                    <li data-translate="services.talent.item1">Animer et soutenir les communautés de développeurs locales</li>
+                    <li data-translate="services.talent.item2">Recrutement de talents et montée en compétence locale</li>
+                    <li data-translate="services.talent.item3">Déployer un programme de certifications et formations spécialisées</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -425,11 +490,11 @@
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4">Soutien au développement économique</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.economic.title">Soutien au développement économique</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li>Facturation en dirhams, sans sortie de devises</li>
-                    <li>Réinvestissement dans des projets socie-économiques</li>
-                    <li>Participation aux grands chantiers nationaux 2030</li>
+                    <li data-translate="services.economic.item1">Facturation en dirhams, sans sortie de devises</li>
+                    <li data-translate="services.economic.item2">Réinvestissement dans des projets socie-économiques</li>
+                    <li data-translate="services.economic.item3">Participation aux grands chantiers nationaux 2030</li>
                 </ul>
             </div>
         </div>
@@ -464,8 +529,8 @@
                         <path d="M 451.352,905.902 L 511.855,1020.0"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Startups & Scale-ups</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Launch fast with zero infrastructure management. Our platform scales automatically as your user base grows, letting you focus on building your product.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4" data-translate="benefits.startups.title">Startups & Scale-ups</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="benefits.startups.text">Launch fast with zero infrastructure management. Our platform scales automatically as your user base grows, letting you focus on building your product.</p>
             </div>
 
             <!-- Enterprises -->
@@ -520,8 +585,8 @@
                         <path d="M 4.115,428.696 L 4.364,884.859"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Large Enterprises</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Meet compliance requirements while maintaining agility. Secure, sovereign infrastructure.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4" data-translate="benefits.enterprises.title">Large Enterprises</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="benefits.enterprises.text">Meet compliance requirements while maintaining agility. Secure, sovereign infrastructure.</p>
             </div>
 
             <!-- Developers -->
@@ -548,8 +613,8 @@
                         <path d="M 929.232,732.234 L 958.458,1018.83"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Public & Para-Public Sector</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Data sovereignty meets public service excellence. Built for government standards.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4" data-translate="benefits.public.title">Public & Para-Public Sector</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="benefits.public.text">Data sovereignty meets public service excellence. Built for government standards.</p>
             </div>
 
             <!-- Integrators -->
@@ -593,8 +658,8 @@
                         <path d="M 324.56,256.003 L 324.387,85.387"></path>
                     </svg>
                 </div>
-                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4">Integrators & IT Service Providers</h3>
-                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed">Partner with proven technology. Deliver sovereign cloud solutions to your clients.</p>
+                <h3 class="font-bold text-xl md:text-2xl lg:text-3xl !mb-4" data-translate="benefits.integrators.title">Integrators & IT Service Providers</h3>
+                <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="benefits.integrators.text">Partner with proven technology. Deliver sovereign cloud solutions to your clients.</p>
             </div>
         </div>
     </section>
@@ -804,10 +869,10 @@
         <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-32 md:w-36 lg:w-40">
         <nav>
             <ul class="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 text-center !my-10">
-                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Home</a></li>
-                <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">About Us</a></li>
-                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Services</a></li>
-                <li><a href="#application-form" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200">Contact</a></li>
+                <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
+                <li><a href="#about-us" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+                <li><a href="#services" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.services">Services</a></li>
+                <li><a href="#application-form" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.contact">Contact</a></li>
             </ul>
         </nav>
         <div class="border-t border-[#deddee] w-full !pt-6 !pb-2 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
@@ -902,69 +967,7 @@
         // Initialize carousel on page load
         generateLogoCarousel();
 
-        // Language Switcher
-        const langBtn = document.getElementById('langBtn');
-        const langDropdown = document.getElementById('langDropdown');
-        const currentFlag = document.getElementById('currentFlag');
-        const currentLang = document.getElementById('currentLang');
-        const langOptions = document.querySelectorAll('.lang-option');
-
-        // Toggle dropdown
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('hidden');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            langDropdown.classList.add('hidden');
-        });
-
-        // Language selection
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                const langName = option.getAttribute('data-name');
-
-                // Update button
-                currentFlag.innerHTML = option.querySelector('svg').outerHTML;
-                currentLang.textContent = langName;
-
-                // Apply translations
-                applyTranslations(lang);
-
-                // Close dropdown
-                langDropdown.classList.add('hidden');
-
-                // Save preference
-                localStorage.setItem('language', lang);
-            });
-        });
-
-        // Initialize with saved language or default to English
-        const savedLang = localStorage.getItem('language') || 'en';
-        const savedOption = document.querySelector(`[data-lang="${savedLang}"]`);
-        if (savedOption) {
-            currentFlag.innerHTML = savedOption.querySelector('svg').outerHTML;
-            currentLang.textContent = savedOption.getAttribute('data-name');
-            applyTranslations(savedLang);
-        }
-
-        function applyTranslations(lang) {
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = translations[lang][key];
-                    } else {
-                        el.textContent = translations[lang][key];
-                    }
-                }
-            });
-        }
-
-        // Translations object
+        // Translations object - MUST be defined before applyTranslations function
         const translations = {
             en: {
                 // Navigation
@@ -998,20 +1001,20 @@
                 // Strategic Pillars Section
                 'pillars.title': 'Built on Three Strategic Pillars',
                 'pillars.subtitle': 'Clever Cloud Morocco combines sovereignty, security, and automation. This foundation ensures your infrastructure meets both local requirements and global standards.',
-                'pillars.pillar1.title': 'Sovereignty & Compliance',
-                'pillars.pillar1.item1': 'Data hosted locally in Morocco',
-                'pillars.pillar1.item2': 'Clear governance frameworks',
-                'pillars.pillar1.item3': 'Aligned with regulatory requirements',
-                'pillars.pillar1.detail.title': 'Why Local Hosting Matters',
-                'pillars.pillar1.detail.text1': 'Your data never leaves Moroccan territory. This ensures compliance with local regulations while giving you complete control over your digital assets.',
-                'pillars.pillar1.detail.text2': 'Our governance model provides transparency and accountability at every level.',
-                'pillars.pillar2.title': 'Security & Resilience',
-                'pillars.pillar2.item1': 'Robust, monitored infrastructure',
-                'pillars.pillar2.item2': 'Integrated DevSecOps practices',
-                'pillars.pillar2.item3': 'High availability architecture',
-                'pillars.pillar2.detail.title': 'Enterprise-Grade Protection',
-                'pillars.pillar2.detail.text1': 'Security is embedded in every layer. Our infrastructure combines advanced monitoring with automated threat detection.',
-                'pillars.pillar2.detail.text2': 'Downtime is not an option. We architect for resilience from day one.',
+                'pillars.sovereignty.title': 'Sovereignty & Compliance',
+                'pillars.sovereignty.item1': 'Data hosted locally in Morocco',
+                'pillars.sovereignty.item2': 'Clear governance frameworks',
+                'pillars.sovereignty.item3': 'Aligned with regulatory requirements',
+                'pillars.local.title': 'Why Local Hosting Matters',
+                'pillars.local.text1': 'Your data never leaves Moroccan territory. This ensures compliance with local regulations while giving you complete control over your digital assets.',
+                'pillars.local.text2': 'Our governance model provides transparency and accountability at every level.',
+                'pillars.security.title': 'Security & Resilience',
+                'pillars.security.item1': 'Robust, monitored infrastructure',
+                'pillars.security.item2': 'Integrated DevSecOps practices',
+                'pillars.security.item3': 'High availability architecture',
+                'pillars.enterprise.title': 'Enterprise-Grade Protection',
+                'pillars.enterprise.text1': 'Security is embedded in every layer. Our infrastructure combines advanced monitoring with automated threat detection.',
+                'pillars.enterprise.text2': 'Downtime is not an option. We architect for resilience from day one.',
 
                 // Partnership Section
                 'partnership.title': 'A Structured Technology Partnership',
@@ -1028,6 +1031,32 @@
                 // Team Section
                 'team.label': 'THE TEAM',
                 'team.title': 'Discover our executive committee',
+                'team.ceo': 'CEO',
+                'team.cto': 'CTO',
+                'team.vp': 'VP Engineering',
+                'team.devrel': 'DevRel',
+                'team.cloudarchitect': 'Cloud Architect',
+                'team.aiengineer': 'AI Engineer',
+
+                // Services Section
+                'services.title': 'Our Commitment to Morocco',
+                'services.subtitle': 'We are committed to innovating with sovereign topology, supporting local startups and talent, and actively contributing to the country\'s economic development.',
+                'services.tech.title': 'Technology',
+                'services.tech.item1': 'Adapt Clever Cloud to the needs of the Moroccan ecosystem.',
+                'services.tech.item2': 'Create local R&D centers (AI, Cloud, Green IT).',
+                'services.tech.item3': 'Support and contribute to strategic open source projects.',
+                'services.innovation.title': 'Innovation',
+                'services.innovation.item1': 'Support and accompany Moroccan startups',
+                'services.innovation.item2': 'Integrate and strengthen the incubation and acceleration ecosystem',
+                'services.innovation.item3': 'Build bridges with global ecosystems (Europe, Africa)',
+                'services.talent.title': 'Digital Talents',
+                'services.talent.item1': 'Animate and support local developer communities',
+                'services.talent.item2': 'Talent recruitment and local skill development',
+                'services.talent.item3': 'Deploy a program of certifications and specialized training',
+                'services.economic.title': 'Support for Economic Development',
+                'services.economic.item1': 'Billing in dirhams, without currency outflow',
+                'services.economic.item2': 'Reinvestment in socio-economic projects',
+                'services.economic.item3': 'Participation in major national projects 2030',
 
                 // FAQ Section
                 'faq.title': 'Frequently Asked Questions',
@@ -1045,22 +1074,22 @@
                 // Application Form Section
                 'form.title': 'Application Form',
                 'form.subtitle': 'Complete the form below and we\'ll get back to you shortly.',
-                'form.section1': 'Contact Information',
-                'form.fullname': 'Full Name',
-                'form.email': 'Professional Email',
-                'form.phone': 'Phone Number',
-                'form.section2': 'Organization Details',
-                'form.org': 'Organization Name',
-                'form.job': 'Job Function/Title',
-                'form.size': 'Organization Size',
-                'form.size.select': 'Select organization size',
-                'form.size.startup': 'Startup (1-50 employees)',
-                'form.size.sme': 'SME (51-250 employees)',
-                'form.size.mid': 'Mid-Market (251-1000 employees)',
-                'form.size.large': 'Large Enterprise (1000+ employees)',
-                'form.size.public': 'Public/Government Sector',
-                'form.section3': 'Technical Information',
-                'form.usecase': 'Primary use case or project description',
+                'form.contact.heading': 'Contact Information',
+                'form.contact.fullName': 'Full Name',
+                'form.contact.email': 'Professional Email',
+                'form.contact.phone': 'Phone Number',
+                'form.organization.heading': 'Organization Details',
+                'form.organization.name': 'Organization Name',
+                'form.organization.jobTitle': 'Job Function/Title',
+                'form.organization.size': 'Organization Size',
+                'form.organization.selectSize': 'Select organization size',
+                'form.organization.startup': 'Startup (1-50 employees)',
+                'form.organization.sme': 'SME (51-250 employees)',
+                'form.organization.midMarket': 'Mid-Market (251-1000 employees)',
+                'form.organization.enterprise': 'Large Enterprise (1000+ employees)',
+                'form.organization.public': 'Public/Government Sector',
+                'form.technical.heading': 'Technical Information',
+                'form.technical.useCase': 'Primary use case or project description',
                 'form.submit': 'Submit Application',
                 'form.sending': 'Sending...',
                 'form.success.title': 'Success!',
@@ -1068,14 +1097,27 @@
                 'form.error.title': 'Error!',
                 'form.error.message': 'Oops! Something went wrong. Please try again or contact us directly at contact@clevercloud.ma',
 
+                // WHO BENEFITS Section
+                'benefits.label': 'WHO BENEFITS',
+                'benefits.title': 'Who Benefits from Our Platform?',
+                'benefits.subtitle': 'Clever Cloud Morocco serves organizations at every stage. From startups to government agencies, our infrastructure adapts to your specific requirements.',
+                'benefits.startups.title': 'Startups & Scale-ups',
+                'benefits.startups.text': 'Launch fast with zero infrastructure management. Our platform scales automatically as your user base grows, letting you focus on building your product.',
+                'benefits.enterprises.title': 'Large Enterprises',
+                'benefits.enterprises.text': 'Meet compliance requirements while maintaining agility. Secure, sovereign infrastructure.',
+                'benefits.public.title': 'Public & Para-Public Sector',
+                'benefits.public.text': 'Data sovereignty meets public service excellence. Built for government standards.',
+                'benefits.integrators.title': 'Integrators & IT Service Providers',
+                'benefits.integrators.text': 'Partner with proven technology. Deliver sovereign cloud solutions to your clients.',
+
                 // Contact Section
                 'contact.label': 'GET IN TOUCH',
                 'contact.title': 'Contact Information',
                 'contact.phone': 'Phone',
                 'contact.email': 'Email',
                 'contact.location': 'Location',
-                'contact.location.text': 'Casablanca, Morocco',
-                'contact.social': 'Follow Us',
+                'contact.address': 'Casablanca, Morocco',
+                'contact.followUs': 'Follow Us',
 
                 // Footer
                 'footer.copyright': '© 2024 Clever Cloud Morocco. All rights reserved.',
@@ -1091,95 +1133,134 @@
                 // Hero Section
                 'hero.subtitle': 'À propos de Clever Cloud Maroc',
                 'hero.title': 'Qui est <b class="font-bold">Clever Cloud</b>',
-                'hero.description': 'Plateforme Cloud Souveraine du Maroc, infrastructure Platform as a Service sécurisée, exploitée localement en partenariat avec Clever Cloud. Vos données restent au Maroc.',
-                'hero.cta1': 'Rejoindre la liste prioritaire',
-                'hero.cta2': 'Parler à notre équipe',
+                'hero.description': 'La plateforme cloud souveraine du Maroc. Une infrastructure Platform as a Service sécurisée, exploitée localement en partenariat avec Clever Cloud. Vos données restent au Maroc.',
+                'hero.cta1': 'Rejoindre la liste d\'accès prioritaire',
+                'hero.cta2': 'Contacter notre équipe',
 
                 // Trusted By Section
                 'trusted.title': 'Ils nous font confiance',
 
                 // Morocco Accelerates Section
-                'morocco.title': 'Le Maroc accélère sa transformation digitale',
-                'morocco.subtitle': 'Le paysage numérique évolue rapidement. Les organisations ont besoin d\'une infrastructure locale qui répond aux exigences de souveraineté tout en offrant des performances de niveau entreprise.',
+                'morocco.title': 'Le Maroc accélère sa transformation numérique',
+                'morocco.subtitle': 'Le paysage numérique évolue rapidement. Les organisations ont besoin d\'une infrastructure locale répondant aux exigences de souveraineté tout en offrant des performances de niveau entreprise.',
                 'morocco.card1.title': 'Souveraineté des données',
-                'morocco.card1.text': 'Exigences croissantes en matière de gouvernance et de contrôle des données locales',
+                'morocco.card1.text': 'Des exigences croissantes en matière de gouvernance et de contrôle des données locales',
                 'morocco.card2.title': 'Infrastructure résiliente',
-                'morocco.card2.text': 'Les secteurs public et privé exigent des plateformes cloud fiables',
-                'morocco.card3.title': 'Accélération digitale',
-                'morocco.card3.text': 'SaaS, e-services et plateformes stimulent l\'innovation',
+                'morocco.card2.text': 'Les secteurs public et privé exigent des plateformes cloud fiables et performantes',
+                'morocco.card3.title': 'Accélération numérique',
+                'morocco.card3.text': 'Le SaaS, les e-services et les plateformes stimulent l\'innovation',
                 'morocco.card4.title': 'Expertise locale',
-                'morocco.card4.text': 'Besoin d\'opérateurs locaux structurés avec une technologie éprouvée',
+                'morocco.card4.text': 'Le besoin d\'opérateurs locaux structurés avec une technologie éprouvée',
 
                 // Strategic Pillars Section
-                'pillars.title': 'Construit sur trois piliers stratégiques',
-                'pillars.subtitle': 'Clever Cloud Maroc combine souveraineté, sécurité et automatisation. Cette fondation garantit que votre infrastructure répond aux exigences locales et aux normes mondiales.',
-                'pillars.pillar1.title': 'Souveraineté & Conformité',
-                'pillars.pillar1.item1': 'Données hébergées localement au Maroc',
-                'pillars.pillar1.item2': 'Cadres de gouvernance clairs',
-                'pillars.pillar1.item3': 'Aligné avec les exigences réglementaires',
-                'pillars.pillar1.detail.title': 'Pourquoi l\'hébergement local est important',
-                'pillars.pillar1.detail.text1': 'Vos données ne quittent jamais le territoire marocain. Cela garantit la conformité avec les réglementations locales tout en vous donnant un contrôle total sur vos actifs numériques.',
-                'pillars.pillar1.detail.text2': 'Notre modèle de gouvernance assure transparence et responsabilité à tous les niveaux.',
-                'pillars.pillar2.title': 'Sécurité & Résilience',
-                'pillars.pillar2.item1': 'Infrastructure robuste et surveillée',
-                'pillars.pillar2.item2': 'Pratiques DevSecOps intégrées',
-                'pillars.pillar2.item3': 'Architecture haute disponibilité',
-                'pillars.pillar2.detail.title': 'Protection de niveau entreprise',
-                'pillars.pillar2.detail.text1': 'La sécurité est intégrée à chaque couche. Notre infrastructure combine surveillance avancée et détection automatique des menaces.',
-                'pillars.pillar2.detail.text2': 'Les temps d\'arrêt ne sont pas une option. Nous concevons pour la résilience dès le premier jour.',
+                'pillars.title': 'Fondé sur trois piliers stratégiques',
+                'pillars.subtitle': 'Clever Cloud Maroc combine souveraineté, sécurité et automatisation. Cette base garantit que votre infrastructure répond aux exigences locales et aux standards internationaux.',
+                'pillars.sovereignty.title': 'Souveraineté & Conformité',
+                'pillars.sovereignty.item1': 'Données hébergées localement au Maroc',
+                'pillars.sovereignty.item2': 'Cadres de gouvernance clairs et transparents',
+                'pillars.sovereignty.item3': 'Conformité aux exigences réglementaires',
+                'pillars.local.title': 'Pourquoi l\'hébergement local est essentiel',
+                'pillars.local.text1': 'Vos données ne quittent jamais le territoire marocain. Cela garantit la conformité avec les réglementations locales tout en vous offrant un contrôle total sur vos actifs numériques.',
+                'pillars.local.text2': 'Notre modèle de gouvernance garantit transparence et responsabilité à tous les niveaux.',
+                'pillars.security.title': 'Sécurité & Résilience',
+                'pillars.security.item1': 'Infrastructure robuste et surveillée en continu',
+                'pillars.security.item2': 'Pratiques DevSecOps intégrées',
+                'pillars.security.item3': 'Architecture haute disponibilité',
+                'pillars.enterprise.title': 'Protection de niveau entreprise',
+                'pillars.enterprise.text1': 'La sécurité est intégrée à chaque niveau. Notre infrastructure combine surveillance avancée et détection automatique des menaces.',
+                'pillars.enterprise.text2': 'Les temps d\'arrêt ne sont pas une option. Nous concevons notre infrastructure pour la résilience dès le départ.',
 
                 // Partnership Section
                 'partnership.title': 'Un partenariat technologique structuré',
-                'partnership.left.title': 'L\'expertise éprouvée rencontre les opérations locales',
-                'partnership.left.text1': 'Notre partenariat avec Clever Cloud France apporte au Maroc une technologie PaaS éprouvée. Plus d\'une décennie d\'expérience cloud européenne opère désormais localement.',
-                'partnership.left.text2': 'Cette collaboration combine les normes internationales avec une compréhension approfondie du marché local.',
-                'partnership.step1.title': 'Fournisseur PaaS établi',
+                'partnership.left.title': 'L\'expertise éprouvée au service des opérations locales',
+                'partnership.left.text1': 'Notre partenariat avec Clever Cloud France apporte au Maroc une technologie PaaS éprouvée. Plus d\'une décennie d\'expérience cloud européenne désormais opérationnelle localement.',
+                'partnership.left.text2': 'Cette collaboration allie standards internationaux et compréhension approfondie du marché local.',
+                'partnership.step1.title': 'Fournisseur PaaS reconnu',
                 'partnership.step1.text': 'La plateforme européenne éprouvée de Clever Cloud',
                 'partnership.step2.title': 'Infrastructure locale',
-                'partnership.step2.text': 'Exploitée entièrement au Maroc',
+                'partnership.step2.text': 'Opérée entièrement sur le territoire maroccan',
                 'partnership.step3.title': 'Expertise combinée',
-                'partnership.step3.text': 'Technologie internationale et connaissances locales',
+                'partnership.step3.text': 'Technologie internationale et expertise locale',
 
                 // Team Section
                 'team.label': 'L\'ÉQUIPE',
                 'team.title': 'Découvrez notre comité exécutif',
+                'team.ceo': 'PDG',
+                'team.cto': 'Directeur Technique',
+                'team.vp': 'VP Ingénierie',
+                'team.devrel': 'Relations Développeurs',
+                'team.cloudarchitect': 'Architecte Cloud',
+                'team.aiengineer': 'Ingénieur IA',
+
+                // Services Section
+                'services.title': 'Notre engagement envers le Maroc',
+                'services.subtitle': 'Nous avons à coeur d\'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement économique du pays.',
+                'services.tech.title': 'Technologie',
+                'services.tech.item1': 'Adapter Clever Cloud aux besoins de l\'écosystème marocain.',
+                'services.tech.item2': 'Créer des centres R&D locaux (IA, Cloud, Green IT).',
+                'services.tech.item3': 'Soutenir et contribuer à des projets open source stratégiques.',
+                'services.innovation.title': 'Innovation',
+                'services.innovation.item1': 'Accompagner et soutenir les startups marocaines',
+                'services.innovation.item2': 'Intégrer et renforcer l\'écosystème d\'incubation et d\'accélération',
+                'services.innovation.item3': 'Construire des ponts avec les écosystèmes mondiaux (Europe, Afrique)',
+                'services.talent.title': 'Talents digitaux',
+                'services.talent.item1': 'Animer et soutenir les communautés de développeurs locales',
+                'services.talent.item2': 'Recrutement de talents et montée en compétence locale',
+                'services.talent.item3': 'Déployer un programme de certifications et formations spécialisées',
+                'services.economic.title': 'Soutien au développement économique',
+                'services.economic.item1': 'Facturation en dirhams, sans sortie de devises',
+                'services.economic.item2': 'Réinvestissement dans des projets socio-économiques',
+                'services.economic.item3': 'Participation aux grands chantiers nationaux 2030',
+
+                // WHO BENEFITS Section
+                'benefits.label': 'QUI EN BÉNÉFICIE',
+                'benefits.title': 'Qui bénéficie de notre plateforme ?',
+                'benefits.subtitle': 'Clever Cloud Maroc sert les organisations à tous les stades. Des startups aux agences gouvernementales, notre infrastructure s\'adapte à vos besoins spécifiques.',
+                'benefits.startups.title': 'Startups & Scale-ups',
+                'benefits.startups.text': 'Lancez-vous rapidement sans gestion d\'infrastructure. Notre plateforme évolue automatiquement avec votre base d\'utilisateurs, vous permettant de vous concentrer sur votre produit.',
+                'benefits.enterprises.title': 'Grandes entreprises',
+                'benefits.enterprises.text': 'Respectez les exigences de conformité tout en maintenant l\'agilité. Infrastructure souveraine et sécurisée.',
+                'benefits.public.title': 'Secteur public et parapublic',
+                'benefits.public.text': 'La souveraineté des données rencontre l\'excellence du service public. Conçu pour les standards gouvernementaux.',
+                'benefits.integrators.title': 'Intégrateurs et fournisseurs de services IT',
+                'benefits.integrators.text': 'Partenaire avec une technologie éprouvée. Offrez des solutions cloud souveraines à vos clients.',
 
                 // FAQ Section
-                'faq.title': 'Questions fréquemment posées',
+                'faq.title': 'Questions fréquentes',
                 'faq.q1': 'Quand est prévu le lancement officiel ?',
-                'faq.a1': 'Le lancement de la plateforme est prévu pour le T2 2024. Les partenaires à accès anticipé commencent l\'intégration au T1.',
+                'faq.a1': 'Le lancement de la plateforme est prévu pour le Q2 2024. Les partenaires bénéficiant d\'un accès anticipé commenceront leur intégration au Q1.',
                 'faq.q2': 'Où seront hébergées les données ?',
-                'faq.a2': 'Toutes les données résident au Maroc. Notre infrastructure fonctionne entièrement sur le territoire marocain, garantissant une souveraineté totale.',
+                'faq.a2': 'Toutes les données résident au Maroc. Notre infrastructure opère entièrement sur le territoire marocain, garantissant une souveraineté complète.',
                 'faq.q3': 'Le service est-il conforme aux exigences locales ?',
-                'faq.a3': 'Oui. Nous sommes alignés avec les cadres réglementaires marocains. Notre modèle de gouvernance garantit une conformité continue.',
+                'faq.a3': 'Oui. Nous sommes conformes aux cadres réglementaires marocains. Notre modèle de gouvernance garantit une conformité continue.',
                 'faq.q4': 'Puis-je devenir partenaire d\'intégration ?',
-                'faq.a4': 'Absolument. Nous construisons un écosystème de partenaires. Contactez notre équipe partenariats pour discuter des opportunités de collaboration.',
+                'faq.a4': 'Absolument. Nous développons un écosystème de partenaires. Contactez notre équipe partenariats pour explorer les opportunités de collaboration.',
                 'faq.q5': 'Comment fonctionne la sélection pour l\'accès anticipé ?',
-                'faq.a5': 'Nous évaluons les candidatures en fonction du cas d\'usage, de la préparation au déploiement et de l\'adéquation stratégique. La priorité va aux organisations engagées à se lancer au cours de notre premier trimestre d\'exploitation.',
+                'faq.a5': 'Nous évaluons les candidatures selon le cas d\'usage, la maturité du projet et l\'alignement stratégique. La priorité est donnée aux organisations prêtes à démarrer dès notre premier trimestre d\'exploitation.',
 
                 // Application Form Section
                 'form.title': 'Formulaire de candidature',
-                'form.subtitle': 'Complétez le formulaire ci-dessous et nous vous contacterons rapidement.',
-                'form.section1': 'Informations de contact',
-                'form.fullname': 'Nom complet',
-                'form.email': 'Email professionnel',
-                'form.phone': 'Numéro de téléphone',
-                'form.section2': 'Détails de l\'organisation',
-                'form.org': 'Nom de l\'organisation',
-                'form.job': 'Fonction/Titre',
-                'form.size': 'Taille de l\'organisation',
-                'form.size.select': 'Sélectionnez la taille de l\'organisation',
-                'form.size.startup': 'Startup (1-50 employés)',
-                'form.size.sme': 'PME (51-250 employés)',
-                'form.size.mid': 'Marché intermédiaire (251-1000 employés)',
-                'form.size.large': 'Grande entreprise (1000+ employés)',
-                'form.size.public': 'Secteur public/gouvernemental',
-                'form.section3': 'Informations techniques',
-                'form.usecase': 'Principal cas d\'usage ou description du projet',
-                'form.submit': 'Soumettre la candidature',
+                'form.subtitle': 'Remplissez le formulaire ci-dessous et nous vous recontacterons rapidement.',
+                'form.contact.heading': 'Informations de contact',
+                'form.contact.fullName': 'Nom complet',
+                'form.contact.email': 'Adresse e-mail professionnelle',
+                'form.contact.phone': 'Numéro de téléphone',
+                'form.organization.heading': 'Informations sur l\'organisation',
+                'form.organization.name': 'Nom de l\'organisation',
+                'form.organization.jobTitle': 'Fonction / Poste',
+                'form.organization.size': 'Taille de l\'organisation',
+                'form.organization.selectSize': 'Sélectionnez la taille',
+                'form.organization.startup': 'Startup (1-50 employés)',
+                'form.organization.sme': 'PME (51-250 employés)',
+                'form.organization.midMarket': 'ETI (251-1000 employés)',
+                'form.organization.enterprise': 'Grande entreprise (1000+ employés)',
+                'form.organization.public': 'Secteur public / Gouvernemental',
+                'form.technical.heading': 'Informations techniques',
+                'form.technical.useCase': 'Cas d\'usage principal ou description du projet',
+                'form.submit': 'Envoyer la candidature',
                 'form.sending': 'Envoi en cours...',
                 'form.success.title': 'Succès !',
-                'form.success.message': 'Merci ! Votre candidature a été soumise avec succès. Nous vous contacterons bientôt.',
+                'form.success.message': 'Merci ! Votre candidature a été envoyée avec succès. Nous vous contacterons prochainement.',
                 'form.error.title': 'Erreur !',
                 'form.error.message': 'Oups ! Une erreur s\'est produite. Veuillez réessayer ou nous contacter directement à contact@clevercloud.ma',
 
@@ -1189,8 +1270,8 @@
                 'contact.phone': 'Téléphone',
                 'contact.email': 'Email',
                 'contact.location': 'Emplacement',
-                'contact.location.text': 'Casablanca, Maroc',
-                'contact.social': 'Suivez-nous',
+                'contact.address': 'Casablanca, Maroc',
+                'contact.followUs': 'Suivez-nous',
 
                 // Footer
                 'footer.copyright': '© 2024 Clever Cloud Maroc. Tous droits réservés.',
@@ -1205,10 +1286,150 @@
 
                 // Hero Section
                 'hero.subtitle': 'حول كليفر كلاود المغرب',
-                'hero.title': 'من هو كليفر كلاود',
-                'hero.description': 'منصة السحابة السيادية في المغرب، بنية تحتية آمنة لخدمة المنصة كخدمة، تدار محليًا بالشراكة مع Clever Cloud. بياناتك تبقى في المغرب.',
-                'hero.cta1': 'انضم إلى القائمة المفضلة',
-                'hero.cta2': 'تحدث إلى فريقنا'
+                'hero.title': 'من هو <b class="font-bold">كليفر كلاود</b>',
+                'hero.description': 'منصة السحابة السيادية للمغرب. بنية تحتية آمنة للمنصة كخدمة، تُدار محلياً بالشراكة مع Clever Cloud. بياناتك تبقى في المغرب.',
+                'hero.cta1': 'الانضمام إلى القائمة ذات الأولوية',
+                'hero.cta2': 'تواصل مع فريقنا',
+
+                // Trusted By Section
+                'trusted.title': 'يثقون بنا',
+
+                // Morocco Accelerates Section
+                'morocco.title': 'المغرب يسرّع التحول الرقمي',
+                'morocco.subtitle': 'المشهد الرقمي يتطور بسرعة. تحتاج المؤسسات إلى بنية تحتية محلية تلبي متطلبات السيادة مع توفير أداء على مستوى المؤسسات.',
+                'morocco.card1.title': 'سيادة البيانات',
+                'morocco.card1.text': 'متطلبات متزايدة للحوكمة المحلية والتحكم في البيانات',
+                'morocco.card2.title': 'بنية تحتية مرنة',
+                'morocco.card2.text': 'القطاعان العام والخاص يطالبان بمنصات سحابية موثوقة وعالية الأداء',
+                'morocco.card3.title': 'تسريع رقمي',
+                'morocco.card3.text': 'البرمجيات كخدمة والخدمات الإلكترونية والمنصات تحفز الابتكار',
+                'morocco.card4.title': 'خبرة محلية',
+                'morocco.card4.text': 'الحاجة إلى مشغلين محليين منظمين بتكنولوجيا مثبتة',
+
+                // Strategic Pillars Section
+                'pillars.title': 'مبني على ثلاثة أعمدة استراتيجية',
+                'pillars.subtitle': 'يجمع كليفر كلاود المغرب بين السيادة والأمن والأتمتة. هذا الأساس يضمن أن بنيتك التحتية تلبي المتطلبات المحلية والمعايير العالمية.',
+                'pillars.sovereignty.title': 'السيادة والامتثال',
+                'pillars.sovereignty.item1': 'بيانات مستضافة محلياً في المغرب',
+                'pillars.sovereignty.item2': 'أطر حوكمة واضحة وشفافة',
+                'pillars.sovereignty.item3': 'متوافق مع المتطلبات التنظيمية',
+                'pillars.local.title': 'لماذا الاستضافة المحلية ضرورية',
+                'pillars.local.text1': 'بياناتك لا تغادر الأراضي المغربية أبداً. هذا يضمن الامتثال للوائح المحلية مع منحك السيطرة الكاملة على أصولك الرقمية.',
+                'pillars.local.text2': 'نموذج الحوكمة لدينا يضمن الشفافية والمساءلة على جميع المستويات.',
+                'pillars.security.title': 'الأمن والمرونة',
+                'pillars.security.item1': 'بنية تحتية قوية ومراقبة باستمرار',
+                'pillars.security.item2': 'ممارسات DevSecOps متكاملة',
+                'pillars.security.item3': 'هندسة عالية التوافر',
+                'pillars.enterprise.title': 'حماية على مستوى المؤسسات',
+                'pillars.enterprise.text1': 'الأمن مدمج في كل مستوى. بنيتنا التحتية تجمع بين المراقبة المتقدمة والكشف التلقائي عن التهديدات.',
+                'pillars.enterprise.text2': 'التوقف عن العمل ليس خياراً. نصمم بنيتنا التحتية للمرونة منذ البداية.',
+
+                // Partnership Section
+                'partnership.title': 'شراكة تقنية منظمة',
+                'partnership.left.title': 'خبرة مثبتة في خدمة العمليات المحلية',
+                'partnership.left.text1': 'شراكتنا مع Clever Cloud فرنسا تجلب إلى المغرب تكنولوجيا PaaS مثبتة. أكثر من عقد من الخبرة السحابية الأوروبية تعمل الآن محلياً.',
+                'partnership.left.text2': 'هذا التعاون يجمع بين المعايير الدولية والفهم العميق للسوق المحلية.',
+                'partnership.step1.title': 'مزود PaaS معترف به',
+                'partnership.step1.text': 'المنصة الأوروبية المثبتة لـ Clever Cloud',
+                'partnership.step2.title': 'بنية تحتية محلية',
+                'partnership.step2.text': 'تُدار بالكامل على الأراضي المغربية',
+                'partnership.step3.title': 'خبرة مشتركة',
+                'partnership.step3.text': 'تكنولوجيا دولية وخبرة محلية',
+
+                // Team Section
+                'team.label': 'الفريق',
+                'team.title': 'تعرف على لجنتنا التنفيذية',
+                'team.ceo': 'الرئيس التنفيذي',
+                'team.cto': 'المدير التقني',
+                'team.vp': 'نائب رئيس الهندسة',
+                'team.devrel': 'علاقات المطورين',
+                'team.cloudarchitect': 'مهندس السحابة',
+                'team.aiengineer': 'مهندس الذكاء الاصطناعي',
+
+                // Services Section
+                'services.title': 'التزامنا تجاه المغرب',
+                'services.subtitle': 'نحن ملتزمون بالابتكار مع طوبولوجيا سيادية، ودعم الشركات الناشئة والمواهب المحلية، والمساهمة الفعالة في التنمية الاقتصادية للبلاد.',
+                'services.tech.title': 'التكنولوجيا',
+                'services.tech.item1': 'تكييف Clever Cloud مع احتياجات النظام البيئي المغربي.',
+                'services.tech.item2': 'إنشاء مراكز بحث وتطوير محلية (الذكاء الاصطناعي، السحابة، تكنولوجيا المعلومات الخضراء).',
+                'services.tech.item3': 'دعم والمساهمة في مشاريع المصادر المفتوحة الاستراتيجية.',
+                'services.innovation.title': 'الابتكار',
+                'services.innovation.item1': 'مرافقة ودعم الشركات الناشئة المغربية',
+                'services.innovation.item2': 'دمج وتعزيز نظام الحضانة والتسريع',
+                'services.innovation.item3': 'بناء جسور مع الأنظمة البيئية العالمية (أوروبا، إفريقيا)',
+                'services.talent.title': 'المواهب الرقمية',
+                'services.talent.item1': 'تنشيط ودعم مجتمعات المطورين المحليين',
+                'services.talent.item2': 'توظيف المواهب وتطوير المهارات المحلية',
+                'services.talent.item3': 'نشر برنامج شهادات وتدريب متخصص',
+                'services.economic.title': 'دعم التنمية الاقتصادية',
+                'services.economic.item1': 'الفوترة بالدرهم، دون تدفق للعملات الأجنبية',
+                'services.economic.item2': 'إعادة الاستثمار في مشاريع اجتماعية واقتصادية',
+                'services.economic.item3': 'المشاركة في المشاريع الوطنية الكبرى 2030',
+
+                // WHO BENEFITS Section
+                'benefits.label': 'من يستفيد',
+                'benefits.title': 'من يستفيد من منصتنا؟',
+                'benefits.subtitle': 'يخدم كليفر كلاود المغرب المؤسسات في جميع المراحل. من الشركات الناشئة إلى الوكالات الحكومية، تتكيف بنيتنا التحتية مع متطلباتك الخاصة.',
+                'benefits.startups.title': 'الشركات الناشئة والشركات المتنامية',
+                'benefits.startups.text': 'انطلق بسرعة دون إدارة البنية التحتية. تتوسع منصتنا تلقائياً مع نمو قاعدة المستخدمين، مما يتيح لك التركيز على بناء منتجك.',
+                'benefits.enterprises.title': 'المؤسسات الكبرى',
+                'benefits.enterprises.text': 'استوفِ متطلبات الامتثال مع الحفاظ على المرونة. بنية تحتية آمنة وسيادية.',
+                'benefits.public.title': 'القطاع العام والشبه عمومي',
+                'benefits.public.text': 'سيادة البيانات تلتقي بالتميز في الخدمة العامة. مصمم لمعايير الحكومة.',
+                'benefits.integrators.title': 'المكاملون ومقدمو خدمات تكنولوجيا المعلومات',
+                'benefits.integrators.text': 'شراكة مع تكنولوجيا مثبتة. قدم حلول سحابية سيادية لعملائك.',
+
+                // FAQ Section
+                'faq.title': 'الأسئلة الشائعة',
+                'faq.q1': 'متى من المقرر الإطلاق الرسمي؟',
+                'faq.a1': 'من المقرر إطلاق المنصة في الربع الثاني من عام 2024. يبدأ الشركاء ذوو الوصول المبكر في الانضمام في الربع الأول.',
+                'faq.q2': 'أين سيتم استضافة البيانات؟',
+                'faq.a2': 'جميع البيانات موجودة في المغرب. تعمل بنيتنا التحتية بالكامل على الأراضي المغربية، مما يضمن السيادة الكاملة.',
+                'faq.q3': 'هل الخدمة متوافقة مع المتطلبات المحلية؟',
+                'faq.a3': 'نعم. نحن متوافقون مع الأطر التنظيمية المغربية. نموذج الحوكمة لدينا يضمن الامتثال المستمر.',
+                'faq.q4': 'هل يمكنني أن أصبح شريك تكامل؟',
+                'faq.a4': 'بالتأكيد. نحن نطور نظاماً بيئياً للشركاء. اتصل بفريق الشراكات لدينا لاستكشاف فرص التعاون.',
+                'faq.q5': 'كيف يعمل الاختيار للوصول المبكر؟',
+                'faq.a5': 'نقيّم الطلبات بناءً على حالة الاستخدام، ونضج المشروع، والتوافق الاستراتيجي. تُمنح الأولوية للمؤسسات المستعدة للبدء في ربعنا الأول من التشغيل.',
+
+                // Application Form Section
+                'form.title': 'نموذج التقديم',
+                'form.subtitle': 'املأ النموذج أدناه وسنتواصل معك قريباً.',
+                'form.contact.heading': 'معلومات الاتصال',
+                'form.contact.fullName': 'الاسم الكامل',
+                'form.contact.email': 'البريد الإلكتروني المهني',
+                'form.contact.phone': 'رقم الهاتف',
+                'form.organization.heading': 'معلومات المؤسسة',
+                'form.organization.name': 'اسم المؤسسة',
+                'form.organization.jobTitle': 'الوظيفة / المنصب',
+                'form.organization.size': 'حجم المؤسسة',
+                'form.organization.selectSize': 'اختر الحجم',
+                'form.organization.startup': 'شركة ناشئة (1-50 موظف)',
+                'form.organization.sme': 'مؤسسة صغيرة ومتوسطة (51-250 موظف)',
+                'form.organization.midMarket': 'مؤسسة متوسطة (251-1000 موظف)',
+                'form.organization.enterprise': 'مؤسسة كبيرة (1000+ موظف)',
+                'form.organization.public': 'القطاع العام / الحكومي',
+                'form.technical.heading': 'المعلومات التقنية',
+                'form.technical.useCase': 'حالة الاستخدام الرئيسية أو وصف المشروع',
+                'form.submit': 'إرسال الطلب',
+                'form.sending': 'جارٍ الإرسال...',
+                'form.success.title': 'نجح!',
+                'form.success.message': 'شكراً لك! تم إرسال طلبك بنجاح. سنتواصل معك قريباً.',
+                'form.error.title': 'خطأ!',
+                'form.error.message': 'عذراً! حدث خطأ ما. يرجى المحاولة مرة أخرى أو الاتصال بنا مباشرة على contact@clevercloud.ma',
+
+                // Contact Section
+                'contact.label': 'تواصل معنا',
+                'contact.title': 'معلومات الاتصال',
+                'contact.phone': 'الهاتف',
+                'contact.email': 'البريد الإلكتروني',
+                'contact.location': 'الموقع',
+                'contact.address': 'الدار البيضاء، المغرب',
+                'contact.followUs': 'تابعنا',
+
+                // Footer
+                'footer.copyright': '© 2024 كليفر كلاود المغرب. جميع الحقوق محفوظة.',
+                'footer.privacy': 'سياسة الخصوصية'
             },
             ber: {
                 // Navigation
@@ -1219,12 +1440,273 @@
 
                 // Hero Section
                 'hero.subtitle': 'ⵅⴼ Clever Cloud ⵍⵎⵖⵔⵉⴱ',
-                'hero.title': 'ⵎⴰⵏ ⵉⴳⴰ Clever Cloud',
+                'hero.title': 'ⵎⴰⵏ ⵉⴳⴰ <b class="font-bold">Clever Cloud</b>',
                 'hero.description': 'ⵜⴰⵙⵏⵙⵍⵜ ⵏ ⵜⴳⵏⵙⵉⵜ ⵏ ⵍⵎⵖⵔⵉⴱ, ⴰⴱⵏⵉⵇ ⵏ ⵜⴰⵖⵔⴷⴰⵙⵜ ⵜⴰⵖⵍⵙⴰⵏⵜ, ⵉⵜⵜⵓⵙⵖⵓⴷⴰⵏ ⴷⵉⴳⵙ ⵙ ⵜⵎⴰⵣⵉⵔⵜ ⴰⴽⴷ Clever Cloud. ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⴰⴷ ⵇⵇⵉⵎⵏ ⴷⴳ ⵍⵎⵖⵔⵉⴱ.',
                 'hero.cta1': 'ⴰⵔⵏⵓ ⵖⵔ ⵜⵍⴳⴰⵎⵜ',
-                'hero.cta2': 'ⵎⵙⴰⵡⴰⵍ ⴰⴽⴷ ⵜⵔⴰⴱⴱⵓⵜ'
+                'hero.cta2': 'ⵎⵙⴰⵡⴰⵍ ⴰⴽⴷ ⵜⵔⴰⴱⴱⵓⵜ',
+
+                // Trusted By Section
+                'trusted.title': 'ⵉⴼⵍⵙⵏ ⴷⵉⴷⵏⵖ',
+
+                // Morocco Accelerates Section
+                'morocco.title': 'ⵍⵎⵖⵔⵉⴱ ⵉⵙⵙⵓⴷⴷⵓⵙ ⴰⵙⵏⴼⵍ ⴰⴷⵉⴳⵉⵜⴰⵍ',
+                'morocco.subtitle': 'ⵜⴰⵙⵖⵏⵜ ⵜⴰⴷⵉⴳⵉⵜⴰⵍⵜ ⵜⵙⵙⴱⵓⵖⵍⵓ ⵙ ⵜⴰⵣⵣⵍⴰ. ⵜⵉⵎⵔⵙⵍⵉⵏ ⵙⵓⵜⵔⵏⵜ ⵖⵔ ⵓⴱⵏⵉⵇ ⴰⴷⵖⴰⵔⴰⵏ ⵢⵓⵎⵍⵏ ⵉ ⵉⵙⵓⵜⵓⵔⵏ ⵏ ⵜⴳⵍⴷⵉⵜ ⴰⵛⴽⵓ ⵢⴻⵜⵜⴰⴽⴽⴰ ⵜⴰⵎⴻⵍⵍⴰⵢⵜ ⵏ ⵜⵎⵔⵙⴰⵍ.',
+                'morocco.card1.title': 'ⵜⴰⴳⵍⴷⵉⵜ ⵏ ⵉⵙⴼⴽⴰ',
+                'morocco.card1.text': 'ⵉⵙⵓⵜⵓⵔⵏ ⵉⵜⵜⵣⴰⵢⴰⴹⵏ ⵏ ⵜⵏⴱⴹⵜ ⴷ ⵓⵙⵖⵓⴷⵓ ⵏ ⵉⵙⴼⴽⴰ ⵉⴷⵖⴰⵔⴰⵏⵏ',
+                'morocco.card2.title': 'ⴰⴱⵏⵉⵇ ⴰⵙⵖⵔⴰⵏ',
+                'morocco.card2.text': 'ⵉⵖⵔⴰⴱⵏ ⵉⵣⴰⵢⴷⵏ ⴷ ⵓⵙⵍⵉⴳ ⵙⵓⵜⵓⵔⵏ ⵖⵔ ⵜⵙⵏⵙⵍⵉⵏ ⵏ ⵜⴳⵏⵙⵉⵜ ⵜⵉⴼⵍⵙⴰⵏⵉⵏ',
+                'morocco.card3.title': 'ⴰⵙⵓⴷⴷⵓⵙ ⴰⴷⵉⴳⵉⵜⴰⵍ',
+                'morocco.card3.text': 'ⵉⵙⵏⵙⵉ SaaS ⴷ ⵜⵙⵏⵙⵍⵉⵏ ⵙⵙⴱⴷⴰⴷⴰⵏⵜ ⴰⵙⵉⵏⴼ',
+                'morocco.card4.title': 'ⵜⴰⵙⵙⵏⵜ ⵜⴰⴷⵖⴰⵔⴰⵏⵜ',
+                'morocco.card4.text': 'ⵜⴰⵙⵓⵜⵔⴰ ⵏ ⵉⵎⵙⵖⵓⴷⴰⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ ⵉⵙⵎⴰⴷⴷⵏ ⵙ ⵜⵉⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⵎⴰⴳⴷⵓⴷⵜ',
+
+                // Strategic Pillars Section
+                'pillars.title': 'ⵉⵜⵜⵓⵔⵙⴰⵏ ⴼⵓⵇ ⴽⵕⴰⴹ ⵏ ⵉⵙⵓⵜⴰⵙ ⵉⵙⵜⵔⴰⵜⵉⵊⵉⵢⵏ',
+                'pillars.subtitle': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵙⵎⵓⵏ ⵜⴰⴳⵍⴷⵉⵜ, ⵜⴰⵖⵍⵙⵜ ⴷ ⵓⵜⵓⵎⴰⵜⵉⴽ. ⴰⵙⵉⵏⴼ ⴰⴷ ⵉⵙⵏⵇⴷ ⵎⴰⵙⴷ ⴰⴱⵏⵉⵇ ⵏⵏⴽ ⵉⵎⵍⴰⵍⴰⵢ ⵉⵙⵓⵜⵓⵔⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ ⴷ ⵉⵏⴰⴳⵔⴰⵡⵏ ⵉⴳⵔⴰⵖⵍⴰⵏⵏ.',
+                'pillars.sovereignty.title': 'ⵜⴰⴳⵍⴷⵉⵜ ⴷ ⵓⵎⵜⵜⵉ',
+                'pillars.sovereignty.item1': 'ⵉⵙⴼⴽⴰ ⵉⵜⵜⵡⴰⴽⵙⵏ ⴷⵉⴳⵙ ⴷⴳ ⵍⵎⵖⵔⵉⴱ',
+                'pillars.sovereignty.item2': 'ⵉⵙⵉⵏⴼⵏ ⵏ ⵜⵏⴱⴹⵜ ⵉⵙⵎⵔⴰⵔⴰⵏ ⴷ ⵉⵥⵍⵉⵏ',
+                'pillars.sovereignty.item3': 'ⵉⵜⵜⵓⵎⵍⵍⵉ ⴰⴽⴷ ⵉⵙⵓⵜⵓⵔⵏ ⵉⴼⵔⴰⴳⵏ',
+                'pillars.local.title': 'ⵎⴰⵖⴼ ⵉⴳⴰ ⵓⴽⵙⵉ ⴰⴷⵖⴰⵔⴰⵏ ⵉⵙⵙⵓⵜⵔ',
+                'pillars.local.text1': 'ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⵓⵔ ⴰⴽ ⴼⴼⵖⵏ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ. ⵎⴰⵏⴰⵢⴰ ⵉⵙⵏⵇⴷ ⴰⵎⵜⵜⵉ ⴷ ⵉⵍⵓⴳⴰⵏⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ ⴰⵛⴽⵓ ⵉⵜⵜⴰⴽⴽⴰ ⵢⴰⴽ ⴰⵙⵖⵓⴷⵓ ⴰⵎⵜⵜⵉⵍ ⴼⵓⵇ ⵜⵎⵙⴰⵍⵉⵏ ⵏⵏⴽ ⵜⵉⴷⵉⴳⵉⵜⴰⵍⵉⵏ.',
+                'pillars.local.text2': 'ⴰⵏⴰⵎⴽ ⵏⵏⵖ ⵏ ⵜⵏⴱⴹⵜ ⵉⵜⵜⴰⴽⴰ ⵜⴰⵥⵍⵉⵜ ⴷ ⵜⵎⴰⵙⵙⴰⵙⵜ ⴳ ⵎⴰⵕⵕⴰ ⴰⵙⵡⵉⵔ.',
+                'pillars.security.title': 'ⵜⴰⵖⵍⵙⵜ ⴷ ⵓⵙⵖⵔⴰⵏ',
+                'pillars.security.item1': 'ⴰⴱⵏⵉⵇ ⴰⵣⴳⵣⴰⵡ ⵉⵜⵜⵡⴰⵙⵙⴰⵙⵏ ⵙ ⵍⴽⵓⵍ ⴰⴽⵓⴷ',
+                'pillars.security.item2': 'ⵜⵉⵎⵙⴰⵔⵉⵏ DevSecOps ⵉⵜⵜⵓⵎⵓⵏⵏ',
+                'pillars.security.item3': 'ⴰⴱⵏⵉⵇ ⴰⵏⴰⴷⴷⴰⵡ ⵓⵏⵥⵉⵍ',
+                'pillars.enterprise.title': 'ⵜⴰⵖⵍⵙⵜ ⵏ ⵓⵙⵡⵉⵔ ⵏ ⵜⵎⵔⵙⴰⵍ',
+                'pillars.enterprise.text1': 'ⵜⴰⵖⵍⵙⵜ ⵜⵜⵓⵎⵓⵏ ⴳ ⵎⴰⵕⵕⴰ ⴰⵙⵡⵉⵔ. ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵙⵎⵓⵏ ⴰⵙⵙⴰⵙ ⵓⵏⵥⵉⵍ ⴷ ⵓⴼⴰ ⴰⵡⵓⵔⵎⴰⵜⵉⴽ ⵏ ⵜⵎⵥⴰⵏⵉⵏ.',
+                'pillars.enterprise.text2': 'ⴰⵃⴱⵙ ⵓⵔ ⵉⴳⵉ ⴰⵖⵜⵜⴰⵙ. ⵏⵙⴱⵏⴰⵢ ⴰⴱⵏⵉⵇ ⵉ ⵓⵙⵖⵔⴰⵏ ⵙⴳ ⵓⵙⵙⵏⵜⵉ.',
+
+                // Partnership Section
+                'partnership.title': 'ⵜⴰⵎⴰⵣⵉⵔⵜ ⵜⴰⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⵙⵎⴰⴷⴷⵜ',
+                'partnership.left.title': 'ⵜⴰⵙⵙⵏⵜ ⵜⴰⵎⴰⴳⴷⵓⴷⵜ ⵜⵙⵖⵓⴷⵓ ⵜⵉⵎⵙⴰⵔⵉⵏ ⵜⵉⴷⵖⴰⵔⴰⵏⵉⵏ',
+                'partnership.left.text1': 'ⵜⴰⵎⴰⵣⵉⵔⵜ ⵏⵏⵖ ⴰⴽⴷ Clever Cloud ⴼⵕⴰⵏⵙⴰ ⵜⵜⴰⴳⴰ ⵖⵔ ⵍⵎⵖⵔⵉⴱ ⵜⴰⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ PaaS ⵜⴰⵎⴰⴳⴷⵓⴷⵜ. ⵓⴳⴳⴰⵔ ⵏ ⴽⵕⴰⴹ ⵏ ⵉⵙⴳⴳⵯⴰⵙⵏ ⵏ ⵜⵔⵎⵉⵜ ⵜⴰⴳⵏⵙⴰⵏⵜ ⵜⴰⵕⵓⴱⴱⵉⵜ ⵜⵙⵖⵓⴷⵓ ⴷⵖⵉ ⴷⵖⴰⵔⴰⵏ.',
+                'partnership.left.text2': 'ⴰⵎⵢⴰⵡⴰⴹ ⴰⴷ ⵉⵙⵎⵓⵏ ⵉⵏⴰⴳⵔⴰⵡⵏ ⵉⴳⵔⴰⵖⵍⴰⵏⵏ ⴷ ⵓⵔⵎⴰⵙ ⴰⵣⵓⵔⴰⵏ ⵏ ⵓⵙⴰⴳ ⴰⴷⵖⴰⵔⴰⵏ.',
+                'partnership.step1.title': 'ⴰⵙⵜⵜⴰⵢ PaaS ⵉⵜⵜⵡⴰⵙⵙⵏ',
+                'partnership.step1.text': 'ⵜⴰⵙⵏⵙⵍⵜ ⵜⴰⵕⵓⴱⴱⵉⵜ ⵜⴰⵎⴰⴳⴷⵓⴷⵜ ⵏ Clever Cloud',
+                'partnership.step2.title': 'ⴰⴱⵏⵉⵇ ⴰⴷⵖⴰⵔⴰⵏ',
+                'partnership.step2.text': 'ⵉⵜⵜⵓⵙⵖⵓⴷⴰⵏ ⴷⵉⴳⵙ ⴳ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ',
+                'partnership.step3.title': 'ⵜⴰⵙⵙⵏⵜ ⵜⴰⵎⴰⵟⵟⵓⵢⵜ',
+                'partnership.step3.text': 'ⵜⴰⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⴳⵔⴰⵖⵍⴰⵏⵜ ⴷ ⵜⴰⵙⵙⵏⵜ ⵜⴰⴷⵖⴰⵔⴰⵏⵜ',
+
+                // Team Section
+                'team.label': 'ⵜⴰⵔⴰⴱⴱⵓⵜ',
+                'team.title': 'ⵙⵙⵏ ⵜⴰⵙⵇⴰⵎⵓⵜ ⵏⵏⵖ ⵜⴰⵏⴼⵓⴹⵜ',
+                'team.ceo': 'ⴰⵙⴻⵍⵡⴰⵢ ⴰⵏⴼⵓⴹ',
+                'team.cto': 'ⴰⵎⴰⵙⵙ ⴰⵜⵉⴽⵏⵉⴽ',
+                'team.vp': 'ⴰⵏⴻⴱⴷⴰⴹ ⵏ ⵜⴻⵜⵉⴽⵏⵉⴽⵜ',
+                'team.devrel': 'ⵜⵉⵎⴻⵙⵍⴰⵢⵉⵏ ⴰⴽⴷ ⵉⵏⴻⵙⴱⵓⵖⵍⵓⵜⵏ',
+                'team.cloudarchitect': 'ⴰⵙⴻⵏⴼⴰⵔ ⵏ ⵜⴳⵏⵙⵉⵜ',
+                'team.aiengineer': 'ⴰⵙⴻⵏⵙⵉ ⵏ ⵓⵙⵙⵏⵜⵉ ⵓⵔⵎⴰⵜⵉⴽ',
+
+                // Services Section
+                'services.title': 'ⴰⵎⵓⴷⴷⵓ ⵏⵏⵖ ⵉ ⵍⵎⵖⵔⵉⴱ',
+                'services.subtitle': 'ⵏⵙⵙⴰⵡⴰⵍ ⴰⴷ ⵏⵙⵉⵏⴼ ⵙ ⵜⵓⴱⵓⵍⵓⵊⵉⵜ ⵜⴰⴳⵍⴷⴰⵏⵜ, ⴰⴷ ⵏⵙⵙⴰⴷⴼ ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⴷ ⵜⵎⴰⵀⵉⵍⵉⵏ ⵜⵉⴷⵖⴰⵔⴰⵏⵉⵏ, ⴰⴷ ⵏⴱⵓⵖⵍⵓ ⵙ ⵡⵓⵔⵎⵉⴹ ⴳ ⵓⵙⴱⵓⵖⵍⵓ ⴰⴷⵎⵙⴰⵏ ⵏ ⵜⵎⴰⵣⵉⵔⵜ.',
+                'services.tech.title': 'ⵜⴰⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ',
+                'services.tech.item1': 'ⴰⵙⵎⵙⴰⵙⴰ ⵏ Clever Cloud ⵉ ⵉⵙⵓⵜⵓⵔⵏ ⵏ ⵓⴳⵔⴰⵡ ⴰⵎⵖⵔⴰⴱⵉ.',
+                'services.tech.item2': 'ⵜⵉⵔⵏⵉⵜ ⵏ ⵡⴰⵎⵎⴰⵙⵏ ⵏ ⵓⵔⵣⵣⵓ ⴷ ⵓⵙⴱⵓⵖⵍⵓ ⵉⴷⵖⴰⵔⴰⵏⵏ (ⴰⵙⵙⵏⵜⵉ ⵓⵔⵎⴰⵜⵉⴽ, ⵜⴰⴳⵏⵙⵉⵜ, ⵜⵉⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⵣⴳⵣⴰⵡⵜ).',
+                'services.tech.item3': 'ⴰⵙⴰⴷⴼ ⴷ ⵓⴱⵓⵖⵍⵓ ⴳ ⵉⵙⵏⴼⴰⵔⵏ ⵉⵏⴻⴳⵍⴰⵏⵏ ⵉⵙⵜⵔⴰⵜⵉⵊⵉⵢⵏ.',
+                'services.innovation.title': 'ⴰⵙⵉⵏⴼ',
+                'services.innovation.item1': 'ⴰⵙⴰⴷⴼ ⴷ ⵓⵙⵎⴰⴷ ⵏ ⵜⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⵜⵉⵎⵖⵔⴰⴱⵉⵢⵉⵏ',
+                'services.innovation.item2': 'ⴰⵎⵓⵏ ⴷ ⵓⵙⵏⴻⵔⵏⵉ ⵏ ⵓⴳⵔⴰⵡ ⵏ ⵓⵙⵎⴰⴷ ⴷ ⵓⵙⵓⴷⴷⵓⵙ',
+                'services.innovation.item3': 'ⵜⵉⵔⵏⵉⵜ ⵏ ⵜⴳⴳⵯⵔⴰ ⴰⴽⴷ ⵉⴳⵔⴰⵡⵏ ⵉⴳⵔⴰⵖⵍⴰⵏⵏ (ⵕⵓⴱⴱⴰ, ⴰⴼⵔⵉⵇⵢⴰ)',
+                'services.talent.title': 'ⵜⵉⵎⴰⵀⵉⵍⵉⵏ ⵜⵉⴷⵉⴳⵉⵜⴰⵍⵉⵏ',
+                'services.talent.item1': 'ⴰⵙⵙⵓⴷⵙ ⴷ ⵓⵙⴰⴷⴼ ⵏ ⵜⴳⵔⴰⵡⵉⵏ ⵏ ⵉⵏⴻⵙⴱⵓⵖⵍⵓⵜⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ',
+                'services.talent.item2': 'ⴰⵙⵙⵓⴼⵖ ⵏ ⵜⵎⴰⵀⵉⵍⵉⵏ ⴷ ⵓⵙⴱⵓⵖⵍⵓ ⵏ ⵜⵓⵙⵙⵏⵉⵡⵉⵏ ⵜⵉⴷⵖⴰⵔⴰⵏⵉⵏ',
+                'services.talent.item3': 'ⴰⵙⵙⵏⵜⵉ ⵏ ⵓⵖⴰⵡⴰⵙ ⵏ ⵜⵙⵙⵓⵔⴰⵢⵉⵏ ⴷ ⵓⵙⵍⵎⴰⴷ ⵓⵙⵍⵉⴳ',
+                'services.economic.title': 'ⴰⵙⴰⴷⴼ ⵏ ⵓⵙⴱⵓⵖⵍⵓ ⴰⴷⵎⵙⴰⵏ',
+                'services.economic.item1': 'ⴰⴽⵜⴰⵔ ⵙ ⵓⴷⵔⵉⵎ, ⴱⵍⴰ ⴰⴼⴼⵓⵖ ⵏ ⵜⵎⵓⵏⵜⵉⵏ',
+                'services.economic.item2': 'ⴰⵙⵙⵓⴷⵙ ⵏ ⵓⵙⴼⵍⴷ ⴳ ⵉⵙⵏⴼⴰⵔⵏ ⵉⵏⴰⵎⵓⵏⵏ-ⵉⴷⵎⵙⴰⵏⵏ',
+                'services.economic.item3': 'ⴰⴱⵓⵖⵍⵓ ⴳ ⵉⵙⵏⴼⴰⵔⵏ ⵉⵏⴰⵎⵓⵔⵏ ⵉⵎⵇⵇⵕⴰⵏⵏ 2030',
+
+                // WHO BENEFITS Section
+                'benefits.label': 'ⵡⵉⵏⵏⴰ ⵉⵙⵜⴰⴼⴰⵏ',
+                'benefits.title': 'ⵡⵉⵏⵏⴰ ⵉⵙⵜⴰⴼⴰⵏ ⵙⴳ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ?',
+                'benefits.subtitle': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵙⵖⵓⴷⵓ ⵜⵉⵎⵔⵙⵍⵉⵏ ⴳ ⵎⴰⵕⵕⴰ ⴰⵙⵡⵉⵔ. ⵙⴳ ⵜⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⴰⵔ ⵜⵎⵔⵙⵍⵉⵏ ⵜⵉⵏⴰⵎⵓⵔⵉⵏ, ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵜⵜⵓⵎⵙⴰⵙⴰ ⵉ ⵉⵙⵓⵜⵓⵔⵏ ⵏⵏⴽ ⵓⵙⵍⵉⴳⵏ.',
+                'benefits.startups.title': 'ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ',
+                'benefits.startups.text': 'ⵙⵙⵏⵜⵉ ⵙ ⵜⴰⵣⵣⵍⴰ ⴱⵍⴰ ⵜⴰⵙⵖⵓⴷⵉ ⵏ ⵓⴱⵏⵉⵇ. ⵜⴰⵙⵏⵙⵍⵜ ⵏⵏⵖ ⵜⴱⵓⵖⵍⵓ ⵙ ⵡⵓⵔⵎⴰⵜⵉⵜ ⵉⵙ ⵜⴱⵓⵖⵍⵓ ⵜⵎⴰⵣⵉⵣⵜ ⵏ ⵉⵙⵙⵎⵔⵙⵏ ⵏⵏⴽ.',
+                'benefits.enterprises.title': 'ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⵇⵇⵕⴰⵏⵉⵏ',
+                'benefits.enterprises.text': 'ⴼⴽ ⵉⵙⵓⵜⵓⵔⵏ ⵏ ⵓⵎⵜⵜⵉ ⴰⵛⴽⵓ ⵜⵃⵟⵟⵓⴷ ⵜⴰⵎⵍⵍⴰⵢⵜ. ⴰⴱⵏⵉⵇ ⴰⵖⵍⵙⴰⵏ ⴷ ⵓⴳⵍⴷⴰⵏ.',
+                'benefits.public.title': 'ⴰⵖⵔⴰⴱ ⴰⵣⴰⵢⴷ ⴷ ⵡⴰⵎⴰⵣⴰⵢⴷ',
+                'benefits.public.text': 'ⵜⴰⴳⵍⴷⵉⵜ ⵏ ⵉⵙⴼⴽⴰ ⵜⵎⵍⴰⵍⴰⵢ ⵜⴰⵎⴰⵢⵏⵓⵜ ⵜⴰⵣⴰⵢⴷⵜ. ⵉⵜⵜⵓⵙⴱⴰⵢⵏ ⵉ ⵉⵏⴰⴳⵔⴰⵡⵏ ⵉⵏⴰⵎⵓⵔⵏ.',
+                'benefits.integrators.title': 'ⵉⵎⵎⵓⵏⵏ ⴷ ⵉⵎⵙⵜⵜⴰⵢⵏ ⵏ ⵜⵎⵙⴰⵔⵉⵏ IT',
+                'benefits.integrators.text': 'ⵎⴰⵣⵉⵔ ⴰⴽⴷ ⵜⴰⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⵎⴰⴳⴷⵓⴷⵜ. ⵙⵜⵜⵉ ⵜⵉⴼⵔⴰⵢⵉⵏ ⵜⵉⴳⵏⵙⴰⵏⵉⵏ ⵜⵉⴳⵍⴷⴰⵏⵉⵏ ⵉ ⵉⵎⵙⴰⵔⴰⴳⵏ ⵏⵏⴽ.',
+
+                // FAQ Section
+                'faq.title': 'ⵉⵙⵇⵙⵉⵜⵏ ⵢⵓⵙⴰⵏ',
+                'faq.q1': 'ⵎⴰⵏⵣⴰⴽ ⵉⵜⵜⵓⵙⵖⵉⵡⵙ ⵓⵙⵏⵜⵉ ⵓⵏⵚⵉⴱ?',
+                'faq.a1': 'ⴰⵙⵏⵜⵉ ⵏ ⵜⵙⵏⵙⵍⵜ ⵉⵜⵜⵓⵙⵖⵉⵡⵙ ⴳ Q2 2024. ⵉⵎⴰⵣⵉⵔⵏ ⵉⵎⵣⵡⵓⵔⴰ ⴰⴷ ⴱⴷⵓⵏ ⴰⵙⵙⴰⵔⵓ ⴳ Q1.',
+                'faq.q2': 'ⵎⴰⵏⵉ ⴰⴷ ⵜⵜⵡⴰⴽⵙⵏⵏⵜ ⵉⵙⴼⴽⴰ?',
+                'faq.a2': 'ⵎⴰⵕⵕⴰ ⵉⵙⴼⴽⴰ ⵍⵍⴰⵏ ⴷⴳ ⵍⵎⵖⵔⵉⴱ. ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵙⵖⵓⴷⵓ ⴳ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ, ⵎⴰⵏⴰⵢⴰ ⵉⵙⵏⵇⴷ ⵜⴰⴳⵍⴷⵉⵜ ⵜⴰⵜⵜⵓⵢⵜ.',
+                'faq.q3': 'ⵉⵙ ⵜⴰⵎⵙⴰⵔⵜ ⵜⵎⵍⴰⵍⴰⵢ ⵉⵙⵓⵜⵓⵔⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ?',
+                'faq.a3': 'ⵢⴰⵀ. ⵏⵜⵜⵓⵎⵍⵍⵉ ⴰⴽⴷ ⵉⵙⵉⵏⴼⵏ ⵉⴼⵔⴰⴳⵏ ⵉⵎⵖⵔⴰⴱⵉⵢⵏ. ⴰⵏⴰⵎⴽ ⵏⵏⵖ ⵏ ⵜⵏⴱⴹⵜ ⵉⵙⵏⵇⴷ ⴰⵎⵜⵜⵉ ⵉⵣⴷⵉⵏ.',
+                'faq.q4': 'ⵉⵙ ⵖⵉⵖ ⴰⴷ ⵓⴳⵖ ⴰⵎⴰⵣⵉⵔ ⵏ ⵓⵎⵓⵏ?',
+                'faq.a4': 'ⴰⵔ ⵜⴰⵡⵙⴰ. ⵏⵙⴱⵓⵖⵍⵓ ⴰⴳⵔⴰⵡ ⵏ ⵉⵎⴰⵣⵉⵔⵏ. ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷ ⵜⵔⴰⴱⴱⵓⵜ ⵏⵏⵖ ⵏ ⵜⵎⴰⵣⵉⵔⵜ.',
+                'faq.q5': 'ⵎⴰⵎⴽ ⵉⵙⵖⵓⴷⵓ ⵓⴼⵔⴰⵏ ⵉ ⵓⵙⵓⵖⵍ ⵉⵎⵣⵡⵓⵔⴰ?',
+                'faq.a5': 'ⵏⵙⵙⵉⵟⵉⴹ ⵉⵙⵓⵜⵔⵏ ⵙ ⵓⵙⵎⵔⵙ, ⵜⵓⵔⴰ ⴷ ⵓⵎⵙⴰⵙⴰ ⴰⵙⵜⵔⴰⵜⵉⵊⵉ. ⵜⴰⵣⵡⴰⵔⵜ ⵜⵜⵓⴽⴽⴰ ⵉ ⵜⵎⵔⵙⵍⵉⵏ ⵉⵙⵜⵄⴷⴷⴰⵏ ⵉ ⵓⵙⵙⵏⵜⵉ ⴳ ⵡⴰⴽⵓⴷ ⴰⵎⵣⵡⴰⵔⵓ.',
+
+                // Application Form Section
+                'form.title': 'ⵜⴰⵍⵖⴰ ⵏ ⵓⵙⵓⵜⵔ',
+                'form.subtitle': 'ⵄⵎⵔ ⵜⴰⵍⵖⴰ ⴷⴷⴰⵡ ⴰⴷ ⵏⵎⵢⴰⵡⴰⴹ ⴰⴽⴷ ⵢⴰⵜ.',
+                'form.contact.heading': 'ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵓⵎⵢⴰⵡⴰⴹ',
+                'form.contact.fullName': 'ⵉⵙⵎ ⴰⵜⵜⵓⵢ',
+                'form.contact.email': 'ⵉⵎⴰⵢⵍ ⴰⵎⵃⵉⵔⴼⵉ',
+                'form.contact.phone': 'ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⴼⵓⵏ',
+                'form.organization.heading': 'ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵜⵎⵔⵙⴰⵍⵜ',
+                'form.organization.name': 'ⵉⵙⵎ ⵏ ⵜⵎⵔⵙⴰⵍⵜ',
+                'form.organization.jobTitle': 'ⵜⴰⵡⵓⵔⵉ / ⴰⴷⵖⴰⵔ',
+                'form.organization.size': 'ⵜⵉⴷⴷⵉ ⵏ ⵜⵎⵔⵙⴰⵍⵜ',
+                'form.organization.selectSize': 'ⵙⵜⵉ ⵜⵉⴷⴷⵉ',
+                'form.organization.startup': 'ⵜⴰⵎⵔⵙⴰⵍⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ (1-50 ⵏ ⵉⵎⵃⵉⵔⴼⵉⵢⵏ)',
+                'form.organization.sme': 'ⵜⴰⵎⵔⵙⴰⵍⵜ ⵜⴰⵎⵥⵥⴰⵏⵜ (51-250 ⵏ ⵉⵎⵃⵉⵔⴼⵉⵢⵏ)',
+                'form.organization.midMarket': 'ⵜⴰⵎⵔⵙⴰⵍⵜ ⵜⴰⵏⴰⵎⵎⴰⵙⵜ (251-1000 ⵏ ⵉⵎⵃⵉⵔⴼⵉⵢⵏ)',
+                'form.organization.enterprise': 'ⵜⴰⵎⵔⵙⴰⵍⵜ ⵜⴰⵎⵇⵇⵕⴰⵏⵜ (1000+ ⵏ ⵉⵎⵃⵉⵔⴼⵉⵢⵏ)',
+                'form.organization.public': 'ⴰⵖⵔⴰⴱ ⴰⵣⴰⵢⴷ / ⴰⵏⴰⵎⵓⵔ',
+                'form.technical.heading': 'ⵉⵏⵖⵎⵉⵙⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ',
+                'form.technical.useCase': 'ⴰⵙⵎⵔⵙ ⴰⴷⵙⵍⴰⵏ ⵏⵖ ⴰⴳⵍⴰⵎ ⵏ ⵓⵙⵏⴼⴰⵔ',
+                'form.submit': 'ⴰⵣⵏ ⴰⵙⵓⵜⵔ',
+                'form.sending': 'ⴰⵔ ⵉⵜⵜⵡⴰⵣⵏ...',
+                'form.success.title': 'ⵢⵓⴼⴰ!',
+                'form.success.message': 'ⵜⴰⵏⵎⵎⵉⵔⵜ! ⴰⵙⵓⵜⵔ ⵏⵏⴽ ⵉⵜⵜⵓⵣⴰⵏ ⵙ ⵜⵖⵉⴷⵉ. ⴰⴷ ⵏⵎⵢⴰⵡⴰⴹ ⴰⴽⴷ ⵢⴰⵜ.',
+                'form.error.title': 'ⵜⴰⵣⴳⴳⵯⴰⵍⵜ!',
+                'form.error.message': 'ⵙⵙⵓⵔⴼ! ⵢⵓⵎⵥ ⵓⵙⴰⴳⵡⴰⴷ. ⴰⵔⵎ ⵙ ⵢⴰⵜ ⵏⵖ ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵙⵔⵉⴷ ⴳ contact@clevercloud.ma',
+
+                // Contact Section
+                'contact.label': 'ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ',
+                'contact.title': 'ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵓⵎⵢⴰⵡⴰⴹ',
+                'contact.phone': 'ⵜⵉⵍⵉⴼⵓⵏ',
+                'contact.email': 'ⵉⵎⴰⵢⵍ',
+                'contact.location': 'ⴰⴷⵖⴰⵔ',
+                'contact.address': 'ⴰⴷⴷⴰⵔⴰⵍⴱⵉⴹⴰ, ⵍⵎⵖⵔⵉⴱ',
+                'contact.followUs': 'ⴹⴼⵕ ⴰⵖ',
+
+                // Footer
+                'footer.copyright': '© 2024 Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵕⵕⴰ ⵉⵣⵔⴼⴰⵏ ⵃⴹⵓⵕⵏ.',
+                'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ'
             }
         };
+
+        // Language Switcher with URL routing
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+        const langOptions = document.querySelectorAll('.lang-option');
+
+        // Get language from URL query parameter (e.g., ?lang=fr, ?lang=ar)
+        function getLangFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('lang');
+        }
+
+        // Update URL with language query parameter
+        function updateURL(lang) {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Set or update the lang parameter
+            if (lang === 'en') {
+                // Remove lang parameter for English (default)
+                urlParams.delete('lang');
+            } else {
+                urlParams.set('lang', lang);
+            }
+
+            // Build new URL
+            const newSearch = urlParams.toString();
+            const newURL = newSearch ? `${window.location.pathname}?${newSearch}` : window.location.pathname;
+
+            // Update URL without reloading
+            window.history.pushState({}, '', newURL);
+        }
+
+        // Toggle dropdown
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            langDropdown.classList.add('hidden');
+        });
+
+        // Language selection
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                const langName = option.getAttribute('data-name');
+
+                // Update button
+                currentFlag.innerHTML = option.querySelector('svg').outerHTML;
+                currentLang.textContent = langName;
+
+                // Apply translations
+                applyTranslations(lang);
+
+                // Update URL
+                updateURL(lang);
+
+                // Close dropdown
+                langDropdown.classList.add('hidden');
+
+                // Save preference
+                localStorage.setItem('language', lang);
+            });
+        });
+
+        // Initialize with URL language, saved language, or default to English
+        const urlLang = getLangFromURL();
+        const savedLang = localStorage.getItem('language');
+        const initialLang = urlLang || savedLang || 'en';
+
+        const initialOption = document.querySelector(`[data-lang="${initialLang}"]`);
+        if (initialOption) {
+            currentFlag.innerHTML = initialOption.querySelector('svg').outerHTML;
+            currentLang.textContent = initialOption.getAttribute('data-name');
+            applyTranslations(initialLang);
+
+            // Update URL if not already set
+            if (!urlLang && initialLang !== 'en') {
+                updateURL(initialLang);
+            }
+        }
+
+        function applyTranslations(lang) {
+            // Set text direction for Arabic and Berber
+            if (lang === 'ar' || lang === 'ber') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', lang);
+                document.body.style.textAlign = 'right';
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', lang);
+                document.body.style.textAlign = 'left';
+            }
+
+            // Apply translations to all elements with data-translate
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else if (el.tagName === 'SELECT') {
+                        // For select elements, update the text of the selected option
+                        const options = el.querySelectorAll('option');
+                        options.forEach(opt => {
+                            const optKey = opt.getAttribute('data-translate');
+                            if (optKey && translations[lang][optKey]) {
+                                opt.textContent = translations[lang][optKey];
+                            }
+                        });
+                    } else {
+                        // Use innerHTML to preserve HTML tags like <b>, <i>, etc.
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+        }
 
         // Mobile Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
