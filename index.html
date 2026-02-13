@@ -31,18 +31,6 @@
             direction: ltr !important;
         }
 
-        @media (max-width: 1024px) {
-            #logoScroll {
-                gap: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #logoScroll {
-                gap: 2rem;
-            }
-        }
-
         #logoScroll:hover {
             animation-play-state: paused;
         }
@@ -103,10 +91,13 @@
             text-align: right;
         }
 
-        /* Keep logo carousel in LTR for infinite scroll */
+        /* Keep entire Trusted By section (logo carousel) in LTR - always left to right */
+        [dir="rtl"] #trustedBySection,
+        [dir="rtl"] #trustedBySection *,
         [dir="rtl"] #logoScroll,
         [dir="rtl"] .logo-track {
             direction: ltr !important;
+            text-align: center !important;
         }
 
         /* Text only - keep components in same position */
@@ -236,7 +227,7 @@
     </section>
 
     <!-- Trusted By Section -->
-    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 flex flex-col justify-center items-center bg-white">
+    <section id="trustedBySection" class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 flex flex-col justify-center items-center bg-white">
         <h2 class="text-[#1c2045] text-center font-bold text-2xl md:text-3xl lg:text-4xl !mb-12 md:!mb-16" data-translate="trusted.title">Trusted By Leading Organizations</h2>
 
         <div class="w-full overflow-hidden relative">
@@ -939,30 +930,26 @@
             const logoScroll = document.getElementById('logoScroll');
             if (!logoScroll) return;
 
-            // Clear existing content
             logoScroll.innerHTML = '';
 
-            // Create logo HTML for each image
             const logoHTML = partnerLogos.map(logo => `
                 <img src="./assets/images/logo/${logo.filename}"
-                     alt="${logo.name}"
-                     title="${logo.name}">
+                    alt="${logo.name}"
+                    title="${logo.name}">
             `).join('');
 
-            // Create first track
             const firstTrack = document.createElement('div');
             firstTrack.className = 'logo-track';
             firstTrack.innerHTML = logoHTML;
 
-            // Create duplicate track for seamless infinite loop
             const secondTrack = document.createElement('div');
             secondTrack.className = 'logo-track';
             secondTrack.innerHTML = logoHTML;
 
-            // Append both tracks
             logoScroll.appendChild(firstTrack);
             logoScroll.appendChild(secondTrack);
         }
+
 
         // Initialize carousel on page load
         generateLogoCarousel();
