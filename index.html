@@ -668,11 +668,11 @@
                     <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.contact.heading">Contact Information</h2>
                     <div class="flex flex-col gap-4">
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.contact.fullName">Full Name <span class="!text-[#5754aa]">*</span></label>
+                            <label class="block text-gray-700 text-sm font-medium !mb-2"><span data-translate="form.contact.fullName">Full Name</span> <span class="!text-red-600">*</span></label>
                             <input type="text" name="full_name" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.contact.email">Professional Email <span class="!text-[#5754aa]">*</span></label>
+                            <label class="block text-gray-700 text-sm font-medium !mb-2"><span data-translate="form.contact.email">Professional Email</span> <span class="!text-red-600">*</span></label>
                             <input type="email" name="email" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
@@ -687,16 +687,16 @@
                     <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.organization.heading">Organization Details</h2>
                     <div class="flex flex-col gap-4">
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.name">Organization Name <span class="!text-[#5754aa]">*</span></label>
+                            <label class="block text-gray-700 text-sm font-medium !mb-2"><span data-translate="form.organization.name">Organization Name</span> <span class="!text-red-600">*</span></label>
                             <input type="text" name="organization_name" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div>
-                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.jobTitle">Job Function/Title <span class="!text-[#5754aa]">*</span></label>
+                            <label class="block text-gray-700 text-sm font-medium !mb-2"><span data-translate="form.organization.jobTitle">Job Function/Title</span> <span class="!text-red-600">*</span></label>
                             <input type="text" name="job_title" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200">
                         </div>
                         <div class="relative">
-                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.size">Organization Size <span class="!text-[#5754aa]">*</span></label>
-                            <select name="organization_size" required class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 bg-white appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%233a3871%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem;">
+                            <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.organization.size">Organization Size</label>
+                            <select name="organization_size" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 bg-white appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%233a3871%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem;">
                                 <option value="" data-translate="form.organization.selectSize">Select organization size</option>
                                 <option value="Startup (1-50 employees)" data-translate="form.organization.startup">Startup (1-50 employees)</option>
                                 <option value="SME (51-250 employees)" data-translate="form.organization.sme">SME (51-250 employees)</option>
@@ -714,7 +714,7 @@
                 <div class="!mb-6">
                     <h2 class="text-[#1c2045] font-bold text-lg md:text-xl !mb-4" data-translate="form.technical.heading">Technical Information</h2>
                     <div>
-                        <label class="block text-gray-700 text-sm font-medium !mb-2" data-translate="form.technical.useCase">Primary use case or project description <span class="!text-[#5754aa]">*</span></label>
+                        <label class="block text-gray-700 text-sm font-medium !mb-2"><span data-translate="form.technical.useCase">Primary use case or project description</span> <span class="!text-red-600">*</span></label>
                         <textarea name="use_case" required rows="4" class="w-full border border-[#deddee] !px-4 !py-3 text-md focus:outline-none focus:border-[#5754aa] transition-colors duration-200 resize-none"></textarea>
                     </div>
                 </div>
@@ -737,9 +737,9 @@
         <h2 class="rajdhani text-2xl md:text-3xl lg:text-4xl text-center" data-translate="contact.label">GET IN TOUCH</h2>
         <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mt-2" data-translate="contact.title">Contact Information</h1>
 
-        <div class="w-full md:max-w-5xl lg:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 !mt-16">
+        <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 !mt-16">
             <!-- Phone -->
-            <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] hover:shadow-lg transition-shadow duration-300">
+            <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] rounded-lg hover:shadow-lg transition-shadow duration-300">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
@@ -750,7 +750,7 @@
             </div>
 
             <!-- Email -->
-            <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] hover:shadow-lg transition-shadow duration-300">
+            <!-- <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] hover:shadow-lg transition-shadow duration-300">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -759,13 +759,11 @@
                 </div>
                 <h3 class="font-bold text-xl md:text-2xl !mb-3" data-translate="contact.email">Email</h3>
                 <div class="flex flex-col gap-2">
-                    <a href="mailto:ismael.faouri@groupe-agel.com" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">ismael.faouri@groupe-agel.com</a>
-                    <a href="mailto:ismail.kabbaj@groupe-agel.com" class="text-gray-700 hover:text-[#5754aa] text-md md:text-lg transition-colors duration-200">ismail.kabbaj@groupe-agel.com</a>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Location -->
-            <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] rounded-lg hover:shadow-lg transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+            <div class="flex flex-col items-center text-center !p-6 md:!p-8 bg-white border border-[#deddee] rounded-lg hover:shadow-lg transition-shadow duration-300">
                 <div class="w-14 h-14 md:w-16 md:h-16 bg-[#3a3871] rounded-full flex items-center justify-center !mb-5">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
