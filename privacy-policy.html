@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <title>Privacy Policy - Clever Cloud Morocco</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="rtl"] body {
+            text-align: right;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="w-full !px-6 md:!px-12 lg:!px-20 !py-4 md:!py-5 flex justify-between items-center border-b border-[#deddee] bg-white sticky top-0 z-50">
+        <a href="index.html">
+            <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-24 md:w-28 lg:w-32">
+        </a>
+        <div class="flex items-center gap-4 md:gap-6">
+            <!-- Language Switcher -->
+            <div class="relative">
+                <button id="langBtn" class="flex items-center gap-2 !px-3 !py-2 border border-[#deddee] hover:border-[#5754aa] transition-colors duration-200">
+                    <div id="currentFlag" class="w-5 h-5">
+                        <!-- English Flag SVG -->
+                        <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                            <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+                            <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath>
+                            <g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>
+                        </svg>
+                    </div>
+                    <span id="currentLang" class="text-sm md:text-base font-medium">English</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+
+                <!-- Dropdown -->
+                <div id="langDropdown" class="hidden absolute right-0 !mt-2 w-48 bg-white border border-[#deddee] shadow-lg z-50">
+                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="en" data-name="English">
+                        <svg class="w-6 h-6" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                            <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+                            <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath>
+                            <g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>
+                        </svg>
+                        <span class="font-medium">English</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="fr" data-name="Français">
+                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="900" height="600" fill="#ED2939"/>
+                            <rect width="600" height="600" fill="#fff"/>
+                            <rect width="300" height="600" fill="#002395"/>
+                        </svg>
+                        <span class="font-medium">Français</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="ar" data-name="العربية">
+                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="900" height="600" fill="#C1272D"/>
+                            <polygon points="450,200 350,450 550,300 350,300 550,450" fill="#006233"/>
+                        </svg>
+                        <span class="font-medium">العربية</span>
+                    </button>
+                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="ber" data-name="ⵜⴰⵎⴰⵣⵉⵖⵜ">
+                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="900" height="600" fill="#C1272D"/>
+                            <polygon points="450,200 350,450 550,300 350,300 550,450" fill="#006233"/>
+                        </svg>
+                        <span class="font-medium">ⵜⴰⵎⴰⵣⵉⵖⵜ</span>
+                    </button>
+                </div>
+            </div>
+            <a href="index.html" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base font-medium transition-colors duration-200" data-translate="privacy.backToHome">Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-gray-50">
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-4" data-translate="privacy.title">Privacy Policy</h1>
+        <p class="text-gray-700 text-center text-md md:text-lg lg:text-xl max-w-3xl" data-translate="privacy.subtitle">
+            Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.
+        </p>
+        <p class="text-gray-600 text-center text-sm md:text-base !mt-4" data-translate="privacy.lastUpdated">
+            Last Updated: February 2026
+        </p>
+    </section>
+
+    <!-- Content Section -->
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24">
+        <div class="max-w-4xl mx-auto">
+            <!-- Section 1 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section1.title">1. Information We Collect</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section1.p1">
+                    We collect information that you provide directly to us when you use our services, including when you create an account, submit applications, or contact us for support.
+                </p>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section1.p2">
+                    This may include your name, email address, phone number, organization details, and technical information about your use case.
+                </p>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section2.title">2. How We Use Your Information</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section2.p1">
+                    We use the information we collect to provide, maintain, and improve our services, to process your applications, and to communicate with you about our platform.
+                </p>
+                <ul class="list-disc list-inside text-gray-700 text-md md:text-lg leading-relaxed space-y-2">
+                    <li data-translate="privacy.section2.li1">To process and respond to your inquiries and applications</li>
+                    <li data-translate="privacy.section2.li2">To provide customer support and technical assistance</li>
+                    <li data-translate="privacy.section2.li3">To send important updates about our services</li>
+                    <li data-translate="privacy.section2.li4">To improve and optimize our platform</li>
+                </ul>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section3.title">3. Data Storage and Security</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section3.p1">
+                    All data is stored and processed within Morocco. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+                </p>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section3.p2">
+                    Our infrastructure operates entirely within Moroccan territory, ensuring complete data sovereignty and compliance with local regulations.
+                </p>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section4.title">4. Data Sharing</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section4.p1">
+                    We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 text-md md:text-lg leading-relaxed space-y-2">
+                    <li data-translate="privacy.section4.li1">With your explicit consent</li>
+                    <li data-translate="privacy.section4.li2">To comply with legal obligations</li>
+                    <li data-translate="privacy.section4.li3">To protect our rights and safety</li>
+                    <li data-translate="privacy.section4.li4">With service providers who assist in operating our platform</li>
+                </ul>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section5.title">5. Your Rights</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section5.p1">
+                    You have the right to access, correct, or delete your personal information. You may also object to or restrict certain processing of your data.
+                </p>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section5.p2">
+                    To exercise these rights, please contact us using the information provided on our main website.
+                </p>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section6.title">6. Cookies and Tracking</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section6.p1">
+                    We use cookies and similar tracking technologies to improve your experience on our website. You can control cookie preferences through your browser settings.
+                </p>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="!mb-12">
+                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section7.title">7. Changes to This Policy</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section7.p1">
+                    We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.
+                </p>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="!p-6 md:!p-8 bg-gray-50 border-l-4 border-[#5754aa]">
+                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl !mb-4" data-translate="privacy.contact.title">Contact Us</h2>
+                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.contact.p1">
+                    If you have any questions about this Privacy Policy, please contact us:
+                </p>
+                <p class="text-gray-700 text-md md:text-lg">
+                    <span data-translate="privacy.contact.phone">Phone:</span> <a href="tel:+212643128182" class="text-[#5754aa] hover:underline">+212 643 128 182</a><br>
+                    <span data-translate="privacy.contact.location">Location:</span> <span data-translate="privacy.contact.address">Casablanca, Morocco</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full !px-6 md:!px-12 lg:!px-20 !py-12 md:!py-16 bg-white !mt-18 border-t border-[#deddee]">
+        <div class="max-w-7xl mx-auto">
+            <!-- Links Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-10 !mb-12">
+                <!-- Logo Column -->
+                <div class="lg:col-span-2 flex flex-col items-center lg:items-start">
+                    <a href="index.html" class="!mb-6">
+                        <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-32 md:w-36 lg:w-40">
+                    </a>
+                    <p class="text-gray-600 text-sm text-center lg:text-left max-w-xs" data-translate="footer.tagline">
+                        Morocco's sovereign cloud platform. Secure, locally-operated infrastructure.
+                    </p>
+                </div>
+
+                <!-- Navigation Column -->
+                <div>
+                    <h3 class="font-bold text-[#1c2045] text-lg !mb-4" data-translate="nav.menu">Menu</h3>
+                    <ul class="flex flex-col gap-3">
+                        <li><a href="index.html" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="nav.home">Home</a></li>
+                        <li><a href="index.html#about-us" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+                        <li><a href="index.html#benefits" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
+                        <li><a href="index.html#application-form" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="nav.contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Column -->
+                <div>
+                    <h3 class="font-bold text-[#1c2045] text-lg !mb-4" data-translate="footer.resources">Resources</h3>
+                    <ul class="flex flex-col gap-3">
+                        <li><a href="https://www.clever.cloud/developers" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.documentation">Documentation</a></li>
+                        <li><a href="https://www.clevercloudstatus.com/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.status">Status</a></li>
+                        <li><a href="https://github.com/CleverCloud/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.github">GitHub</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Column -->
+                <div>
+                    <h3 class="font-bold text-[#1c2045] text-lg !mb-4" data-translate="footer.company">Company</h3>
+                    <ul class="flex flex-col gap-3">
+                        <li><a href="https://www.clever.cloud/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.ccEurope">Clever Cloud Europe</a></li>
+                        <li><a href="https://www.clever.cloud/up-program/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.upProgram">UP Program (Startups)</a></li>
+                        <li><a href="https://www.clever.cloud/compliance/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.compliance">Compliance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Column -->
+                <div>
+                    <h3 class="font-bold text-[#1c2045] text-lg !mb-4" data-translate="footer.legal">Legal</h3>
+                    <ul class="flex flex-col gap-3">
+                        <li><a href="privacy-policy.html" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.privacy">Privacy Policy</a></li>
+                        <li><a href="https://www.clever.cloud/acceptable-use-policy/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.acceptableUse">Acceptable Use Policy</a></li>
+                        <li><a href="https://www.clever.cloud/premium-services-policy/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.premiumServices">Premium Services Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-[#deddee] !pt-6 text-center">
+                <p class="text-gray-700 text-sm md:text-base" id="copyrightText" data-translate="footer.copyright">&copy; <span id="currentYear">2026</span> Clever Cloud Morocco. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            en: {
+                // Navigation
+                'nav.menu': 'Menu',
+                'nav.home': 'Home',
+                'nav.about': 'About Us',
+                'nav.benefits': 'Benefits',
+                'nav.contact': 'Contact',
+
+                // Privacy Page
+                'privacy.backToHome': 'Back to Home',
+                'privacy.title': 'Privacy Policy',
+                'privacy.subtitle': 'Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.',
+                'privacy.lastUpdated': 'Last Updated: February 2026',
+
+                'privacy.section1.title': '1. Information We Collect',
+                'privacy.section1.p1': 'We collect information that you provide directly to us when you use our services, including when you create an account, submit applications, or contact us for support.',
+                'privacy.section1.p2': 'This may include your name, email address, phone number, organization details, and technical information about your use case.',
+
+                'privacy.section2.title': '2. How We Use Your Information',
+                'privacy.section2.p1': 'We use the information we collect to provide, maintain, and improve our services, to process your applications, and to communicate with you about our platform.',
+                'privacy.section2.li1': 'To process and respond to your inquiries and applications',
+                'privacy.section2.li2': 'To provide customer support and technical assistance',
+                'privacy.section2.li3': 'To send important updates about our services',
+                'privacy.section2.li4': 'To improve and optimize our platform',
+
+                'privacy.section3.title': '3. Data Storage and Security',
+                'privacy.section3.p1': 'All data is stored and processed within Morocco. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.',
+                'privacy.section3.p2': 'Our infrastructure operates entirely within Moroccan territory, ensuring complete data sovereignty and compliance with local regulations.',
+
+                'privacy.section4.title': '4. Data Sharing',
+                'privacy.section4.p1': 'We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:',
+                'privacy.section4.li1': 'With your explicit consent',
+                'privacy.section4.li2': 'To comply with legal obligations',
+                'privacy.section4.li3': 'To protect our rights and safety',
+                'privacy.section4.li4': 'With service providers who assist in operating our platform',
+
+                'privacy.section5.title': '5. Your Rights',
+                'privacy.section5.p1': 'You have the right to access, correct, or delete your personal information. You may also object to or restrict certain processing of your data.',
+                'privacy.section5.p2': 'To exercise these rights, please contact us using the information provided on our main website.',
+
+                'privacy.section6.title': '6. Cookies and Tracking',
+                'privacy.section6.p1': 'We use cookies and similar tracking technologies to improve your experience on our website. You can control cookie preferences through your browser settings.',
+
+                'privacy.section7.title': '7. Changes to This Policy',
+                'privacy.section7.p1': 'We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.',
+
+                'privacy.contact.title': 'Contact Us',
+                'privacy.contact.p1': 'If you have any questions about this Privacy Policy, please contact us:',
+                'privacy.contact.phone': 'Phone:',
+                'privacy.contact.location': 'Location:',
+                'privacy.contact.address': 'Casablanca, Morocco',
+
+                // Footer
+                'footer.tagline': 'Morocco\'s sovereign cloud platform. Secure, locally-operated infrastructure.',
+                'footer.copyright': '© {year} Clever Cloud Morocco. All rights reserved.',
+                'footer.resources': 'Resources',
+                'footer.company': 'Company',
+                'footer.legal': 'Legal',
+                'footer.documentation': 'Documentation',
+                'footer.status': 'Status',
+                'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud Europe',
+                'footer.upProgram': 'UP Program (Startups)',
+                'footer.compliance': 'Compliance',
+                'footer.privacy': 'Privacy Policy',
+                'footer.acceptableUse': 'Acceptable Use Policy',
+                'footer.premiumServices': 'Premium Services Policy'
+            },
+            fr: {
+                // Navigation
+                'nav.menu': 'Menu',
+                'nav.home': 'Accueil',
+                'nav.about': 'À propos',
+                'nav.benefits': 'Avantages',
+                'nav.contact': 'Contact',
+
+                // Privacy Page
+                'privacy.backToHome': 'Retour à l\'accueil',
+                'privacy.title': 'Politique de confidentialité',
+                'privacy.subtitle': 'Votre vie privée est importante pour nous. Cette politique explique comment nous collectons, utilisons et protégeons vos informations personnelles.',
+                'privacy.lastUpdated': 'Dernière mise à jour : Février 2026',
+
+                'privacy.section1.title': '1. Informations que nous collectons',
+                'privacy.section1.p1': 'Nous collectons les informations que vous nous fournissez directement lorsque vous utilisez nos services, notamment lorsque vous créez un compte, soumettez des candidatures ou nous contactez pour obtenir de l\'aide.',
+                'privacy.section1.p2': 'Cela peut inclure votre nom, adresse e-mail, numéro de téléphone, coordonnées de l\'organisation et informations techniques sur votre cas d\'usage.',
+
+                'privacy.section2.title': '2. Comment nous utilisons vos informations',
+                'privacy.section2.p1': 'Nous utilisons les informations que nous collectons pour fournir, maintenir et améliorer nos services, traiter vos candidatures et communiquer avec vous au sujet de notre plateforme.',
+                'privacy.section2.li1': 'Pour traiter et répondre à vos demandes et candidatures',
+                'privacy.section2.li2': 'Pour fournir un support client et une assistance technique',
+                'privacy.section2.li3': 'Pour envoyer des mises à jour importantes concernant nos services',
+                'privacy.section2.li4': 'Pour améliorer et optimiser notre plateforme',
+
+                'privacy.section3.title': '3. Stockage et sécurité des données',
+                'privacy.section3.p1': 'Toutes les données sont stockées et traitées au Maroc. Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles contre l\'accès non autorisé, la modification, la divulgation ou la destruction.',
+                'privacy.section3.p2': 'Notre infrastructure fonctionne entièrement sur le territoire marocain, garantissant une souveraineté complète des données et la conformité aux réglementations locales.',
+
+                'privacy.section4.title': '4. Partage de données',
+                'privacy.section4.p1': 'Nous ne vendons, n\'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons partager vos informations uniquement dans les circonstances suivantes :',
+                'privacy.section4.li1': 'Avec votre consentement explicite',
+                'privacy.section4.li2': 'Pour se conformer aux obligations légales',
+                'privacy.section4.li3': 'Pour protéger nos droits et notre sécurité',
+                'privacy.section4.li4': 'Avec les fournisseurs de services qui nous aident à exploiter notre plateforme',
+
+                'privacy.section5.title': '5. Vos droits',
+                'privacy.section5.p1': 'Vous avez le droit d\'accéder, de corriger ou de supprimer vos informations personnelles. Vous pouvez également vous opposer ou restreindre certains traitements de vos données.',
+                'privacy.section5.p2': 'Pour exercer ces droits, veuillez nous contacter en utilisant les informations fournies sur notre site Web principal.',
+
+                'privacy.section6.title': '6. Cookies et suivi',
+                'privacy.section6.p1': 'Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience sur notre site Web. Vous pouvez contrôler les préférences de cookies via les paramètres de votre navigateur.',
+
+                'privacy.section7.title': '7. Modifications de cette politique',
+                'privacy.section7.p1': 'Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date de "Dernière mise à jour".',
+
+                'privacy.contact.title': 'Nous contacter',
+                'privacy.contact.p1': 'Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter :',
+                'privacy.contact.phone': 'Téléphone :',
+                'privacy.contact.location': 'Emplacement :',
+                'privacy.contact.address': 'Casablanca, Maroc',
+
+                // Footer
+                'footer.tagline': 'Plateforme cloud souveraine du Maroc. Infrastructure sécurisée et opérée localement.',
+                'footer.copyright': '© {year} Clever Cloud Maroc. Tous droits réservés.',
+                'footer.resources': 'Ressources',
+                'footer.company': 'Entreprise',
+                'footer.legal': 'Légal',
+                'footer.documentation': 'Documentation',
+                'footer.status': 'Statut',
+                'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud Europe',
+                'footer.upProgram': 'Programme UP (Startups)',
+                'footer.compliance': 'Conformité',
+                'footer.privacy': 'Politique de confidentialité',
+                'footer.acceptableUse': 'Politique d\'utilisation acceptable',
+                'footer.premiumServices': 'Politique des services premium'
+            },
+            ar: {
+                // Navigation
+                'nav.menu': 'القائمة',
+                'nav.home': 'الرئيسية',
+                'nav.about': 'من نحن',
+                'nav.benefits': 'الفوائد',
+                'nav.contact': 'اتصل بنا',
+
+                // Privacy Page
+                'privacy.backToHome': 'العودة إلى الصفحة الرئيسية',
+                'privacy.title': 'سياسة الخصوصية',
+                'privacy.subtitle': 'خصوصيتك مهمة بالنسبة لنا. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك الشخصية.',
+                'privacy.lastUpdated': 'آخر تحديث: فبراير 2026',
+
+                'privacy.section1.title': '1. المعلومات التي نجمعها',
+                'privacy.section1.p1': 'نجمع المعلومات التي تقدمها لنا مباشرة عند استخدام خدماتنا، بما في ذلك عندما تنشئ حسابًا أو تقدم طلبات أو تتصل بنا للحصول على الدعم.',
+                'privacy.section1.p2': 'قد يشمل ذلك اسمك وعنوان بريدك الإلكتروني ورقم هاتفك وتفاصيل المؤسسة والمعلومات التقنية حول حالة الاستخدام الخاصة بك.',
+
+                'privacy.section2.title': '2. كيف نستخدم معلوماتك',
+                'privacy.section2.p1': 'نستخدم المعلومات التي نجمعها لتوفير خدماتنا وصيانتها وتحسينها، ومعالجة طلباتك، والتواصل معك بشأن منصتنا.',
+                'privacy.section2.li1': 'لمعالجة والرد على استفساراتك وطلباتك',
+                'privacy.section2.li2': 'لتقديم دعم العملاء والمساعدة الفنية',
+                'privacy.section2.li3': 'لإرسال تحديثات مهمة حول خدماتنا',
+                'privacy.section2.li4': 'لتحسين وتطوير منصتنا',
+
+                'privacy.section3.title': '3. تخزين البيانات والأمان',
+                'privacy.section3.p1': 'يتم تخزين جميع البيانات ومعالجتها داخل المغرب. ننفذ التدابير التقنية والتنظيمية المناسبة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التعديل أو الإفصاح أو التدمير.',
+                'privacy.section3.p2': 'تعمل بنيتنا التحتية بالكامل على الأراضي المغربية، مما يضمن السيادة الكاملة على البيانات والامتثال للوائح المحلية.',
+
+                'privacy.section4.title': '4. مشاركة البيانات',
+                'privacy.section4.p1': 'نحن لا نبيع أو نتاجر أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك فقط في الظروف التالية:',
+                'privacy.section4.li1': 'بموافقتك الصريحة',
+                'privacy.section4.li2': 'للامتثال للالتزامات القانونية',
+                'privacy.section4.li3': 'لحماية حقوقنا وسلامتنا',
+                'privacy.section4.li4': 'مع مزودي الخدمات الذين يساعدون في تشغيل منصتنا',
+
+                'privacy.section5.title': '5. حقوقك',
+                'privacy.section5.p1': 'لديك الحق في الوصول إلى معلوماتك الشخصية أو تصحيحها أو حذفها. يمكنك أيضًا الاعتراض على معالجة معينة لبياناتك أو تقييدها.',
+                'privacy.section5.p2': 'لممارسة هذه الحقوق، يرجى الاتصال بنا باستخدام المعلومات المقدمة على موقعنا الرئيسي.',
+
+                'privacy.section6.title': '6. ملفات تعريف الارتباط والتتبع',
+                'privacy.section6.p1': 'نستخدم ملفات تعريف الارتباط وتقنيات التتبع المماثلة لتحسين تجربتك على موقعنا. يمكنك التحكم في تفضيلات ملفات تعريف الارتباط من خلال إعدادات المتصفح.',
+
+                'privacy.section7.title': '7. التغييرات على هذه السياسة',
+                'privacy.section7.p1': 'قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر السياسة الجديدة على هذه الصفحة وتحديث تاريخ "آخر تحديث".',
+
+                'privacy.contact.title': 'اتصل بنا',
+                'privacy.contact.p1': 'إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا:',
+                'privacy.contact.phone': 'الهاتف:',
+                'privacy.contact.location': 'الموقع:',
+                'privacy.contact.address': 'الدار البيضاء، المغرب',
+
+                // Footer
+                'footer.tagline': 'منصة السحابة السيادية للمغرب. بنية تحتية آمنة تدار محلياً.',
+                'footer.copyright': '© {year} كليفر كلاود المغرب. جميع الحقوق محفوظة.',
+                'footer.resources': 'الموارد',
+                'footer.company': 'الشركة',
+                'footer.legal': 'القانوني',
+                'footer.documentation': 'التوثيق',
+                'footer.status': 'الحالة',
+                'footer.github': 'GitHub',
+                'footer.ccEurope': 'كليفر كلاود أوروبا',
+                'footer.upProgram': 'برنامج UP (الشركات الناشئة)',
+                'footer.compliance': 'الامتثال',
+                'footer.privacy': 'سياسة الخصوصية',
+                'footer.acceptableUse': 'سياسة الاستخدام المقبول',
+                'footer.premiumServices': 'سياسة الخدمات المميزة'
+            },
+            ber: {
+                // Navigation
+                'nav.menu': 'ⵓⵎⵓⵖⵍⵓ',
+                'nav.home': 'ⴰⵙⵏⵓⴱⴳ',
+                'nav.about': 'ⵅⴼ ⵏⵖ',
+                'nav.benefits': 'ⵜⵉⵏⴼⵓⵜⵉⵏ',
+                'nav.contact': 'ⵎⵢⴰⵡⴰⴹ',
+
+                // Privacy Page
+                'privacy.backToHome': 'ⴰⵔⵓⵢ ⵖⵔ ⴰⵙⵏⵓⴱⴳ',
+                'privacy.title': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
+                'privacy.subtitle': 'ⵜⵓⴹⴼⵉⵜ ⵏⵏⴽ ⵜⵓⵙⵙⴰⵔ ⴼⵍⵍⴰⵏⵖ. ⵜⴰⵙⵔⵜⵉⵜ ⴰⴷ ⵜⵙⵙⴼⵔⵓ ⵎⴰⵎⴽ ⴰⵔⴰ ⵏⵙⵎⵓⵏ, ⵏⵙⵙⵎⵔⵙ ⴷ ⵏⵃⴹⵓ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ.',
+                'privacy.lastUpdated': 'ⴰⵙⴷⵖⵉ ⴰⵎⴳⴳⴰⵔⵓ: ⴱⵕⴰⵢⵕ 2026',
+
+                'privacy.section1.title': '1. ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵏⵙⵎⵓⵏⵏ',
+                'privacy.section1.p1': 'ⵏⵙⵎⵓⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⴰⵖ ⵜⴼⴽⴰⵎ ⵙⵔⵉⴷ ⵎⵉ ⴰⵔⴰ ⵜⵙⵙⵎⵔⵙⵎ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ, ⵙ ⵓⵙⵎⴰⵜⵜⵔ ⵎⵉ ⴰⵔⴰ ⵜⵙⵏⵓⵍⴼⵓⵎ ⴰⵎⵉⴹⴰⵏ, ⵜⴰⵣⵏⵎ ⵉⵙⵓⵜⵔⵏ ⵏⵖ ⵜⵎⵢⴰⵡⴰⴹⵎ ⴰⴽⴷⵏⵖ ⵉ ⵓⵙⴰⴷⴼ.',
+                'privacy.section1.p2': 'ⴰⵢⴰⴷ ⵉⵖⵢ ⴰⴷ ⵢⵉⵍⵉ ⵉⵙⵎ ⵏⵏⴽ, ⵜⴰⵏⵙⴰ ⵏ ⵉⵎⴰⵢⵍ, ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⴼⵓⵏ, ⵜⵉⵏⵖⵎⴰⵙ ⵏ ⵜⵎⵔⵙⴰⵍⵜ ⴷ ⵉⵏⵖⵎⵉⵙⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ ⵅⴼ ⵓⵙⵎⵔⵙ ⵏⵏⴽ.',
+
+                'privacy.section2.title': '2. ⵎⴰⵎⴽ ⴰⵔⴰ ⵏⵙⵙⵎⵔⵙ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ',
+                'privacy.section2.p1': 'ⵏⵙⵙⵎⵔⵙ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵏⵙⵎⵓⵏⵏ ⵉ ⵓⵙⴽⵙⴰⵡ, ⴰⵙⴷⴷⴰⴷ ⴷ ⵓⵙⵏⵔⵏⵉ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ, ⵉ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⵓⵜⵔⵏ ⵏⵏⴽ, ⴷ ⵓⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⴽ ⵅⴼ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ.',
+                'privacy.section2.li1': 'ⵉ ⵓⵙⵙⵉⵜⵉⴹ ⴷ ⵜⵔⴰⵔⵓⵜ ⵅⴼ ⵉⵙⵇⵙⵉⵜⵏ ⴷ ⵉⵙⵓⵜⵔⵏ ⵏⵏⴽ',
+                'privacy.section2.li2': 'ⵉ ⵓⵙⴽⵙⴰⵡ ⵏ ⵓⵙⴰⴷⴼ ⵏ ⵉⵎⵙⴰⵔⴰⴳⵏ ⴷ ⵜⵡⵉⵙⵉ ⵜⴰⵜⵉⴽⵏⵉⴽⵜ',
+                'privacy.section2.li3': 'ⵉ ⵓⵣⵏ ⵏ ⵉⵙⴷⵖⴰⵜⵏ ⵉⵎⵓⵀⵎⵎⴰⵏⵏ ⵅⴼ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ',
+                'privacy.section2.li4': 'ⵉ ⵓⵙⵏⵔⵏⵉ ⴷ ⵓⵙⵏⵉⵍⵙ ⵏ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ',
+
+                'privacy.section3.title': '3. ⴰⵃⵔⴰⵣ ⴷ ⵜⵖⵍⴼⵉⵜ ⵏ ⵉⵙⴼⴽⴰ',
+                'privacy.section3.p1': 'ⵎⴰⵕⵕⴰ ⵉⵙⴼⴽⴰ ⵜⵜⵡⴰⵃⵔⴰⵣⵏⵜ ⴷ ⵜⵜⵡⴰⵙⵙⵉⵜⵉⴹⵏⵜ ⴳ ⵍⵎⵖⵔⵉⴱ. ⵏⵙⵏⴼⴽ ⵉⴳⴰⵎⵎⴰⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ ⴷ ⵡⵓⵏⵙⵉⵖⵏ ⵉⵎⵥⵍⴰⵢⵏ ⵉ ⵓⵃⴹⵓ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵎⴳⴰⵍ ⵓⴽⵛⵛⵓⵎ ⵡⴰⵔ ⵉⵜⵜⵓⵙⵉⵔⴷ, ⴰⵙⵏⴼⵍ, ⴰⵙⵙⴼⵔⵓ ⵏⵖ ⴰⵔⵣⴰⵢ.',
+                'privacy.section3.p2': 'ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵙⵖⵓⴷⵓ ⴳ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ, ⵎⴰⵏⴰⵢⴰ ⵉⵙⵏⵇⴷ ⵜⴰⴳⵍⴷⵉⵜ ⵜⴰⵜⵜⵓⵢⵜ ⵏ ⵉⵙⴼⴽⴰ ⴷ ⵓⵎⵜⵜⵉ ⵉ ⵉⵙⵉⵏⴼⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ.',
+
+                'privacy.section4.title': '4. ⴰⴱⴹⵓ ⵏ ⵉⵙⴼⴽⴰ',
+                'privacy.section4.p1': 'ⵓⵔ ⵏⵙⵙⵏⵥⴰⵕ, ⵓⵔ ⵏⵙⵙⵎⵍⵍⴰ ⵓⵔ ⵏⵙⵙⴽⵔⴰ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵉ ⵡⵉⵢⵢⴰⴹ. ⵏⵖⵢ ⴰⴷ ⵏⴱⴹⵓ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵖⴰⵙ ⴳ ⵜⵎⵀⴰⵍⵉⵏ ⴰⴷ:',
+                'privacy.section4.li1': 'ⵙ ⵓⵙⴰⵔⴰⴳ ⵏⵏⴽ ⵓⵎⵙⵉⴳ',
+                'privacy.section4.li2': 'ⵉ ⵓⵎⵜⵜⵉ ⵉ ⵜⵡⵓⵔⵉⵡⵉⵏ ⵜⵉⵣⵔⴼⴰⵏⵉⵏ',
+                'privacy.section4.li3': 'ⵉ ⵓⵃⴹⵓ ⵏ ⵉⵣⵔⴼⴰⵏ ⴷ ⵜⵖⵍⴼⵉⵜ ⵏⵏⵖ',
+                'privacy.section4.li4': 'ⴰⴽⴷ ⵉⵎⵙⵜⵜⴰⵢⵏ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⴰ ⵉⵙⴰⴷⴼⴰⵏⵏ ⴳ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ',
+
+                'privacy.section5.title': '5. ⵉⵣⵔⴼⴰⵏ ⵏⵏⴽ',
+                'privacy.section5.p1': 'ⵖⵓⵔⴽ ⵉⵣⵔⴼ ⵏ ⵓⴽⵛⵛⵓⵎ, ⴰⵙⵙⵖⵜⵉ ⵏⵖ ⴰⴽⴽⵙ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ. ⵜⵖⵉⵎ ⴰⵡⴷ ⴰⴷ ⵜⴳⵉⵎ ⵎⴳⴰⵍ ⵏⵖ ⴰⴷ ⵜⵙⴽⵔⴼⵎ ⴽⵔⴰ ⵏ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ.',
+                'privacy.section5.p2': 'ⵉ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵣⵔⴼⴰⵏ ⴰⴷ, ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵙ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵉⵍⵍⴰⵏ ⴳ ⵓⵙⵉⵜ ⵏⵏⵖ ⴰⴷⵙⵍⴰⵏ.',
+
+                'privacy.section6.title': '6. ⵉⴽⵓⴽⵉⵣ ⴷ ⵓⴹⴼⴼⵓⵕ',
+                'privacy.section6.p1': 'ⵏⵙⵙⵎⵔⵙ ⵉⴽⵓⴽⵉⵣ ⴷ ⵜⵉⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜⵉⵏ ⵏ ⵓⴹⴼⴼⵓⵕ ⵉⵎⵢⴰⵎⵎⴰⵏⵏ ⵉ ⵓⵙⵏⵔⵏⵉ ⵏ ⵜⵉⵔⵎⵉⵜ ⵏⵏⴽ ⴳ ⵓⵙⵉⵜ ⵏⵏⵖ. ⵜⵖⵉⵎ ⴰⴷ ⵜⵙⴼⵔⴰⴽⵎ ⵉⵙⵎⴰⵢⵏⵓⵜⵏ ⵏ ⵉⴽⵓⴽⵉⵣ ⵙ ⵉⵙⵎⴰⵢⵏⵓⵜⵏ ⵏ ⵓⵎⵙⵙⴰⵔⴰ ⵏⵏⴽ.',
+
+                'privacy.section7.title': '7. ⵉⵙⵏⴼⴰⵍⵏ ⴳ ⵜⵙⵔⵜⵉⵜ ⴰⴷ',
+                'privacy.section7.p1': 'ⵏⵖⵢ ⴰⴷ ⵏⵙⴷⵖⵉ ⵜⴰⵙⵔⵜⵉⵜ ⴰⴷ ⵏ ⵜⵓⴹⴼⵉⵜ ⵙ ⵢⴰⵏ ⵓⴽⵓⴷ ⵖⵔ ⵢⴰⵏ. ⴰⴷ ⴰⵖ ⵏⵙⵙⴰⵡⵍ ⵎⴰⵢⴰⴷ ⵉⵙⵏⴼⵍⵏ ⵙ ⵓⵙⵙⵉⵜⵉ ⵏ ⵜⵙⵔⵜⵉⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ ⴳ ⵜⴰⵙⵏⴰ ⴰⴷ ⴷ ⵓⵙⴷⵖⵉ ⵏ ⵓⵣⵎⵣ "ⴰⵙⴷⵖⵉ ⴰⵎⴳⴳⴰⵔⵓ".',
+
+                'privacy.contact.title': 'ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ',
+                'privacy.contact.p1': 'ⵎⴽ ⵖⵓⵔⴽ ⵉⵙⵇⵙⵉⵜⵏ ⵅⴼ ⵜⵙⵔⵜⵉⵜ ⴰⴷ ⵏ ⵜⵓⴹⴼⵉⵜ, ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ:',
+                'privacy.contact.phone': 'ⵜⵉⵍⵉⴼⵓⵏ:',
+                'privacy.contact.location': 'ⴰⴷⵖⴰⵔ:',
+                'privacy.contact.address': 'ⴰⴷⴷⴰⵔⴰⵍⴱⵉⴹⴰ, ⵍⵎⵖⵔⵉⴱ',
+
+                // Footer
+                'footer.tagline': 'ⵜⴰⵙⵏⵙⵍⵜ ⵏ ⵜⴳⵏⵙⵉⵜ ⵜⴰⴳⵍⴷⴰⵏⵜ ⵏ ⵍⵎⵖⵔⵉⴱ. ⴰⴱⵏⵉⵇ ⴰⵖⵍⵙⴰⵏ ⵉⵜⵜⵓⵙⵖⵓⴷⴰⵏ ⴷⵉⴳⵙ.',
+                'footer.copyright': '© {year} Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵕⵕⴰ ⵉⵣⵔⴼⴰⵏ ⵃⴹⵓⵕⵏ.',
+                'footer.resources': 'ⵜⵉⵎⵙⵔⵉⴷⵉⵏ',
+                'footer.company': 'ⵜⴰⵎⵔⵙⴰⵍⵜ',
+                'footer.legal': 'ⴰⵣⵔⴼⴰⵏ',
+                'footer.documentation': 'ⵜⵉⴷⵍⵉⵙⵉⵏ',
+                'footer.status': 'ⴰⴷⴷⴰⴷ',
+                'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud ⵕⵓⴱⴱⴰ',
+                'footer.upProgram': 'ⴰⵖⴰⵡⴰⵙ UP (ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ)',
+                'footer.compliance': 'ⴰⵎⵜⵜⵉ',
+                'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
+                'footer.acceptableUse': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵓⵙⵎⵔⵙ ⵓⵇⴱⵉⵍ',
+                'footer.premiumServices': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵜⵉⴼⴰⵢⵜⵉⵏ'
+            }
+        };
+
+        // Language Switcher
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+        const langOptions = document.querySelectorAll('.lang-option');
+
+        // Get language from URL query parameter
+        function getLangFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('lang');
+        }
+
+        // Update URL with language query parameter
+        function updateURL(lang) {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (lang === 'en') {
+                urlParams.delete('lang');
+            } else {
+                urlParams.set('lang', lang);
+            }
+            const newSearch = urlParams.toString();
+            const newURL = newSearch ? `${window.location.pathname}?${newSearch}` : window.location.pathname;
+            window.history.pushState({}, '', newURL);
+        }
+
+        // Toggle dropdown
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            langDropdown.classList.add('hidden');
+        });
+
+        // Language selection
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                const langName = option.getAttribute('data-name');
+
+                currentFlag.innerHTML = option.querySelector('svg').outerHTML;
+                currentLang.textContent = langName;
+
+                applyTranslations(lang);
+                updateURL(lang);
+                langDropdown.classList.add('hidden');
+                localStorage.setItem('language', lang);
+            });
+        });
+
+        // Initialize with URL language, saved language, or default to English
+        const urlLang = getLangFromURL();
+        const savedLang = localStorage.getItem('language');
+        const initialLang = urlLang || savedLang || 'en';
+
+        const initialOption = document.querySelector(`[data-lang="${initialLang}"]`);
+        if (initialOption) {
+            currentFlag.innerHTML = initialOption.querySelector('svg').outerHTML;
+            currentLang.textContent = initialOption.getAttribute('data-name');
+            applyTranslations(initialLang);
+
+            if (!urlLang && initialLang !== 'en') {
+                updateURL(initialLang);
+            }
+        }
+
+        function applyTranslations(lang) {
+            const isRTL = lang === 'ar' || lang === 'ber';
+            const docEl = document.documentElement;
+
+            docEl.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            docEl.setAttribute('lang', lang);
+            document.body.style.textAlign = isRTL ? 'right' : 'left';
+
+            const langData = translations[lang];
+            if (!langData) return;
+
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-translate');
+                const translation = langData[key];
+
+                if (!translation) return;
+
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translation;
+                } else {
+                    el.innerHTML = translation;
+                }
+            });
+
+            // Update copyright year dynamically
+            updateCopyrightYear();
+        }
+
+        // Function to update copyright year dynamically
+        function updateCopyrightYear() {
+            const currentYear = new Date().getFullYear();
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) {
+                yearSpan.textContent = currentYear;
+            }
+
+            const copyrightText = document.getElementById('copyrightText');
+            if (copyrightText) {
+                const lang = document.documentElement.getAttribute('lang') || 'en';
+                const langData = translations[lang];
+                if (langData && langData['footer.copyright']) {
+                    const copyrightWithYear = langData['footer.copyright'].replace('{year}', currentYear);
+                    copyrightText.innerHTML = copyrightWithYear.replace(currentYear, `<span id="currentYear">${currentYear}</span>`);
+                }
+            }
+        }
+
+        // Initialize copyright year
+        updateCopyrightYear();
+    </script>
+</body>
+</html>
