@@ -149,6 +149,16 @@
             direction: rtl;
         }
 
+        /* Prevent flash of untranslated content */
+        body:not(.translations-loaded) {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+
+        body.translations-loaded {
+            opacity: 1;
+        }
+
         /* Video play button overlay */
         .video__play {
             position: absolute;
@@ -176,7 +186,7 @@
 <body class="bg-[#F9F9FB] ">
     <!-- Header -->
     <header class="w-full !px-6 !py-5 md:!px-12 lg:!px-20 flex justify-between bg-white items-center relative">
-        <a href="#">
+        <a href="https://www.clever-cloud.com/">
             <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="h-10 lg:h-12">
         </a>
         <nav class="flex items-center gap-4">
@@ -318,7 +328,7 @@
     <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-white">
         <!-- Header -->
         <div class="w-full md:max-w-4xl lg:max-w-5xl text-center !mb-16 md:!mb-20">
-            <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-6" data-translate="pillars.title">Built on 3 Strategic Pillars</h1>
+            <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-6" data-translate="pillars.title">Built on 4 Strategic Pillars</h1>
             <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed" data-translate="pillars.subtitle">Clever Cloud Morocco combines sovereignty, security, and automation. This foundation ensures your infrastructure meets both local requirements and global standards.</p>
         </div>
 
@@ -404,8 +414,8 @@
     </section>
     <!-- Important Information -->
     <section id="services" class="w-full flex !px-6 md:!px-12 lg:!px-20 !pt-4 flex-col justify-center items-center">
-        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl" data-translate="services.title">Discover our executive committee</b></h1>
-        <p class="!mt-8 !mb-12 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center" data-translate="services.subtitle">Nous avons à coeur d'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement écnomique du pays.</p>
+        <h1 class="text-[#1c2045] text-center text-3xl md:text-4xl lg:text-6xl" data-translate="services.title">Our Commitment to Morocco</h1>
+        <p class="!mt-8 !mb-12 text-md md:text-lg lg:text-xl leading-7 md:leading-8 lg:leading-9 max-w-3xl lg:max-w-4xl text-center" data-translate="services.subtitle">We are committed to innovating with sovereign topology, supporting local startups and talent, and actively contributing to the country's economic development.</p>
         <!-- Items -->
         <div class="w-full md:max-w-4xl lg:max-w-6xl flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-8 lg:gap-10">
             <div class="flex flex-col">
@@ -417,11 +427,11 @@
                         <line x1="6" y1="18" x2="6.01" y2="18"></line>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.tech.title">Technologie</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.tech.title">Technology</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li data-translate="services.tech.item1">Adapter Clever Cloud aux besoins de l'ecosystem marocain.</li>
-                    <li data-translate="services.tech.item2">Créer des centres R&D local (IA, Cloud,Green IT).</li>
-                    <li data-translate="services.tech.item3">Soutenir et contribuer à des projets open source stratégiques.</li>
+                    <li data-translate="services.tech.item1">Adapt Clever Cloud to the needs of the Moroccan ecosystem.</li>
+                    <li data-translate="services.tech.item2">Create local R&D centers (AI, Cloud, Green IT).</li>
+                    <li data-translate="services.tech.item3">Support and contribute to strategic open source projects.</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -435,9 +445,9 @@
                 </div>
                 <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.innovation.title">Innovation</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li data-translate="services.innovation.item1">Accompagner et soutenir les startups marocaines</li>
-                    <li data-translate="services.innovation.item2">Intégrer et renforcer l'écosystéme d'incubation et d'accélération</li>
-                    <li data-translate="services.innovation.item3">Contruire des ponts avec les écosystémes mondiaux (Europe, Afrique)</li>
+                    <li data-translate="services.innovation.item1">Support and accompany Moroccan startups</li>
+                    <li data-translate="services.innovation.item2">Integrate and strengthen the incubation and acceleration ecosystem</li>
+                    <li data-translate="services.innovation.item3">Build bridges with global ecosystems (Europe, Africa)</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -450,11 +460,11 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.talent.title">Talents digitaux</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.talent.title">Digital Talents</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li data-translate="services.talent.item1">Animer et soutenir les communautés de développeurs locales</li>
-                    <li data-translate="services.talent.item2">Recrutement de talents et montée en compétence locale</li>
-                    <li data-translate="services.talent.item3">Déployer un programme de certifications et formations spécialisées</li>
+                    <li data-translate="services.talent.item1">Animate and support local developer communities</li>
+                    <li data-translate="services.talent.item2">Talent recruitment and local skill development</li>
+                    <li data-translate="services.talent.item3">Deploy a program of certifications and specialized training</li>
                 </ul>
             </div>
             <!-- Item -->
@@ -465,11 +475,11 @@
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
                 </div>
-                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.economic.title">Soutien au développement économique</h2>
+                <h2 class="font-bold text-xl md:text-2xl lg:text-3xl !my-4 !mb-4" data-translate="services.economic.title">Support for Economic Development</h2>
                 <ul class="list-disc !pl-4 text-md md:text-lg lg:text-xl space-y-2">
-                    <li data-translate="services.economic.item1">Facturation en dirhams, sans sortie de devises</li>
-                    <li data-translate="services.economic.item2">Réinvestissement dans des projets socie-économiques</li>
-                    <li data-translate="services.economic.item3">Participation aux grands chantiers nationaux 2030</li>
+                    <li data-translate="services.economic.item1">Billing in dirhams, without currency outflow</li>
+                    <li data-translate="services.economic.item2">Reinvestment in socio-economic projects</li>
+                    <li data-translate="services.economic.item3">Participation in major national projects 2030</li>
                 </ul>
             </div>
         </div>
@@ -915,13 +925,13 @@
             <!-- Question 1 -->
             <div class="border border-[#deddee]">
                 <button class="faq-question w-full text-left !p-5 md:!p-6 flex justify-between items-center hover:bg-gray-50 transition-colors duration-200">
-                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q1">When is the official launch planned?</h3>
+                    <h3 class="font-bold text-lg md:text-xl lg:text-2xl text-[#1c2045] pr-4" data-translate="faq.q1">What is the current status of the platform?</h3>
                     <svg class="faq-icon w-6 h-6 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0;">
-                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a1">Platform launch is scheduled for Q2 2024. Early access partners begin onboarding in Q1.</p>
+                    <p class="text-gray-700 text-md md:text-lg lg:text-xl leading-relaxed !px-5 md:!px-6 !pb-5 md:!pb-6" data-translate="faq.a1">We are currently onboarding early access partners. Contact us to discuss your project timeline.</p>
                 </div>
             </div>
 
@@ -980,7 +990,9 @@
     </section>
     <!--  -->
     <footer class="w-full !px-6 md:!px-12 lg:!px-20 !py-6 md:!py-8 lg:!py-10 flex flex-col justify-center items-center bg-white !mt-18">
-        <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-32 md:w-36 lg:w-40">
+        <a href="https://www.clever-cloud.com/">
+            <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-32 md:w-36 lg:w-40">
+        </a>
         <nav>
             <ul class="flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-12 text-center !my-10">
                 <li><a href="#" class="text-gray-700 hover:text-gray-900 text-md md:text-lg lg:text-lg font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
@@ -990,7 +1002,7 @@
             </ul>
         </nav>
         <div class="border-t border-[#deddee] w-full !pt-6 !pb-2 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
-            <p class="text-gray-700 text-sm md:text-md lg:text-base text-center" data-translate="footer.copyright">&copy; 2024 Clever Cloud Morocco. All rights reserved.</p>
+            <p class="text-gray-700 text-sm md:text-md lg:text-base text-center" data-translate="footer.copyright">&copy; 2025–2026 Clever Cloud Morocco. All rights reserved.</p>
             <a href="#" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-md lg:text-base font-medium transition-colors duration-200" data-translate="footer.privacy">Politique de confidentialité</a>
         </div>
     </footer>
@@ -1114,7 +1126,7 @@
                 'publiczone.text2': 'With cutting-edge technology and local expertise, we\'re enabling businesses to accelerate their digital transformation while maintaining full control over their data and meeting compliance requirements.',
 
                 // Strategic Pillars Section
-                'pillars.title': 'Built on 3 Strategic Pillars',
+                'pillars.title': 'Built on 4 Strategic Pillars',
                 'pillars.subtitle': 'Clever Cloud Morocco combines sovereignty, security, and automation. This foundation ensures your infrastructure meets both local requirements and global standards.',
                 'pillars.sovereignty.title': 'Sovereignty & Compliance',
                 'pillars.sovereignty.item1': 'Data hosted locally in Morocco',
@@ -1179,8 +1191,8 @@
 
                 // FAQ Section
                 'faq.title': 'Frequently Asked Questions',
-                'faq.q1': 'When is the official launch planned?',
-                'faq.a1': 'Platform launch is scheduled for Q2 2024. Early access partners begin onboarding in Q1.',
+                'faq.q1': 'What is the current status of the platform?',
+                'faq.a1': 'We are currently onboarding early access partners. Contact us to discuss your project timeline.',
                 'faq.q2': 'Where will data be hosted?',
                 'faq.a2': 'All data resides in Morocco. Our infrastructure operates entirely within Moroccan territory, ensuring complete sovereignty.',
                 'faq.q3': 'Is the service compliant with local requirements?',
@@ -1241,8 +1253,13 @@
                 'contact.followUs': 'Follow Us',
 
                 // Footer
-                'footer.copyright': '© 2024 Clever Cloud Morocco. All rights reserved.',
-                'footer.privacy': 'Privacy Policy'
+                'footer.copyright': '© 2025–2026 Clever Cloud Morocco. All rights reserved.',
+                'footer.privacy': 'Privacy Policy',
+
+                // UI Elements (aria-labels)
+                'ui.menu': 'Menu',
+                'ui.playVideo': 'Play video',
+                'ui.closeVideo': 'Close video'
             },
             fr: {
                 // Navigation
@@ -1324,7 +1341,7 @@
 
                 // Services Section
                 'services.title': 'Notre engagement envers le Maroc',
-                'services.subtitle': 'Nous avons à coeur d\'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement économique du pays.',
+                'services.subtitle': 'Nous avons à cœur d\'innover avec une topologie souveraine, soutenir les startups et talents locaux, et contribuer activement au développement économique du pays.',
                 'services.tech.title': 'Technologie',
                 'services.tech.item1': 'Adapter Clever Cloud aux besoins de l\'écosystème marocain.',
                 'services.tech.item2': 'Créer des centres R&D locaux (IA, Cloud, Green IT).',
@@ -1357,8 +1374,8 @@
 
                 // FAQ Section
                 'faq.title': 'Questions fréquentes',
-                'faq.q1': 'Quand est prévu le lancement officiel ?',
-                'faq.a1': 'Le lancement de la plateforme est prévu pour le Q2 2024. Les partenaires bénéficiant d\'un accès anticipé commenceront leur intégration au Q1.',
+                'faq.q1': 'Quel est le statut actuel de la plateforme ?',
+                'faq.a1': 'Nous intégrons actuellement des partenaires à accès anticipé. Contactez-nous pour discuter du calendrier de votre projet.',
                 'faq.q2': 'Où seront hébergées les données ?',
                 'faq.a2': 'Toutes les données résident au Maroc. Notre infrastructure opère entièrement sur le territoire marocain, garantissant une souveraineté complète.',
                 'faq.q3': 'Le service est-il conforme aux exigences locales ?',
@@ -1406,8 +1423,13 @@
                 'contact.followUs': 'Suivez-nous',
 
                 // Footer
-                'footer.copyright': '© 2024 Clever Cloud Maroc. Tous droits réservés.',
-                'footer.privacy': 'Politique de confidentialité'
+                'footer.copyright': '© 2025–2026 Clever Cloud Maroc. Tous droits réservés.',
+                'footer.privacy': 'Politique de confidentialité',
+
+                // UI Elements (aria-labels)
+                'ui.menu': 'Menu',
+                'ui.playVideo': 'Lire la vidéo',
+                'ui.closeVideo': 'Fermer la vidéo'
             },
             ar: {
                 // Navigation
@@ -1444,7 +1466,7 @@
                 'publiczone.text2': 'بفضل التكنولوجيا المتطورة والخبرة المحلية، نمكن الشركات من تسريع تحولها الرقمي مع الحفاظ على السيطرة الكاملة على بياناتها وتلبية متطلبات الامتثال.',
 
                 // Strategic Pillars Section
-                'pillars.title': 'مبني على 3 أعمدة استراتيجية',
+                'pillars.title': 'مبني على 4 أعمدة استراتيجية',
                 'pillars.subtitle': 'يجمع كليفر كلاود المغرب بين السيادة والأمن والأتمتة. هذا الأساس يضمن أن بنيتك التحتية تلبي المتطلبات المحلية والمعايير العالمية.',
                 'pillars.sovereignty.title': 'السيادة والامتثال',
                 'pillars.sovereignty.item1': 'بيانات مستضافة محلياً في المغرب',
@@ -1522,8 +1544,8 @@
 
                 // FAQ Section
                 'faq.title': 'الأسئلة الشائعة',
-                'faq.q1': 'متى من المقرر الإطلاق الرسمي؟',
-                'faq.a1': 'من المقرر إطلاق المنصة في الربع الثاني من عام 2024. يبدأ الشركاء ذوو الوصول المبكر في الانضمام في الربع الأول.',
+                'faq.q1': 'ما هو الوضع الحالي للمنصة؟',
+                'faq.a1': 'نحن حاليًا نقوم بإدماج شركاء الوصول المبكر. اتصل بنا لمناقشة الجدول الزمني لمشروعك.',
                 'faq.q2': 'أين سيتم استضافة البيانات؟',
                 'faq.a2': 'جميع البيانات موجودة في المغرب. تعمل بنيتنا التحتية بالكامل على الأراضي المغربية، مما يضمن السيادة الكاملة.',
                 'faq.q3': 'هل الخدمة متوافقة مع المتطلبات المحلية؟',
@@ -1571,8 +1593,13 @@
                 'contact.followUs': 'تابعنا',
 
                 // Footer
-                'footer.copyright': '© 2024 كليفر كلاود المغرب. جميع الحقوق محفوظة.',
-                'footer.privacy': 'سياسة الخصوصية'
+                'footer.copyright': '© 2025–2026 كليفر كلاود المغرب. جميع الحقوق محفوظة.',
+                'footer.privacy': 'سياسة الخصوصية',
+
+                // UI Elements (aria-labels)
+                'ui.menu': 'القائمة',
+                'ui.playVideo': 'تشغيل الفيديو',
+                'ui.closeVideo': 'إغلاق الفيديو'
             },
             ber: {
                 // Navigation
@@ -1609,7 +1636,7 @@
                 'publiczone.text2': 'ⵙ ⵜⵉⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜ ⵜⴰⵜⵔⴰⵔⵜ ⴷ ⵜⴰⵙⵙⵏⵜ ⵜⴰⴷⵖⴰⵔⴰⵏⵜ, ⴰⵔ ⵏⵙⵙⴽⴰⵔ ⵜⵉⵎⵔⵙⵍⵉⵏ ⴰⴷ ⵙⵙⵓⴷⴷⵓⵙⵏⵜ ⴰⵙⵏⴼⵍ ⵏⵏⵙⵏⵜ ⴰⴷⵉⴳⵉⵜⴰⵍ ⵙ ⵓⵃⴼⴰⴹ ⵏ ⵓⵙⵖⵓⴷⵓ ⴰⵜⵜⵓⵢ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⵙⵏⵜ ⴷ ⵓⵎⵍⴰⵍⴰⵢ ⵏ ⵉⵙⵓⵜⵓⵔⵏ ⵏ ⵓⵎⵜⵜⵉ.',
 
                 // Strategic Pillars Section
-                'pillars.title': 'ⵉⵜⵜⵓⵔⵙⴰⵏ ⴼⵓⵇ 3 ⵉⵙⵓⵜⴰⵙ ⵉⵙⵜⵔⴰⵜⵉⵊⵉⵢⵏ',
+                'pillars.title': 'ⵉⵜⵜⵓⵔⵙⴰⵏ ⴼⵓⵇ 4 ⵉⵙⵓⵜⴰⵙ ⵉⵙⵜⵔⴰⵜⵉⵊⵉⵢⵏ',
                 'pillars.subtitle': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵙⵎⵓⵏ ⵜⴰⴳⵍⴷⵉⵜ, ⵜⴰⵖⵍⵙⵜ ⴷ ⵓⵜⵓⵎⴰⵜⵉⴽ. ⴰⵙⵉⵏⴼ ⴰⴷ ⵉⵙⵏⵇⴷ ⵎⴰⵙⴷ ⴰⴱⵏⵉⵇ ⵏⵏⴽ ⵉⵎⵍⴰⵍⴰⵢ ⵉⵙⵓⵜⵓⵔⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ ⴷ ⵉⵏⴰⴳⵔⴰⵡⵏ ⵉⴳⵔⴰⵖⵍⴰⵏⵏ.',
                 'pillars.sovereignty.title': 'ⵜⴰⴳⵍⴷⵉⵜ ⴷ ⵓⵎⵜⵜⵉ',
                 'pillars.sovereignty.item1': 'ⵉⵙⴼⴽⴰ ⵉⵜⵜⵡⴰⴽⵙⵏ ⴷⵉⴳⵙ ⴷⴳ ⵍⵎⵖⵔⵉⴱ',
@@ -1687,8 +1714,8 @@
 
                 // FAQ Section
                 'faq.title': 'ⵉⵙⵇⵙⵉⵜⵏ ⵢⵓⵙⴰⵏ',
-                'faq.q1': 'ⵎⴰⵏⵣⴰⴽ ⵉⵜⵜⵓⵙⵖⵉⵡⵙ ⵓⵙⵏⵜⵉ ⵓⵏⵚⵉⴱ?',
-                'faq.a1': 'ⴰⵙⵏⵜⵉ ⵏ ⵜⵙⵏⵙⵍⵜ ⵉⵜⵜⵓⵙⵖⵉⵡⵙ ⴳ Q2 2024. ⵉⵎⴰⵣⵉⵔⵏ ⵉⵎⵣⵡⵓⵔⴰ ⴰⴷ ⴱⴷⵓⵏ ⴰⵙⵙⴰⵔⵓ ⴳ Q1.',
+                'faq.q1': 'ⵎⴰⵏ ⵉⴳⴰ ⵡⴰⴷⴷⴰⴷ ⴰⵎⵉⵔⴰⵏ ⵏ ⵜⵙⵏⵙⵍⵜ?',
+                'faq.a1': 'ⴷⴰ ⵏⵙⵙⴰⵔⵓ ⵜⵓⵔⴰ ⵉⵎⴰⵣⵉⵔⵏ ⵏ ⵓⵣⵔⴰⴼ ⴰⵎⵣⵡⴰⵔⵓ. ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵉ ⵓⵙⵎⵔⴰⵔⴰⵙ ⵏ ⵓⵙⴰⴽⵓⴷ ⵏ ⵓⵙⵏⴼⴰⵔ ⵏⵏⴽ.',
                 'faq.q2': 'ⵎⴰⵏⵉ ⴰⴷ ⵜⵜⵡⴰⴽⵙⵏⵏⵜ ⵉⵙⴼⴽⴰ?',
                 'faq.a2': 'ⵎⴰⵕⵕⴰ ⵉⵙⴼⴽⴰ ⵍⵍⴰⵏ ⴷⴳ ⵍⵎⵖⵔⵉⴱ. ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵙⵖⵓⴷⵓ ⴳ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ, ⵎⴰⵏⴰⵢⴰ ⵉⵙⵏⵇⴷ ⵜⴰⴳⵍⴷⵉⵜ ⵜⴰⵜⵜⵓⵢⵜ.',
                 'faq.q3': 'ⵉⵙ ⵜⴰⵎⵙⴰⵔⵜ ⵜⵎⵍⴰⵍⴰⵢ ⵉⵙⵓⵜⵓⵔⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ?',
@@ -1736,8 +1763,13 @@
                 'contact.followUs': 'ⴹⴼⵕ ⴰⵖ',
 
                 // Footer
-                'footer.copyright': '© 2024 Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵕⵕⴰ ⵉⵣⵔⴼⴰⵏ ⵃⴹⵓⵕⵏ.',
-                'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ'
+                'footer.copyright': '© 2025–2026 Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵕⵕⴰ ⵉⵣⵔⴼⴰⵏ ⵃⴹⵓⵕⵏ.',
+                'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
+
+                // UI Elements (aria-labels)
+                'ui.menu': 'ⵓⵎⵓⵖⵍⵓ',
+                'ui.playVideo': 'ⵙⵙⵓⴷⴷⵓ ⴰⴼⵉⴷⵢⵓ',
+                'ui.closeVideo': 'ⵔⴳⵍ ⴰⴼⵉⴷⵢⵓ'
             }
         };
 
@@ -1827,38 +1859,67 @@
         }
 
         function applyTranslations(lang) {
-            // Set text direction for Arabic and Berber
-            if (lang === 'ar' || lang === 'ber') {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', lang);
-                document.body.style.textAlign = 'right';
-            } else {
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', lang);
-                document.body.style.textAlign = 'left';
-            }
+            // Use requestAnimationFrame for smoother rendering
+            requestAnimationFrame(() => {
+                // Set text direction for Arabic and Berber
+                const isRTL = lang === 'ar' || lang === 'ber';
+                const docEl = document.documentElement;
 
-            // Apply translations to all elements with data-translate
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = translations[lang][key];
-                    } else if (el.tagName === 'SELECT') {
+                docEl.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+                docEl.setAttribute('lang', lang);
+                document.body.style.textAlign = isRTL ? 'right' : 'left';
+
+                // Get translation data once
+                const langData = translations[lang];
+                if (!langData) return;
+
+                // Apply translations to all elements with data-translate
+                const elements = document.querySelectorAll('[data-translate]');
+
+                // Use fragment to batch DOM updates
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    const translation = langData[key];
+
+                    if (!translation) return;
+
+                    const tagName = el.tagName;
+
+                    if (tagName === 'INPUT' || tagName === 'TEXTAREA') {
+                        el.placeholder = translation;
+                    } else if (tagName === 'SELECT') {
                         // For select elements, update the text of the selected option
                         const options = el.querySelectorAll('option');
                         options.forEach(opt => {
                             const optKey = opt.getAttribute('data-translate');
-                            if (optKey && translations[lang][optKey]) {
-                                opt.textContent = translations[lang][optKey];
+                            if (optKey && langData[optKey]) {
+                                opt.textContent = langData[optKey];
                             }
                         });
                     } else {
                         // Use innerHTML to preserve HTML tags like <b>, <i>, etc.
-                        el.innerHTML = translations[lang][key];
+                        el.innerHTML = translation;
                     }
+                });
+
+                // Update aria-labels
+                const menuBtn = document.getElementById('menuBtn');
+                if (menuBtn && langData['ui.menu']) {
+                    menuBtn.setAttribute('aria-label', langData['ui.menu']);
                 }
+
+                const playVideoBtn = document.querySelector('.video__play');
+                if (playVideoBtn && langData['ui.playVideo']) {
+                    playVideoBtn.setAttribute('aria-label', langData['ui.playVideo']);
+                }
+
+                const closeVideoBtn = document.querySelector('#videoModal button[aria-label]');
+                if (closeVideoBtn && langData['ui.closeVideo']) {
+                    closeVideoBtn.setAttribute('aria-label', langData['ui.closeVideo']);
+                }
+
+                // Show content after translations are applied
+                document.body.classList.add('translations-loaded');
             });
         }
 
