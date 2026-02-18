@@ -11,6 +11,7 @@
             scroll-behavior: smooth;
         }
 
+        /* RTL Support for Arabic and Berber - Text direction only, keep layout LTR */
         [dir="rtl"] {
             text-align: right;
         }
@@ -18,172 +19,307 @@
         [dir="rtl"] body {
             text-align: right;
         }
+
+        /* Text only - keep components in same position */
+        [dir="rtl"] p,
+        [dir="rtl"] h1,
+        [dir="rtl"] h2,
+        [dir="rtl"] h3,
+        [dir="rtl"] h4,
+        [dir="rtl"] h5,
+        [dir="rtl"] h6,
+        [dir="rtl"] span,
+        [dir="rtl"] li {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Lists - text RTL, layout LTR */
+        [dir="rtl"] ul, [dir="rtl"] ol {
+            text-align: right;
+        }
+
+        [dir="rtl"] ul li, [dir="rtl"] ol li {
+            direction: rtl;
+        }
+
+        /* Prevent flash of untranslated content */
+        body:not(.translations-loaded) {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+
+        body.translations-loaded {
+            opacity: 1;
+        }
     </style>
 </head>
-<body class="bg-white">
-    <!-- Navigation -->
-    <nav class="w-full !px-6 md:!px-12 lg:!px-20 !py-4 md:!py-5 flex justify-between items-center border-b border-[#deddee] bg-white sticky top-0 z-50">
+<body class="bg-[#F9F9FB]">
+
+    <!-- Header -->
+    <header class="w-full !px-6 !py-5 md:!px-12 lg:!px-20 flex justify-between bg-white items-center relative">
         <a href="index.html">
-            <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="w-24 md:w-28 lg:w-32">
+            <img src="./assets/images/logo.svg" alt="Clever Cloud Morocco Logo" class="h-10 lg:h-12">
         </a>
-        <div class="flex items-center gap-4 md:gap-6">
-            <!-- Language Switcher -->
+        <nav class="flex items-center gap-4">
+            <ul class="hidden lg:flex items-center gap-10">
+                <li><a href="index.html" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.home">Home</a></li>
+                <li><a href="index.html#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+                <li><a href="index.html#benefits" class="text-gray-700 hover:text-gray-900 text-base font-medium transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
+                <li><a href="index.html#application-form" class="bg-[#3a3871] !text-white !px-6 !py-3 font-semibold hover:bg-[#5754aa] transition-all duration-200 inline-flex items-center justify-center" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
+            </ul>
+
+            <!-- Language Selector -->
             <div class="relative">
-                <button id="langBtn" class="flex items-center gap-2 !px-3 !py-2 border border-[#deddee] hover:border-[#5754aa] transition-colors duration-200">
-                    <div id="currentFlag" class="w-5 h-5">
-                        <!-- English Flag SVG -->
-                        <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                            <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-                            <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath>
-                            <g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>
-                        </svg>
-                    </div>
-                    <span id="currentLang" class="text-sm md:text-base font-medium">English</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="langBtn" class="flex items-center gap-3 px-4 py-2 hover:bg-[#F9F9FB] transition-colors duration-200 bg-white" style="border-radius: 4px;">
+                    <span id="currentFlag" class="w-6 h-6 flex-shrink-0"></span>
+                    <span id="currentLang" class="text-base font-medium text-gray-700">EN</span>
+                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-
-                <!-- Dropdown -->
-                <div id="langDropdown" class="hidden absolute right-0 !mt-2 w-48 bg-white border border-[#deddee] shadow-lg z-50">
-                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="en" data-name="English">
-                        <svg class="w-6 h-6" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                            <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-                            <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v15 z v-15 h30 z"/></clipPath>
-                            <g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>
-                        </svg>
-                        <span class="font-medium">English</span>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white shadow-lg" style="border-radius: 8px; z-index: 100; overflow: hidden; padding: 8px;">
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="en" data-name="EN">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#00247d"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#cf142b" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/></svg>
+                        <span class="text-base font-medium text-gray-700">English</span>
                     </button>
-                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="fr" data-name="Français">
-                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="900" height="600" fill="#ED2939"/>
-                            <rect width="600" height="600" fill="#fff"/>
-                            <rect width="300" height="600" fill="#002395"/>
-                        </svg>
-                        <span class="font-medium">Français</span>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="fr" data-name="FR">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect width="900" height="600" fill="#ED2939"/><rect width="600" height="600" fill="#fff"/><rect width="300" height="600" fill="#002395"/></svg>
+                        <span class="text-base font-medium text-gray-700">Français</span>
                     </button>
-                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="ar" data-name="العربية">
-                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="900" height="600" fill="#C1272D"/>
-                            <polygon points="450,200 350,450 550,300 350,300 550,450" fill="#006233"/>
-                        </svg>
-                        <span class="font-medium">العربية</span>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="ar" data-name="AR">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect width="900" height="600" style="fill:#c1272d"/><path d="M 449.96875,200 427.53125,269.28125 354.75,269.34375 413.59375,312.15625 391.15625,381.5 C 406.32078,370.37811 433.78167,350.44542 450,338.6875 L 508.90625,381.46875 486.40625,312.1875 545.25,269.3125 472.53125,269.3125 449.96875,200 z M 449.96875,247.4375 457.125,269.28125 442.875,269.3125 449.96875,247.4375 z M 422.75,283.9375 418.375,297.53125 399.78125,284 422.75,283.9375 z M 438.125,283.9375 461.875,283.9375 469.21875,306.5625 450,320.5625 430.78125,306.5625 438.125,283.9375 z M 477.25,283.9375 500.1875,283.9375 481.65625,297.53125 477.25,283.9375 z M 426.03125,321.25 437.59375,329.59375 419,343.125 426.03125,321.25 z M 474.03125,321.25 481.0625,343.125 462.5,329.625 462.5,329.59375 474.03125,321.25 z" style="fill:#006233"/></svg>
+                        <span class="text-base font-medium text-gray-700">العربية</span>
                     </button>
-                    <button class="lang-option w-full flex items-center gap-3 !px-4 !py-3 hover:bg-gray-50 transition-colors duration-200" data-lang="ber" data-name="ⵜⴰⵎⴰⵣⵉⵖⵜ">
-                        <svg class="w-6 h-6" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="900" height="600" fill="#C1272D"/>
-                            <polygon points="450,200 350,450 550,300 350,300 550,450" fill="#006233"/>
-                        </svg>
-                        <span class="font-medium">ⵜⴰⵎⴰⵣⵉⵖⵜ</span>
+                    <button class="lang-option w-full flex items-center gap-4 px-5 py-3 hover:bg-[#F9F9FB] transition-colors duration-200 text-left" style="border-radius: 6px;" data-lang="ber" data-name="ⵣ">
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="#0090DA" width="900" height="200"/><rect fill="#78BE20" y="200" width="900" height="200"/><rect fill="#FEDD00" y="400" width="900" height="200"/><polygon fill="#CC0033" points="429.675,477.64 458.13,507.721 466.26,97.9695 450,80.8966 "/><path fill="#CC0033" d="M657.315 515.851l54.4711 -23.5769c-104.877,-104.064 -165.039,-142.275 -264.225,-144.714 -126.015,8.94308 -208.128,59.3489 -243.087,159.348l24.3898 -4.87785c99.9991,-123.576 156.909,-109.755 220.323,-117.072 67.4791,2.43908 136.584,46.3409 208.128,130.893l0 -0.000307692z"/><path fill="#CC0033" d="M289.839 93.0917l-52.032 13.8209c50.4058,89.4298 122.763,143.901 215.445,147.966 122.763,.812923 193.494,-82.1129 242.274,-156.909l-41.4631 12.1951c-78.8609,111.381 -164.226,115.446 -202.437,109.755 -64.2271,-4.87785 -117.072,-57.7231 -161.787,-126.828z"/></svg>
+                        <span class="text-base font-medium text-gray-700">Amazigh</span>
                     </button>
                 </div>
             </div>
-            <a href="index.html" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base font-medium transition-colors duration-200" data-translate="privacy.backToHome">Back to Home</a>
-        </div>
-    </nav>
+
+            <button id="menuBtn" class="lg:hidden cursor-pointer p-1" aria-label="Menu">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="sidebar" class="fixed left-0 right-0 bg-white shadow-lg transition-all duration-300 ease-in-out lg:hidden border-b border-gray-200" style="top: 76px; max-height: 0; overflow: hidden; z-index: 60; opacity: 0;">
+        <ul class="flex flex-col items-center !px-8 !py-10">
+            <li class="w-full text-center !mb-6"><a href="index.html" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.home">Home</a></li>
+            <li class="w-full text-center !mb-6"><a href="index.html#about-us" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.about">About Us</a></li>
+            <li class="w-full text-center !mb-6"><a href="index.html#benefits" class="text-gray-700 hover:text-gray-900 text-base font-medium block !py-3 transition-colors duration-200" data-translate="nav.benefits">Benefits</a></li>
+            <li class="w-full flex justify-center !mt-4"><a href="index.html#application-form" class="bg-[#3a3871] !text-white !px-8 !py-3 font-semibold inline-flex items-center justify-center hover:bg-[#5754aa] transition-all duration-200" style="height: 3rem;" data-translate="nav.contact">Contact</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
-    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-gray-50">
-        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-4" data-translate="privacy.title">Privacy Policy</h1>
-        <p class="text-gray-700 text-center text-md md:text-lg lg:text-xl max-w-3xl" data-translate="privacy.subtitle">
-            Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.
-        </p>
-        <p class="text-gray-600 text-center text-sm md:text-base !mt-4" data-translate="privacy.lastUpdated">
-            Last Updated: February 2026
-        </p>
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24 flex flex-col justify-center items-center bg-white">
+        <h1 class="text-[#1c2045] text-center font-bold text-3xl md:text-4xl lg:text-6xl !mb-4" data-translate="pp.hero.title">Privacy Policy</h1>
+        <p class="text-gray-600 text-center text-sm md:text-base !mt-2" data-translate="pp.hero.date">Last Updated: May 5, 2022</p>
     </section>
 
     <!-- Content Section -->
-    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-16 md:!py-20 lg:!py-24">
-        <div class="max-w-4xl mx-auto">
+    <section class="w-full !px-6 md:!px-12 lg:!px-20 !py-12 md:!py-16 lg:!py-20 bg-[#F9F9FB]">
+        <div class="bg-white !p-8 md:!p-12 lg:!p-16">
+
+            <!-- Introduction -->
+            <div class="!mb-10">
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.i.p1">
+                    Respecting the confidentiality and integrity of our customers' data is a priority for Clever Cloud Morocco. That is why we take care to limit our processing of personal data to what is necessary for the provision of our services, and to fully respect your rights guaranteed by the Moroccan Law 09-08 on the Protection of Personal Data.
+                </p>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.i.p2">
+                    In general and except for the specific needs detailed below, Clever Cloud Morocco does not access the data you choose to host on the platform. In any case, Clever Cloud Morocco never exploits the data of your own customers and users. This Privacy Policy details what data we process, why we process it, and what rights you have. It applies to our own customers' personal data collected during your use of the Clever Cloud Morocco Platform. However, each Clever Cloud Morocco customer who uses our hosting services to run an application is solely responsible for the processing of his or her own users' data, subject to the Data Processing Agreement that is part of the Contract between you and Clever Cloud Morocco.
+                </p>
+            </div>
+
             <!-- Section 1 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section1.title">1. Information We Collect</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section1.p1">
-                    We collect information that you provide directly to us when you use our services, including when you create an account, submit applications, or contact us for support.
+            <div class="!mb-10">
+                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl lg:text-3xl !mb-6 !pb-3 border-b border-[#deddee]" data-translate="pp.s1.title">1. The data processings by Clever Cloud Morocco</h2>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-6" data-translate="pp.s1.intro">
+                    Clever Cloud Morocco processes personal data for various purposes, in particular:
                 </p>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section1.p2">
-                    This may include your name, email address, phone number, organization details, and technical information about your use case.
-                </p>
+
+                <!-- 1.1 Statistical analysis -->
+                <div class="!mb-8">
+                    <h3 class="text-[#1c2045] font-semibold text-lg md:text-xl !mb-3" data-translate="pp.1a.title">Statistical analysis of website visits</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1a.p1">
+                        During your visit to the Platform, Clever Cloud Morocco collects data necessary to detect anomalies, to track visits to the various pages and components of the Platform, to verify the suitability of the content to the expectations of our visitors and users, and to optimize the performance of the website and the Platform.
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1a.p2">These data strictly necessary for the proper administration of the Platform include:</p>
+                    <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !mb-4 !ml-4">
+                        <li data-translate="pp.1a.li1">The first half of your IP address (e.g. 192.168.xxx.xxx);</li>
+                        <li data-translate="pp.1a.li2">The version of your browser;</li>
+                        <li data-translate="pp.1a.li3">Your operating system (e.g. Windows, Mac OS, Linux…);</li>
+                        <li data-translate="pp.1a.li4">The type of terminal (e.g. telephone, computer…) and its screen resolution;</li>
+                        <li data-translate="pp.1a.li5">The URL of the pages you visit or the type of action you take;</li>
+                        <li data-translate="pp.1a.li6">A pseudonymous identifier.</li>
+                    </ul>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1a.p3">
+                        They are kept and processed for 180 days within the Matomo Analytics tool hosted on its own servers by Clever Cloud Morocco, and are therefore not shared with third parties. If you do not wish to have your visits recorded, you can refer to the following instructions:
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.1a.p4">
+                        This processing is carried out on the basis of the legitimate interest of Clever Cloud Morocco to analyze the traffic of its website (Law 09-08 on the Protection of Personal Data).
+                    </p>
+                </div>
+
+                <!-- 1.2 Platform security -->
+                <div class="!mb-8">
+                    <h3 class="text-[#1c2045] font-semibold text-lg md:text-xl !mb-3" data-translate="pp.1b.title">Platform security, error management and access logging</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1b.p1">
+                        In order to secure the Platform, in particular by detecting attempted intrusions, fraud, illicit copying of content or denial of service attacks, and to detect any anomalies in the operation of the Platform, Clever Cloud Morocco implements technical processes requiring the processing of personal data such as:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !mb-4 !ml-4">
+                        <li data-translate="pp.1b.li1">Your IP address;</li>
+                        <li data-translate="pp.1b.li2">The User Agent of your browser;</li>
+                        <li data-translate="pp.1b.li3">Your login and passwords;</li>
+                        <li data-translate="pp.1b.li4">The source code of your Applications (e.g. for automated malware detection);</li>
+                        <li data-translate="pp.1b.li5">A log of your activities and events on the Platform (such as system error logs).</li>
+                    </ul>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1b.p2">
+                        These processing operations are carried out on the basis of Clever Cloud Morocco's legitimate interest in securing its services and the data of its Customers, and ensuring the proper functioning of the Platform (Law 09-08 on the Protection of Personal Data).
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.1b.p3">
+                        In addition, in order to comply with its legal obligations to retain connection data, Clever Cloud Morocco retains for 1 year the aforementioned data related to your content (source code) creation, modification or deletion operations. The Customer is reminded that it is up to him to collect and retain the connection data related to the contents of his own customers, in accordance with his own legal obligations.
+                    </p>
+                </div>
+
+                <!-- 1.3 Administration and billing -->
+                <div class="!mb-8">
+                    <h3 class="text-[#1c2045] font-semibold text-lg md:text-xl !mb-3" data-translate="pp.1c.title">Administration and billing of your customer account</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1c.p1">
+                        When you register on the Platform and use it, you may provide Clever Cloud Morocco with data associated with your customer account such as:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !mb-4 !ml-4">
+                        <li data-translate="pp.1c.li1">Your name;</li>
+                        <li data-translate="pp.1c.li2">Your marital status;</li>
+                        <li data-translate="pp.1c.li3">Your e-mail address;</li>
+                        <li data-translate="pp.1c.li4">Your phone number;</li>
+                        <li data-translate="pp.1c.li5">Your mailing address;</li>
+                        <li data-translate="pp.1c.li6">Your login;</li>
+                        <li data-translate="pp.1c.li7">The organizations to which you are attached;</li>
+                        <li data-translate="pp.1c.li8">Your applications and associated data.</li>
+                    </ul>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1c.p2">
+                        This data is kept for the duration of the Contract between you and us (based on Law 09-08 on the Protection of Personal Data) for the purpose of managing and securing your customer account, as well as for billing our services. They may also be kept beyond this date, until the expiry of the retention periods imposed by our legal and regulatory constraints (on the basis of Law 09-08).
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1c.p3">
+                        The password associated with your login is never stored in clear text by Clever Cloud Morocco and you will never be asked for it anywhere other than on the interface that allows you to login to the Platform, exclusively from the Clever Cloud Morocco website. You have the possibility to activate the two-factor authentication to reinforce the security of the access to your account. Clever Cloud Morocco encourages you to activate it to limit the risk that third parties fraudulently access your data.
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1c.p4">
+                        The banking information you enter during a payment is processed exclusively by the Clever Cloud Morocco partner you choose at the time of payment:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !ml-4">
+                        <li data-translate="pp.1c.li9">Stripe, whose privacy policy is available at: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://stripe.com/privacy</a></li>
+                        <li data-translate="pp.1c.li10">Paypal, whose privacy policy is available at: <a href="https://www.paypal.com/fr/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.paypal.com/fr/webapps/mpp/ua/privacy-full</a></li>
+                    </ul>
+                </div>
+
+                <!-- 1.4 Technical and commercial support -->
+                <div class="!mb-8">
+                    <h3 class="text-[#1c2045] font-semibold text-lg md:text-xl !mb-3" data-translate="pp.1d.title">Technical and commercial support</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1d.p1">
+                        In order to respond to requests for technical or commercial assistance from its Customers, Clever Cloud Morocco may process the following data on the basis of the performance of the contract between you and Clever Cloud Morocco (Law 09-08 on the Protection of Personal Data):
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !mb-4 !ml-4">
+                        <li data-translate="pp.1d.li1">Your IP address;</li>
+                        <li data-translate="pp.1d.li2">The organizations to which your account is attached;</li>
+                        <li data-translate="pp.1d.li3">Your email address;</li>
+                        <li data-translate="pp.1d.li4">Your phone number;</li>
+                        <li data-translate="pp.1d.li5">The content of your messages;</li>
+                        <li data-translate="pp.1d.li6">The date and time of your last activity.</li>
+                    </ul>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1d.p2">
+                        Clever Cloud Morocco shares this data with its partner Crisp, exclusively for the purpose of processing your support request, whose Privacy Policy is available at <a href="https://crisp.chat/fr/privacy/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://crisp.chat/fr/privacy/</a>
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1d.p3">
+                        In this context, Clever Cloud Morocco deploys a messaging tool integrated to the Platform, requiring the installation on your browser of Crisp cookies. These cookies are necessary to restore chat sessions with the technical support team and to maintain the continuity of exchanges during your navigation in our pages. These cookies are kept under the conditions explained in Crisp's privacy policy.
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.1d.p4">
+                        If you call the hotline, your phone number is retained while we process your request. The data is shared with our voice server provider Twilio, whose privacy policy is available at <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.twilio.com/legal/privacy</a>
+                    </p>
+                </div>
+
+                <!-- 1.5 Processing of applications -->
+                <div class="!mb-8">
+                    <h3 class="text-[#1c2045] font-semibold text-lg md:text-xl !mb-3" data-translate="pp.1e.title">Processing of applications (recruitment)</h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.1e.p1">
+                        For its recruitment activities, on the basis of the need to process your applications (Law 09-08 on the Protection of Personal Data) Clever Cloud Morocco must process the personal data that you provide in the process of your application, such as your full name, date of birth, addresses, telephone contact details, resumes, emails, dates and results of interviews, salary expectations,…
+                    </p>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.1e.p2">
+                        This data is kept for the time necessary to process your application and at the latest 12 months from the last contact, unless you authorize otherwise. It will not be passed on to third parties without your permission. If you apply from a third party service, you must read and agree to the service's privacy policy.
+                    </p>
+                </div>
             </div>
 
             <!-- Section 2 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section2.title">2. How We Use Your Information</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section2.p1">
-                    We use the information we collect to provide, maintain, and improve our services, to process your applications, and to communicate with you about our platform.
+            <div class="!mb-10">
+                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl lg:text-3xl !mb-6 !pb-3 border-b border-[#deddee]" data-translate="pp.s2.title">2. Security measures</h2>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s2.p1">
+                    Clever Cloud Morocco implements technical and organizational measures in order to secure the data you entrust to us as well as possible, for example by using encryption measures as systematically as possible, or by limiting access rights to data to employees and service providers who have a legitimate interest in accessing it within the framework of the missions entrusted to them.
                 </p>
-                <ul class="list-disc list-inside text-gray-700 text-md md:text-lg leading-relaxed space-y-2">
-                    <li data-translate="privacy.section2.li1">To process and respond to your inquiries and applications</li>
-                    <li data-translate="privacy.section2.li2">To provide customer support and technical assistance</li>
-                    <li data-translate="privacy.section2.li3">To send important updates about our services</li>
-                    <li data-translate="privacy.section2.li4">To improve and optimize our platform</li>
-                </ul>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s2.p2">
+                    Clever Cloud Morocco's services creation processes incorporate stringent data security requirements from the outset, and are monitored throughout the development and subsequent upgrades, with continuous evaluation and improvement of security requirements.
+                </p>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.s2.p3">
+                    Data is hosted exclusively on servers managed by Clever Cloud Morocco, in highly secure data centers located within Moroccan territory. You can find more information on how we secure your data and the security certifications of our data centers on the following page: <a href="https://www.clever.cloud/security/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.clever.cloud/security/</a>
+                </p>
             </div>
 
             <!-- Section 3 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section3.title">3. Data Storage and Security</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section3.p1">
-                    All data is stored and processed within Morocco. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+            <div class="!mb-10">
+                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl lg:text-3xl !mb-6 !pb-3 border-b border-[#deddee]" data-translate="pp.s3.title">3. Exercising your rights</h2>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s3.intro">
+                    In accordance with the Moroccan Law 09-08 on the Protection of Personal Data, you have the following rights to your personal data:
                 </p>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section3.p2">
-                    Our infrastructure operates entirely within Moroccan territory, ensuring complete data sovereignty and compliance with local regulations.
-                </p>
-            </div>
-
-            <!-- Section 4 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section4.title">4. Data Sharing</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section4.p1">
-                    We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
-                </p>
-                <ul class="list-disc list-inside text-gray-700 text-md md:text-lg leading-relaxed space-y-2">
-                    <li data-translate="privacy.section4.li1">With your explicit consent</li>
-                    <li data-translate="privacy.section4.li2">To comply with legal obligations</li>
-                    <li data-translate="privacy.section4.li3">To protect our rights and safety</li>
-                    <li data-translate="privacy.section4.li4">With service providers who assist in operating our platform</li>
+                <ul class="list-disc list-inside text-gray-700 text-base md:text-lg leading-relaxed space-y-2 !mb-6 !ml-4">
+                    <li data-translate="pp.s3.li1">Right of access, rectification, update, and completeness of your data (Law 09-08);</li>
+                    <li data-translate="pp.s3.li2">The right to withdraw your consent at any time (Law 09-08);</li>
+                    <li data-translate="pp.s3.li3">The right to limit the processing of your data (Law 09-08);</li>
+                    <li data-translate="pp.s3.li4">Right to object to the processing of your data (Law 09-08);</li>
+                    <li data-translate="pp.s3.li5">Right to portability of the data you have provided to us, where your data is subject to automated processing based on your consent or on a contract (Law 09-08);</li>
+                    <li data-translate="pp.s3.li6">Right to erasure of your personal data (Law 09-08).</li>
                 </ul>
-            </div>
-
-            <!-- Section 5 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section5.title">5. Your Rights</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.section5.p1">
-                    You have the right to access, correct, or delete your personal information. You may also object to or restrict certain processing of your data.
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s3.p2">
+                    In accordance with Law 09-08, each request to exercise rights must be accompanied by relevant information to demonstrate your identity. In case of reasonable doubt, Clever Cloud Morocco may request that additional information necessary to confirm the identity of the person requesting the exercise of his or her rights be provided. Personal data relating to the exercise of these rights will be kept for a period of 1 year from the date of the reply sent by Clever Cloud Morocco.
                 </p>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section5.p2">
-                    To exercise these rights, please contact us using the information provided on our main website.
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s3.p3">
+                    You also have the right to instruct us as to what to do with your data after your death and to choose whether or not we disclose your data to a third party that you have designated. In the event of your death and in the absence of instructions from you, we undertake to destroy your data, except where their retention is necessary for evidential purposes or to meet a legal obligation.
                 </p>
-            </div>
-
-            <!-- Section 6 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section6.title">6. Cookies and Tracking</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section6.p1">
-                    We use cookies and similar tracking technologies to improve your experience on our website. You can control cookie preferences through your browser settings.
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed !mb-4" data-translate="pp.s3.p4">
+                    You can exercise these rights by writing to us at <a href="mailto:dpo@clever-cloud.com" class="text-[#5754aa] hover:underline">dpo@clever-cloud.com</a> or by sending a letter to the address indicated in our legal notice, for the attention of the Legal Department.
+                </p>
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed" data-translate="pp.s3.p5">
+                    You may also file a complaint before the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel), whose website is accessible at: <a href="https://www.cndp.ma/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.cndp.ma/</a>
                 </p>
             </div>
 
-            <!-- Section 7 -->
-            <div class="!mb-12">
-                <h2 class="text-[#1c2045] font-bold text-2xl md:text-3xl !mb-4" data-translate="privacy.section7.title">7. Changes to This Policy</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-translate="privacy.section7.p1">
-                    We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.
-                </p>
+            <!-- Revision History -->
+            <div class="!mb-2">
+                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl lg:text-3xl !mb-6 !pb-3 border-b border-[#deddee]" data-translate="pp.rev.title">Revision history</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-gray-700 text-base md:text-lg border-collapse">
+                        <thead>
+                            <tr class="border-b-2 border-[#deddee]">
+                                <th class="text-left !py-3 !pr-8 font-semibold text-[#1c2045]" data-translate="pp.rev.col1">Date</th>
+                                <th class="text-left !py-3 font-semibold text-[#1c2045]" data-translate="pp.rev.col2">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-[#deddee]">
+                                <td class="!py-4 !pr-8 align-top whitespace-nowrap">2026</td>
+                                <td class="!py-4 leading-relaxed" data-translate="pp.rev.c1">In the introduction, reference added to Clever Cloud Morocco's Data Processing Agreement (DPA), applicable under the Moroccan Law 09-08 on the Protection of Personal Data.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Contact Section -->
-            <div class="!p-6 md:!p-8 bg-gray-50 border-l-4 border-[#5754aa]">
-                <h2 class="text-[#1c2045] font-bold text-xl md:text-2xl !mb-4" data-translate="privacy.contact.title">Contact Us</h2>
-                <p class="text-gray-700 text-md md:text-lg leading-relaxed !mb-4" data-translate="privacy.contact.p1">
-                    If you have any questions about this Privacy Policy, please contact us:
-                </p>
-                <p class="text-gray-700 text-md md:text-lg">
-                    <span data-translate="privacy.contact.phone">Phone:</span> <a href="tel:+212643128182" class="text-[#5754aa] hover:underline">+212 643 128 182</a><br>
-                    <span data-translate="privacy.contact.location">Location:</span> <span data-translate="privacy.contact.address">Casablanca, Morocco</span>
-                </p>
-            </div>
         </div>
     </section>
 
@@ -242,6 +378,23 @@
                         <li><a href="https://www.clever.cloud/premium-services-policy/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-[#5754aa] text-sm md:text-base transition-colors duration-200" data-translate="footer.premiumServices">Premium Services Policy</a></li>
                     </ul>
                 </div>
+
+                <!-- Social Column -->
+                <div>
+                    <h3 class="font-bold text-[#1c2045] text-lg !mb-4" data-translate="contact.followUs">Follow Us</h3>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/company/clever-cloud-morocco/posts/?feedView=all" target="_blank" class="w-10 h-10 bg-white border-2 border-[#deddee] flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/CleverCloud/" target="_blank" class="w-10 h-10 bg-white border-2 border-[#deddee] flex items-center justify-center hover:bg-[#3a3871] hover:border-[#5754aa] transition-all duration-300 group">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-gray-700 group-hover:text-white transition-colors duration-300">
+                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Bottom Section -->
@@ -255,276 +408,336 @@
         // Translations
         const translations = {
             en: {
-                // Navigation
-                'nav.menu': 'Menu',
-                'nav.home': 'Home',
-                'nav.about': 'About Us',
-                'nav.benefits': 'Benefits',
-                'nav.contact': 'Contact',
-
-                // Privacy Page
-                'privacy.backToHome': 'Back to Home',
-                'privacy.title': 'Privacy Policy',
-                'privacy.subtitle': 'Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.',
-                'privacy.lastUpdated': 'Last Updated: February 2026',
-
-                'privacy.section1.title': '1. Information We Collect',
-                'privacy.section1.p1': 'We collect information that you provide directly to us when you use our services, including when you create an account, submit applications, or contact us for support.',
-                'privacy.section1.p2': 'This may include your name, email address, phone number, organization details, and technical information about your use case.',
-
-                'privacy.section2.title': '2. How We Use Your Information',
-                'privacy.section2.p1': 'We use the information we collect to provide, maintain, and improve our services, to process your applications, and to communicate with you about our platform.',
-                'privacy.section2.li1': 'To process and respond to your inquiries and applications',
-                'privacy.section2.li2': 'To provide customer support and technical assistance',
-                'privacy.section2.li3': 'To send important updates about our services',
-                'privacy.section2.li4': 'To improve and optimize our platform',
-
-                'privacy.section3.title': '3. Data Storage and Security',
-                'privacy.section3.p1': 'All data is stored and processed within Morocco. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.',
-                'privacy.section3.p2': 'Our infrastructure operates entirely within Moroccan territory, ensuring complete data sovereignty and compliance with local regulations.',
-
-                'privacy.section4.title': '4. Data Sharing',
-                'privacy.section4.p1': 'We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:',
-                'privacy.section4.li1': 'With your explicit consent',
-                'privacy.section4.li2': 'To comply with legal obligations',
-                'privacy.section4.li3': 'To protect our rights and safety',
-                'privacy.section4.li4': 'With service providers who assist in operating our platform',
-
-                'privacy.section5.title': '5. Your Rights',
-                'privacy.section5.p1': 'You have the right to access, correct, or delete your personal information. You may also object to or restrict certain processing of your data.',
-                'privacy.section5.p2': 'To exercise these rights, please contact us using the information provided on our main website.',
-
-                'privacy.section6.title': '6. Cookies and Tracking',
-                'privacy.section6.p1': 'We use cookies and similar tracking technologies to improve your experience on our website. You can control cookie preferences through your browser settings.',
-
-                'privacy.section7.title': '7. Changes to This Policy',
-                'privacy.section7.p1': 'We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last Updated" date.',
-
-                'privacy.contact.title': 'Contact Us',
-                'privacy.contact.p1': 'If you have any questions about this Privacy Policy, please contact us:',
-                'privacy.contact.phone': 'Phone:',
-                'privacy.contact.location': 'Location:',
-                'privacy.contact.address': 'Casablanca, Morocco',
-
-                // Footer
+                // Nav & Footer
+                'nav.menu': 'Menu', 'nav.home': 'Home', 'nav.about': 'About Us', 'nav.benefits': 'Benefits', 'nav.contact': 'Contact',
+                'contact.followUs': 'Follow Us',
                 'footer.tagline': 'Morocco\'s sovereign cloud platform. Secure, locally-operated infrastructure.',
                 'footer.copyright': '© {year} Clever Cloud Morocco. All rights reserved.',
-                'footer.resources': 'Resources',
-                'footer.company': 'Company',
-                'footer.legal': 'Legal',
-                'footer.documentation': 'Documentation',
-                'footer.status': 'Status',
-                'footer.github': 'GitHub',
-                'footer.ccEurope': 'Clever Cloud Europe',
-                'footer.upProgram': 'UP Program (Startups)',
-                'footer.compliance': 'Compliance',
-                'footer.privacy': 'Privacy Policy',
-                'footer.acceptableUse': 'Acceptable Use Policy',
-                'footer.premiumServices': 'Premium Services Policy'
+                'footer.resources': 'Resources', 'footer.company': 'Company', 'footer.legal': 'Legal',
+                'footer.documentation': 'Documentation', 'footer.status': 'Status', 'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud Europe', 'footer.upProgram': 'UP Program (Startups)',
+                'footer.compliance': 'Compliance', 'footer.privacy': 'Privacy Policy',
+                'footer.acceptableUse': 'Acceptable Use Policy', 'footer.premiumServices': 'Premium Services Policy',
+                // Hero
+                'pp.hero.title': 'Privacy Policy',
+                'pp.hero.date': 'Last Updated: May 5, 2022',
+                // Introduction
+                'pp.i.p1': 'Respecting the confidentiality and integrity of our customers\' data is a priority for Clever Cloud Morocco. That is why we take care to limit our processing of personal data to what is necessary for the provision of our services, and to fully respect your rights guaranteed by the Moroccan Law 09-08 on the Protection of Personal Data.',
+                'pp.i.p2': 'In general and except for the specific needs detailed below, Clever Cloud Morocco does not access the data you choose to host on the platform. In any case, Clever Cloud Morocco never exploits the data of your own customers and users. This Privacy Policy details what data we process, why we process it, and what rights you have. It applies to our own customers\' personal data collected during your use of the Clever Cloud Morocco Platform. However, each Clever Cloud Morocco customer who uses our hosting services to run an application is solely responsible for the processing of his or her own users\' data, subject to the Data Processing Agreement that is part of the Contract between you and Clever Cloud Morocco.',
+                // Section 1
+                'pp.s1.title': '1. The data processings by Clever Cloud Morocco',
+                'pp.s1.intro': 'Clever Cloud Morocco processes personal data for various purposes, in particular:',
+                'pp.1a.title': 'Statistical analysis of website visits',
+                'pp.1a.p1': 'During your visit to the Platform, Clever Cloud Morocco collects data necessary to detect anomalies, to track visits to the various pages and components of the Platform, to verify the suitability of the content to the expectations of our visitors and users, and to optimize the performance of the website and the Platform.',
+                'pp.1a.p2': 'These data strictly necessary for the proper administration of the Platform include:',
+                'pp.1a.li1': 'The first half of your IP address (e.g. 192.168.xxx.xxx);',
+                'pp.1a.li2': 'The version of your browser;',
+                'pp.1a.li3': 'Your operating system (e.g. Windows, Mac OS, Linux…);',
+                'pp.1a.li4': 'The type of terminal (e.g. telephone, computer…) and its screen resolution;',
+                'pp.1a.li5': 'The URL of the pages you visit or the type of action you take;',
+                'pp.1a.li6': 'A pseudonymous identifier.',
+                'pp.1a.p3': 'They are kept and processed for 180 days within the Matomo Analytics tool hosted on its own servers by Clever Cloud Morocco, and are therefore not shared with third parties. If you do not wish to have your visits recorded, you can refer to the following instructions:',
+                'pp.1a.p4': 'This processing is carried out on the basis of the legitimate interest of Clever Cloud Morocco to analyze the traffic of its website (Law 09-08 on the Protection of Personal Data).',
+                'pp.1b.title': 'Platform security, error management and access logging',
+                'pp.1b.p1': 'In order to secure the Platform, in particular by detecting attempted intrusions, fraud, illicit copying of content or denial of service attacks, and to detect any anomalies in the operation of the Platform, Clever Cloud Morocco implements technical processes requiring the processing of personal data such as:',
+                'pp.1b.li1': 'Your IP address;',
+                'pp.1b.li2': 'The User Agent of your browser;',
+                'pp.1b.li3': 'Your login and passwords;',
+                'pp.1b.li4': 'The source code of your Applications (e.g. for automated malware detection);',
+                'pp.1b.li5': 'A log of your activities and events on the Platform (such as system error logs).',
+                'pp.1b.p2': 'These processing operations are carried out on the basis of Clever Cloud Morocco\'s legitimate interest in securing its services and the data of its Customers, and ensuring the proper functioning of the Platform (Law 09-08 on the Protection of Personal Data).',
+                'pp.1b.p3': 'In addition, in order to comply with its legal obligations to retain connection data, Clever Cloud Morocco retains for 1 year the aforementioned data related to your content (source code) creation, modification or deletion operations. The Customer is reminded that it is up to him to collect and retain the connection data related to the contents of his own customers, in accordance with his own legal obligations.',
+                'pp.1c.title': 'Administration and billing of your customer account',
+                'pp.1c.p1': 'When you register on the Platform and use it, you may provide Clever Cloud Morocco with data associated with your customer account such as:',
+                'pp.1c.li1': 'Your name;', 'pp.1c.li2': 'Your marital status;', 'pp.1c.li3': 'Your e-mail address;',
+                'pp.1c.li4': 'Your phone number;', 'pp.1c.li5': 'Your mailing address;', 'pp.1c.li6': 'Your login;',
+                'pp.1c.li7': 'The organizations to which you are attached;', 'pp.1c.li8': 'Your applications and associated data.',
+                'pp.1c.p2': 'This data is kept for the duration of the Contract between you and us (based on Law 09-08 on the Protection of Personal Data) for the purpose of managing and securing your customer account, as well as for billing our services. They may also be kept beyond this date, until the expiry of the retention periods imposed by our legal and regulatory constraints (on the basis of Law 09-08).',
+                'pp.1c.p3': 'The password associated with your login is never stored in clear text by Clever Cloud Morocco and you will never be asked for it anywhere other than on the interface that allows you to login to the Platform, exclusively from the Clever Cloud Morocco website. You have the possibility to activate the two-factor authentication to reinforce the security of the access to your account. Clever Cloud Morocco encourages you to activate it to limit the risk that third parties fraudulently access your data.',
+                'pp.1c.p4': 'The banking information you enter during a payment is processed exclusively by the Clever Cloud Morocco partner you choose at the time of payment:',
+                'pp.1c.li9': 'Stripe, whose privacy policy is available at: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://stripe.com/privacy</a>',
+                'pp.1c.li10': 'Paypal, whose privacy policy is available at: <a href="https://www.paypal.com/fr/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.paypal.com/fr/webapps/mpp/ua/privacy-full</a>',
+                'pp.1d.title': 'Technical and commercial support',
+                'pp.1d.p1': 'In order to respond to requests for technical or commercial assistance from its Customers, Clever Cloud Morocco may process the following data on the basis of the performance of the contract between you and Clever Cloud Morocco (Law 09-08 on the Protection of Personal Data):',
+                'pp.1d.li1': 'Your IP address;', 'pp.1d.li2': 'The organizations to which your account is attached;',
+                'pp.1d.li3': 'Your email address;', 'pp.1d.li4': 'Your phone number;',
+                'pp.1d.li5': 'The content of your messages;', 'pp.1d.li6': 'The date and time of your last activity.',
+                'pp.1d.p2': 'Clever Cloud Morocco shares this data with its partner Crisp, exclusively for the purpose of processing your support request, whose Privacy Policy is available at <a href="https://crisp.chat/fr/privacy/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://crisp.chat/fr/privacy/</a>',
+                'pp.1d.p3': 'In this context, Clever Cloud Morocco deploys a messaging tool integrated to the Platform, requiring the installation on your browser of Crisp cookies. These cookies are necessary to restore chat sessions with the technical support team and to maintain the continuity of exchanges during your navigation in our pages. These cookies are kept under the conditions explained in Crisp\'s privacy policy.',
+                'pp.1d.p4': 'If you call the hotline, your phone number is retained while we process your request. The data is shared with our voice server provider Twilio, whose privacy policy is available at <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.twilio.com/legal/privacy</a>',
+                'pp.1e.title': 'Processing of applications (recruitment)',
+                'pp.1e.p1': 'For its recruitment activities, on the basis of the need to process your applications (Law 09-08 on the Protection of Personal Data) Clever Cloud Morocco must process the personal data that you provide in the process of your application, such as your full name, date of birth, addresses, telephone contact details, resumes, emails, dates and results of interviews, salary expectations,…',
+                'pp.1e.p2': 'This data is kept for the time necessary to process your application and at the latest 12 months from the last contact, unless you authorize otherwise. It will not be passed on to third parties without your permission. If you apply from a third party service, you must read and agree to the service\'s privacy policy.',
+                // Section 2
+                'pp.s2.title': '2. Security measures',
+                'pp.s2.p1': 'Clever Cloud Morocco implements technical and organizational measures in order to secure the data you entrust to us as well as possible, for example by using encryption measures as systematically as possible, or by limiting access rights to data to employees and service providers who have a legitimate interest in accessing it within the framework of the missions entrusted to them.',
+                'pp.s2.p2': 'Clever Cloud Morocco\'s services creation processes incorporate stringent data security requirements from the outset, and are monitored throughout the development and subsequent upgrades, with continuous evaluation and improvement of security requirements.',
+                'pp.s2.p3': 'Data is hosted exclusively on servers managed by Clever Cloud Morocco, in highly secure data centers located within Moroccan territory. You can find more information on how we secure your data and the security certifications of our data centers on the following page: <a href="https://www.clever.cloud/security/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.clever.cloud/security/</a>',
+                // Section 3
+                'pp.s3.title': '3. Exercising your rights',
+                'pp.s3.intro': 'In accordance with the Moroccan Law 09-08 on the Protection of Personal Data, you have the following rights to your personal data:',
+                'pp.s3.li1': 'Right of access, rectification, update, and completeness of your data (Law 09-08);',
+                'pp.s3.li2': 'The right to withdraw your consent at any time (Law 09-08);',
+                'pp.s3.li3': 'The right to limit the processing of your data (Law 09-08);',
+                'pp.s3.li4': 'Right to object to the processing of your data (Law 09-08);',
+                'pp.s3.li5': 'Right to portability of the data you have provided to us, where your data is subject to automated processing based on your consent or on a contract (Law 09-08);',
+                'pp.s3.li6': 'Right to erasure of your personal data (Law 09-08).',
+                'pp.s3.p2': 'In accordance with Law 09-08, each request to exercise rights must be accompanied by relevant information to demonstrate your identity. In case of reasonable doubt, Clever Cloud Morocco may request that additional information necessary to confirm the identity of the person requesting the exercise of his or her rights be provided. Personal data relating to the exercise of these rights will be kept for a period of 1 year from the date of the reply sent by Clever Cloud Morocco.',
+                'pp.s3.p3': 'You also have the right to instruct us as to what to do with your data after your death and to choose whether or not we disclose your data to a third party that you have designated. In the event of your death and in the absence of instructions from you, we undertake to destroy your data, except where their retention is necessary for evidential purposes or to meet a legal obligation.',
+                'pp.s3.p4': 'You can exercise these rights by writing to us at <a href="mailto:dpo@clever-cloud.com" class="text-[#5754aa] hover:underline">dpo@clever-cloud.com</a> or by sending a letter to the address indicated in our legal notice, for the attention of the Legal Department.',
+                'pp.s3.p5': 'You may also file a complaint before the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel), whose website is accessible at: <a href="https://www.cndp.ma/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.cndp.ma/</a>',
+                // Revision
+                'pp.rev.title': 'Revision history', 'pp.rev.col1': 'Date', 'pp.rev.col2': 'Comments',
+                'pp.rev.c1': 'In the introduction, reference added to Clever Cloud Morocco\'s Data Processing Agreement (DPA), applicable under the Moroccan Law 09-08 on the Protection of Personal Data.'
             },
             fr: {
-                // Navigation
-                'nav.menu': 'Menu',
-                'nav.home': 'Accueil',
-                'nav.about': 'À propos',
-                'nav.benefits': 'Avantages',
-                'nav.contact': 'Contact',
-
-                // Privacy Page
-                'privacy.backToHome': 'Retour à l\'accueil',
-                'privacy.title': 'Politique de confidentialité',
-                'privacy.subtitle': 'Votre vie privée est importante pour nous. Cette politique explique comment nous collectons, utilisons et protégeons vos informations personnelles.',
-                'privacy.lastUpdated': 'Dernière mise à jour : Février 2026',
-
-                'privacy.section1.title': '1. Informations que nous collectons',
-                'privacy.section1.p1': 'Nous collectons les informations que vous nous fournissez directement lorsque vous utilisez nos services, notamment lorsque vous créez un compte, soumettez des candidatures ou nous contactez pour obtenir de l\'aide.',
-                'privacy.section1.p2': 'Cela peut inclure votre nom, adresse e-mail, numéro de téléphone, coordonnées de l\'organisation et informations techniques sur votre cas d\'usage.',
-
-                'privacy.section2.title': '2. Comment nous utilisons vos informations',
-                'privacy.section2.p1': 'Nous utilisons les informations que nous collectons pour fournir, maintenir et améliorer nos services, traiter vos candidatures et communiquer avec vous au sujet de notre plateforme.',
-                'privacy.section2.li1': 'Pour traiter et répondre à vos demandes et candidatures',
-                'privacy.section2.li2': 'Pour fournir un support client et une assistance technique',
-                'privacy.section2.li3': 'Pour envoyer des mises à jour importantes concernant nos services',
-                'privacy.section2.li4': 'Pour améliorer et optimiser notre plateforme',
-
-                'privacy.section3.title': '3. Stockage et sécurité des données',
-                'privacy.section3.p1': 'Toutes les données sont stockées et traitées au Maroc. Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles contre l\'accès non autorisé, la modification, la divulgation ou la destruction.',
-                'privacy.section3.p2': 'Notre infrastructure fonctionne entièrement sur le territoire marocain, garantissant une souveraineté complète des données et la conformité aux réglementations locales.',
-
-                'privacy.section4.title': '4. Partage de données',
-                'privacy.section4.p1': 'Nous ne vendons, n\'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons partager vos informations uniquement dans les circonstances suivantes :',
-                'privacy.section4.li1': 'Avec votre consentement explicite',
-                'privacy.section4.li2': 'Pour se conformer aux obligations légales',
-                'privacy.section4.li3': 'Pour protéger nos droits et notre sécurité',
-                'privacy.section4.li4': 'Avec les fournisseurs de services qui nous aident à exploiter notre plateforme',
-
-                'privacy.section5.title': '5. Vos droits',
-                'privacy.section5.p1': 'Vous avez le droit d\'accéder, de corriger ou de supprimer vos informations personnelles. Vous pouvez également vous opposer ou restreindre certains traitements de vos données.',
-                'privacy.section5.p2': 'Pour exercer ces droits, veuillez nous contacter en utilisant les informations fournies sur notre site Web principal.',
-
-                'privacy.section6.title': '6. Cookies et suivi',
-                'privacy.section6.p1': 'Nous utilisons des cookies et des technologies de suivi similaires pour améliorer votre expérience sur notre site Web. Vous pouvez contrôler les préférences de cookies via les paramètres de votre navigateur.',
-
-                'privacy.section7.title': '7. Modifications de cette politique',
-                'privacy.section7.p1': 'Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date de "Dernière mise à jour".',
-
-                'privacy.contact.title': 'Nous contacter',
-                'privacy.contact.p1': 'Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter :',
-                'privacy.contact.phone': 'Téléphone :',
-                'privacy.contact.location': 'Emplacement :',
-                'privacy.contact.address': 'Casablanca, Maroc',
-
-                // Footer
+                // Nav & Footer
+                'nav.menu': 'Menu', 'nav.home': 'Accueil', 'nav.about': 'À propos', 'nav.benefits': 'Avantages', 'nav.contact': 'Contact',
+                'contact.followUs': 'Suivez-nous',
                 'footer.tagline': 'Plateforme cloud souveraine du Maroc. Infrastructure sécurisée et opérée localement.',
                 'footer.copyright': '© {year} Clever Cloud Maroc. Tous droits réservés.',
-                'footer.resources': 'Ressources',
-                'footer.company': 'Entreprise',
-                'footer.legal': 'Légal',
-                'footer.documentation': 'Documentation',
-                'footer.status': 'Statut',
-                'footer.github': 'GitHub',
-                'footer.ccEurope': 'Clever Cloud Europe',
-                'footer.upProgram': 'Programme UP (Startups)',
-                'footer.compliance': 'Conformité',
-                'footer.privacy': 'Politique de confidentialité',
-                'footer.acceptableUse': 'Politique d\'utilisation acceptable',
-                'footer.premiumServices': 'Politique des services premium'
+                'footer.resources': 'Ressources', 'footer.company': 'Entreprise', 'footer.legal': 'Légal',
+                'footer.documentation': 'Documentation', 'footer.status': 'Statut', 'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud Europe', 'footer.upProgram': 'Programme UP (Startups)',
+                'footer.compliance': 'Conformité', 'footer.privacy': 'Politique de confidentialité',
+                'footer.acceptableUse': 'Politique d\'utilisation acceptable', 'footer.premiumServices': 'Politique des services premium',
+                // Hero
+                'pp.hero.title': 'Politique de confidentialité',
+                'pp.hero.date': 'Dernière mise à jour : 5 mai 2022',
+                // Introduction
+                'pp.i.p1': 'Le respect de la confidentialité et de l\'intégrité des données de nos clients est une priorité pour Clever Cloud Maroc. C\'est pourquoi nous veillons à limiter notre traitement des données personnelles à ce qui est nécessaire pour la fourniture de nos services, et à respecter pleinement vos droits garantis par la loi marocaine 09-08 relative à la protection des données à caractère personnel.',
+                'pp.i.p2': 'En général et sauf pour les besoins spécifiques détaillés ci-dessous, Clever Cloud Maroc n\'accède pas aux données que vous choisissez d\'héberger sur la plateforme. En tout état de cause, Clever Cloud Maroc n\'exploite jamais les données de vos propres clients et utilisateurs. Cette Politique de Confidentialité détaille les données que nous traitons, pourquoi nous les traitons, et quels droits vous avez. Elle s\'applique aux données personnelles de nos propres clients collectées lors de votre utilisation de la Plateforme Clever Cloud Maroc. Cependant, chaque client de Clever Cloud Maroc qui utilise nos services d\'hébergement pour exécuter une application est seul responsable du traitement des données de ses propres utilisateurs, sous réserve de l\'Accord de Traitement des Données qui fait partie du Contrat entre vous et Clever Cloud Maroc.',
+                // Section 1
+                'pp.s1.title': '1. Les traitements de données par Clever Cloud Maroc',
+                'pp.s1.intro': 'Clever Cloud Maroc traite des données personnelles à diverses fins, notamment :',
+                'pp.1a.title': 'Analyse statistique des visites du site Web',
+                'pp.1a.p1': 'Lors de votre visite sur la Plateforme, Clever Cloud Maroc collecte des données nécessaires pour détecter les anomalies, suivre les visites des différentes pages et composants de la Plateforme, vérifier l\'adéquation du contenu aux attentes de nos visiteurs et utilisateurs, et optimiser les performances du site Web et de la Plateforme.',
+                'pp.1a.p2': 'Ces données strictement nécessaires au bon fonctionnement de la Plateforme comprennent :',
+                'pp.1a.li1': 'La première moitié de votre adresse IP (ex. 192.168.xxx.xxx) ;',
+                'pp.1a.li2': 'La version de votre navigateur ;',
+                'pp.1a.li3': 'Votre système d\'exploitation (ex. Windows, Mac OS, Linux…) ;',
+                'pp.1a.li4': 'Le type de terminal (ex. téléphone, ordinateur…) et sa résolution d\'écran ;',
+                'pp.1a.li5': 'L\'URL des pages que vous visitez ou le type d\'action que vous effectuez ;',
+                'pp.1a.li6': 'Un identifiant pseudonyme.',
+                'pp.1a.p3': 'Elles sont conservées et traitées pendant 180 jours au sein de l\'outil Matomo Analytics hébergé sur ses propres serveurs par Clever Cloud Maroc, et ne sont donc pas partagées avec des tiers. Si vous ne souhaitez pas que vos visites soient enregistrées, vous pouvez vous référer aux instructions suivantes :',
+                'pp.1a.p4': 'Ce traitement est effectué sur la base de l\'intérêt légitime de Clever Cloud Maroc à analyser le trafic de son site Web (Loi 09-08 relative à la protection des données à caractère personnel).',
+                'pp.1b.title': 'Sécurité de la plateforme, gestion des erreurs et journalisation des accès',
+                'pp.1b.p1': 'Afin de sécuriser la Plateforme, notamment en détectant les tentatives d\'intrusion, les fraudes, les copies illicites de contenu ou les attaques par déni de service, et pour détecter toute anomalie dans le fonctionnement de la Plateforme, Clever Cloud Maroc met en œuvre des processus techniques nécessitant le traitement de données personnelles telles que :',
+                'pp.1b.li1': 'Votre adresse IP ;',
+                'pp.1b.li2': 'Le User Agent de votre navigateur ;',
+                'pp.1b.li3': 'Vos identifiant et mots de passe ;',
+                'pp.1b.li4': 'Le code source de vos Applications (ex. pour la détection automatique de logiciels malveillants) ;',
+                'pp.1b.li5': 'Un journal de vos activités et événements sur la Plateforme (tels que les journaux d\'erreurs système).',
+                'pp.1b.p2': 'Ces traitements sont effectués sur la base de l\'intérêt légitime de Clever Cloud Maroc à sécuriser ses services et les données de ses Clients, et à assurer le bon fonctionnement de la Plateforme (Loi 09-08 relative à la protection des données à caractère personnel).',
+                'pp.1b.p3': 'De plus, afin de respecter ses obligations légales de conservation des données de connexion, Clever Cloud Maroc conserve pendant 1 an les données susmentionnées relatives à vos opérations de création, modification ou suppression de contenu (code source). Le Client est rappelé qu\'il lui appartient de collecter et conserver les données de connexion relatives aux contenus de ses propres clients, conformément à ses propres obligations légales.',
+                'pp.1c.title': 'Administration et facturation de votre compte client',
+                'pp.1c.p1': 'Lors de votre inscription sur la Plateforme et de son utilisation, vous pouvez fournir à Clever Cloud Maroc des données associées à votre compte client telles que :',
+                'pp.1c.li1': 'Votre nom ;', 'pp.1c.li2': 'Votre état civil ;', 'pp.1c.li3': 'Votre adresse e-mail ;',
+                'pp.1c.li4': 'Votre numéro de téléphone ;', 'pp.1c.li5': 'Votre adresse postale ;', 'pp.1c.li6': 'Votre identifiant ;',
+                'pp.1c.li7': 'Les organisations auxquelles vous êtes rattaché ;', 'pp.1c.li8': 'Vos applications et données associées.',
+                'pp.1c.p2': 'Ces données sont conservées pendant la durée du Contrat entre vous et nous (sur la base de la Loi 09-08) aux fins de gestion et de sécurisation de votre compte client, ainsi que pour la facturation de nos services. Elles peuvent également être conservées au-delà de cette date, jusqu\'à l\'expiration des délais de conservation imposés par nos contraintes légales et réglementaires.',
+                'pp.1c.p3': 'Le mot de passe associé à votre identifiant n\'est jamais stocké en clair par Clever Cloud Maroc et il ne vous sera jamais demandé ailleurs que sur l\'interface vous permettant de vous connecter à la Plateforme, exclusivement depuis le site Web de Clever Cloud Maroc. Vous avez la possibilité d\'activer l\'authentification à deux facteurs pour renforcer la sécurité de l\'accès à votre compte. Clever Cloud Maroc vous encourage à l\'activer pour limiter le risque que des tiers accèdent frauduleusement à vos données.',
+                'pp.1c.p4': 'Les informations bancaires que vous saisissez lors d\'un paiement sont traitées exclusivement par le partenaire de Clever Cloud Maroc que vous choisissez au moment du paiement :',
+                'pp.1c.li9': 'Stripe, dont la politique de confidentialité est disponible sur : <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://stripe.com/privacy</a>',
+                'pp.1c.li10': 'Paypal, dont la politique de confidentialité est disponible sur : <a href="https://www.paypal.com/fr/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.paypal.com/fr/webapps/mpp/ua/privacy-full</a>',
+                'pp.1d.title': 'Support technique et commercial',
+                'pp.1d.p1': 'Afin de répondre aux demandes d\'assistance technique ou commerciale de ses Clients, Clever Cloud Maroc peut traiter les données suivantes sur la base de l\'exécution du contrat entre vous et Clever Cloud Maroc (Loi 09-08 relative à la protection des données à caractère personnel) :',
+                'pp.1d.li1': 'Votre adresse IP ;', 'pp.1d.li2': 'Les organisations auxquelles votre compte est rattaché ;',
+                'pp.1d.li3': 'Votre adresse e-mail ;', 'pp.1d.li4': 'Votre numéro de téléphone ;',
+                'pp.1d.li5': 'Le contenu de vos messages ;', 'pp.1d.li6': 'La date et l\'heure de votre dernière activité.',
+                'pp.1d.p2': 'Clever Cloud Maroc partage ces données avec son partenaire Crisp, exclusivement aux fins du traitement de votre demande d\'assistance, dont la Politique de Confidentialité est disponible sur <a href="https://crisp.chat/fr/privacy/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://crisp.chat/fr/privacy/</a>',
+                'pp.1d.p3': 'Dans ce contexte, Clever Cloud Maroc déploie un outil de messagerie intégré à la Plateforme, nécessitant l\'installation sur votre navigateur de cookies Crisp. Ces cookies sont nécessaires pour restaurer les sessions de chat avec l\'équipe de support technique et maintenir la continuité des échanges lors de votre navigation sur nos pages. Ces cookies sont conservés selon les conditions expliquées dans la politique de confidentialité de Crisp.',
+                'pp.1d.p4': 'Si vous appelez la hotline, votre numéro de téléphone est conservé le temps de traiter votre demande. Les données sont partagées avec notre fournisseur de serveur vocal Twilio, dont la politique de confidentialité est disponible sur <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.twilio.com/legal/privacy</a>',
+                'pp.1e.title': 'Traitement des candidatures (recrutement)',
+                'pp.1e.p1': 'Pour ses activités de recrutement, sur la base du besoin de traiter vos candidatures (Loi 09-08 relative à la protection des données à caractère personnel), Clever Cloud Maroc doit traiter les données personnelles que vous fournissez dans le cadre de votre candidature, telles que votre nom complet, date de naissance, adresses, coordonnées téléphoniques, CV, e-mails, dates et résultats des entretiens, prétentions salariales,…',
+                'pp.1e.p2': 'Ces données sont conservées le temps nécessaire au traitement de votre candidature et au plus tard 12 mois à compter du dernier contact, sauf autorisation contraire de votre part. Elles ne seront pas transmises à des tiers sans votre permission. Si vous postulez depuis un service tiers, vous devez lire et accepter la politique de confidentialité du service.',
+                // Section 2
+                'pp.s2.title': '2. Mesures de sécurité',
+                'pp.s2.p1': 'Clever Cloud Maroc met en œuvre des mesures techniques et organisationnelles afin de sécuriser au mieux les données que vous nous confiez, par exemple en utilisant des mesures de chiffrement aussi systématiquement que possible, ou en limitant les droits d\'accès aux données aux employés et prestataires de services qui ont un intérêt légitime à y accéder dans le cadre des missions qui leur sont confiées.',
+                'pp.s2.p2': 'Les processus de création des services de Clever Cloud Maroc intègrent dès le départ des exigences strictes en matière de sécurité des données, et sont surveillés tout au long du développement et des mises à niveau ultérieures, avec une évaluation et une amélioration continues des exigences de sécurité.',
+                'pp.s2.p3': 'Les données sont hébergées exclusivement sur des serveurs gérés par Clever Cloud Maroc, dans des centres de données hautement sécurisés situés sur le territoire marocain. Vous trouverez plus d\'informations sur la manière dont nous sécurisons vos données sur la page suivante : <a href="https://www.clever.cloud/security/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.clever.cloud/security/</a>',
+                // Section 3
+                'pp.s3.title': '3. Exercice de vos droits',
+                'pp.s3.intro': 'Conformément à la loi marocaine 09-08 relative à la protection des données à caractère personnel, vous disposez des droits suivants concernant vos données personnelles :',
+                'pp.s3.li1': 'Droit d\'accès, de rectification, de mise à jour et de complétude de vos données (Loi 09-08) ;',
+                'pp.s3.li2': 'Le droit de retirer votre consentement à tout moment (Loi 09-08) ;',
+                'pp.s3.li3': 'Le droit de limiter le traitement de vos données (Loi 09-08) ;',
+                'pp.s3.li4': 'Droit d\'opposition au traitement de vos données (Loi 09-08) ;',
+                'pp.s3.li5': 'Droit à la portabilité des données que vous nous avez fournies, lorsque vos données font l\'objet d\'un traitement automatisé basé sur votre consentement ou sur un contrat (Loi 09-08) ;',
+                'pp.s3.li6': 'Droit à l\'effacement de vos données personnelles (Loi 09-08).',
+                'pp.s3.p2': 'Conformément à la Loi 09-08, chaque demande d\'exercice de droits doit être accompagnée d\'informations pertinentes permettant de démontrer votre identité. En cas de doute raisonnable, Clever Cloud Maroc peut demander que des informations supplémentaires nécessaires pour confirmer l\'identité de la personne demandant l\'exercice de ses droits soient fournies. Les données personnelles relatives à l\'exercice de ces droits seront conservées pendant une période de 1 an à compter de la date de la réponse envoyée par Clever Cloud Maroc.',
+                'pp.s3.p3': 'Vous avez également le droit de nous donner des instructions sur ce qu\'il convient de faire de vos données après votre décès et de choisir si nous divulguons ou non vos données à un tiers que vous avez désigné. En cas de décès et en l\'absence d\'instructions de votre part, nous nous engageons à détruire vos données, sauf si leur conservation est nécessaire à des fins probatoires ou pour satisfaire une obligation légale.',
+                'pp.s3.p4': 'Vous pouvez exercer ces droits en nous écrivant à <a href="mailto:dpo@clever-cloud.com" class="text-[#5754aa] hover:underline">dpo@clever-cloud.com</a> ou en envoyant un courrier à l\'adresse indiquée dans nos mentions légales, à l\'attention du Service Juridique.',
+                'pp.s3.p5': 'Vous pouvez également déposer une plainte auprès de la CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel), dont le site est accessible à : <a href="https://www.cndp.ma/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.cndp.ma/</a>',
+                // Revision
+                'pp.rev.title': 'Historique des révisions', 'pp.rev.col1': 'Date', 'pp.rev.col2': 'Commentaires',
+                'pp.rev.c1': 'Dans l\'introduction, référence ajoutée à l\'Accord de Traitement des Données (DPA) de Clever Cloud Maroc, applicable en vertu de la loi marocaine 09-08 relative à la protection des données à caractère personnel.'
             },
             ar: {
-                // Navigation
-                'nav.menu': 'القائمة',
-                'nav.home': 'الرئيسية',
-                'nav.about': 'من نحن',
-                'nav.benefits': 'الفوائد',
-                'nav.contact': 'اتصل بنا',
-
-                // Privacy Page
-                'privacy.backToHome': 'العودة إلى الصفحة الرئيسية',
-                'privacy.title': 'سياسة الخصوصية',
-                'privacy.subtitle': 'خصوصيتك مهمة بالنسبة لنا. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك الشخصية.',
-                'privacy.lastUpdated': 'آخر تحديث: فبراير 2026',
-
-                'privacy.section1.title': '1. المعلومات التي نجمعها',
-                'privacy.section1.p1': 'نجمع المعلومات التي تقدمها لنا مباشرة عند استخدام خدماتنا، بما في ذلك عندما تنشئ حسابًا أو تقدم طلبات أو تتصل بنا للحصول على الدعم.',
-                'privacy.section1.p2': 'قد يشمل ذلك اسمك وعنوان بريدك الإلكتروني ورقم هاتفك وتفاصيل المؤسسة والمعلومات التقنية حول حالة الاستخدام الخاصة بك.',
-
-                'privacy.section2.title': '2. كيف نستخدم معلوماتك',
-                'privacy.section2.p1': 'نستخدم المعلومات التي نجمعها لتوفير خدماتنا وصيانتها وتحسينها، ومعالجة طلباتك، والتواصل معك بشأن منصتنا.',
-                'privacy.section2.li1': 'لمعالجة والرد على استفساراتك وطلباتك',
-                'privacy.section2.li2': 'لتقديم دعم العملاء والمساعدة الفنية',
-                'privacy.section2.li3': 'لإرسال تحديثات مهمة حول خدماتنا',
-                'privacy.section2.li4': 'لتحسين وتطوير منصتنا',
-
-                'privacy.section3.title': '3. تخزين البيانات والأمان',
-                'privacy.section3.p1': 'يتم تخزين جميع البيانات ومعالجتها داخل المغرب. ننفذ التدابير التقنية والتنظيمية المناسبة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التعديل أو الإفصاح أو التدمير.',
-                'privacy.section3.p2': 'تعمل بنيتنا التحتية بالكامل على الأراضي المغربية، مما يضمن السيادة الكاملة على البيانات والامتثال للوائح المحلية.',
-
-                'privacy.section4.title': '4. مشاركة البيانات',
-                'privacy.section4.p1': 'نحن لا نبيع أو نتاجر أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك فقط في الظروف التالية:',
-                'privacy.section4.li1': 'بموافقتك الصريحة',
-                'privacy.section4.li2': 'للامتثال للالتزامات القانونية',
-                'privacy.section4.li3': 'لحماية حقوقنا وسلامتنا',
-                'privacy.section4.li4': 'مع مزودي الخدمات الذين يساعدون في تشغيل منصتنا',
-
-                'privacy.section5.title': '5. حقوقك',
-                'privacy.section5.p1': 'لديك الحق في الوصول إلى معلوماتك الشخصية أو تصحيحها أو حذفها. يمكنك أيضًا الاعتراض على معالجة معينة لبياناتك أو تقييدها.',
-                'privacy.section5.p2': 'لممارسة هذه الحقوق، يرجى الاتصال بنا باستخدام المعلومات المقدمة على موقعنا الرئيسي.',
-
-                'privacy.section6.title': '6. ملفات تعريف الارتباط والتتبع',
-                'privacy.section6.p1': 'نستخدم ملفات تعريف الارتباط وتقنيات التتبع المماثلة لتحسين تجربتك على موقعنا. يمكنك التحكم في تفضيلات ملفات تعريف الارتباط من خلال إعدادات المتصفح.',
-
-                'privacy.section7.title': '7. التغييرات على هذه السياسة',
-                'privacy.section7.p1': 'قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر السياسة الجديدة على هذه الصفحة وتحديث تاريخ "آخر تحديث".',
-
-                'privacy.contact.title': 'اتصل بنا',
-                'privacy.contact.p1': 'إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا:',
-                'privacy.contact.phone': 'الهاتف:',
-                'privacy.contact.location': 'الموقع:',
-                'privacy.contact.address': 'الدار البيضاء، المغرب',
-
-                // Footer
+                // Nav & Footer
+                'nav.menu': 'القائمة', 'nav.home': 'الرئيسية', 'nav.about': 'من نحن', 'nav.benefits': 'الفوائد', 'nav.contact': 'اتصل بنا',
+                'contact.followUs': 'تابعونا',
                 'footer.tagline': 'منصة السحابة السيادية للمغرب. بنية تحتية آمنة تدار محلياً.',
                 'footer.copyright': '© {year} كليفر كلاود المغرب. جميع الحقوق محفوظة.',
-                'footer.resources': 'الموارد',
-                'footer.company': 'الشركة',
-                'footer.legal': 'القانوني',
-                'footer.documentation': 'التوثيق',
-                'footer.status': 'الحالة',
-                'footer.github': 'GitHub',
-                'footer.ccEurope': 'كليفر كلاود أوروبا',
-                'footer.upProgram': 'برنامج UP (الشركات الناشئة)',
-                'footer.compliance': 'الامتثال',
-                'footer.privacy': 'سياسة الخصوصية',
-                'footer.acceptableUse': 'سياسة الاستخدام المقبول',
-                'footer.premiumServices': 'سياسة الخدمات المميزة'
+                'footer.resources': 'الموارد', 'footer.company': 'الشركة', 'footer.legal': 'القانوني',
+                'footer.documentation': 'التوثيق', 'footer.status': 'الحالة', 'footer.github': 'GitHub',
+                'footer.ccEurope': 'كليفر كلاود أوروبا', 'footer.upProgram': 'برنامج UP (الشركات الناشئة)',
+                'footer.compliance': 'الامتثال', 'footer.privacy': 'سياسة الخصوصية',
+                'footer.acceptableUse': 'سياسة الاستخدام المقبول', 'footer.premiumServices': 'سياسة الخدمات المميزة',
+                // Hero
+                'pp.hero.title': 'سياسة الخصوصية',
+                'pp.hero.date': 'آخر تحديث: 5 مايو 2022',
+                // Introduction
+                'pp.i.p1': 'يُعدّ احترام سرية وسلامة بيانات عملائنا أولوية قصوى لدى كليفر كلاود المغرب. ولهذا السبب، نحرص على تقييد معالجتنا للبيانات الشخصية بما هو ضروري لتقديم خدماتنا، واحترام حقوقك المكفولة بموجب القانون المغربي 09-08 المتعلق بحماية البيانات ذات الطابع الشخصي.',
+                'pp.i.p2': 'بشكل عام وباستثناء الاحتياجات المحددة المفصّلة أدناه، لا تصل كليفر كلاود المغرب إلى البيانات التي تختار استضافتها على المنصة. وفي جميع الأحوال، لا تستغل كليفر كلاود المغرب بيانات عملائك ومستخدميك. تُفصّل سياسة الخصوصية هذه البيانات التي نعالجها، وسبب معالجتها، والحقوق التي تتمتع بها. تنطبق هذه السياسة على البيانات الشخصية لعملائنا المجمّعة خلال استخدامك لمنصة كليفر كلاود المغرب. ومع ذلك، يتحمّل كل عميل من عملاء كليفر كلاود المغرب الذي يستخدم خدمات الاستضافة لدينا لتشغيل تطبيق، المسؤولية الكاملة عن معالجة بيانات مستخدميه، وفقاً لاتفاقية معالجة البيانات التي تشكّل جزءاً من العقد المبرم بينك وبين كليفر كلاود المغرب.',
+                // Section 1
+                'pp.s1.title': '1. معالجات البيانات التي تقوم بها كليفر كلاود المغرب',
+                'pp.s1.intro': 'تعالج كليفر كلاود المغرب البيانات الشخصية لأغراض متعددة، ولا سيما:',
+                'pp.1a.title': 'التحليل الإحصائي لزيارات الموقع',
+                'pp.1a.p1': 'خلال زيارتك للمنصة، تجمع كليفر كلاود المغرب البيانات اللازمة للكشف عن الشذوذات، وتتبع زيارات مختلف صفحات ومكونات المنصة، والتحقق من ملاءمة المحتوى لتوقعات زوارنا ومستخدمينا، وتحسين أداء الموقع والمنصة.',
+                'pp.1a.p2': 'تشمل هذه البيانات الضرورية للإدارة السليمة للمنصة:',
+                'pp.1a.li1': 'النصف الأول من عنوان IP الخاص بك (مثال: 192.168.xxx.xxx)؛',
+                'pp.1a.li2': 'إصدار متصفحك؛',
+                'pp.1a.li3': 'نظام التشغيل لديك (مثل: Windows أو Mac OS أو Linux…)؛',
+                'pp.1a.li4': 'نوع الجهاز (مثل: هاتف أو حاسوب…) ودقة شاشته؛',
+                'pp.1a.li5': 'عنوان URL للصفحات التي تزورها أو نوع الإجراء الذي تتخذه؛',
+                'pp.1a.li6': 'معرّف مجهول الهوية.',
+                'pp.1a.p3': 'يتم الاحتفاظ بهذه البيانات ومعالجتها لمدة 180 يوماً ضمن أداة Matomo Analytics المستضافة على خوادمها الخاصة من قِبل كليفر كلاود المغرب، ولا تُشارَك مع أطراف ثالثة. إذا كنت لا ترغب في تسجيل زياراتك، يمكنك الرجوع إلى التعليمات التالية:',
+                'pp.1a.p4': 'يتم هذا المعالجة على أساس المصلحة المشروعة لكليفر كلاود المغرب في تحليل حركة مرور موقعها الإلكتروني (القانون 09-08 المتعلق بحماية البيانات الشخصية).',
+                'pp.1b.title': 'أمن المنصة وإدارة الأخطاء وتسجيل الوصول',
+                'pp.1b.p1': 'بهدف تأمين المنصة، ولا سيما من خلال الكشف عن محاولات الاختراق والاحتيال والنسخ غير المشروع للمحتوى أو هجمات حجب الخدمة، وللكشف عن أي شذوذات في تشغيل المنصة، تطبّق كليفر كلاود المغرب عمليات تقنية تستلزم معالجة البيانات الشخصية، مثل:',
+                'pp.1b.li1': 'عنوان IP الخاص بك؛',
+                'pp.1b.li2': 'معرّف المستخدم (User Agent) لمتصفحك؛',
+                'pp.1b.li3': 'اسم المستخدم وكلمات المرور الخاصة بك؛',
+                'pp.1b.li4': 'الكود المصدري لتطبيقاتك (مثال: للكشف التلقائي عن البرامج الضارة)؛',
+                'pp.1b.li5': 'سجل أنشطتك وأحداثك على المنصة (مثل سجلات أخطاء النظام).',
+                'pp.1b.p2': 'تُجرى هذه العمليات على أساس المصلحة المشروعة لكليفر كلاود المغرب في تأمين خدماتها وبيانات عملائها، وضمان الأداء السليم للمنصة (القانون 09-08 المتعلق بحماية البيانات الشخصية).',
+                'pp.1b.p3': 'علاوة على ذلك، وللامتثال لالتزاماتها القانونية بالاحتفاظ ببيانات الاتصال، تحتفظ كليفر كلاود المغرب لمدة سنة واحدة بالبيانات المذكورة أعلاه المتعلقة بعمليات الإنشاء أو التعديل أو الحذف لمحتواك (الكود المصدري). يُذكَّر العميل بأنه يتعين عليه جمع والاحتفاظ ببيانات الاتصال المتعلقة بمحتويات عملائه الخاصين وفقاً لالتزاماته القانونية.',
+                'pp.1c.title': 'إدارة وفوترة حساب عميلك',
+                'pp.1c.p1': 'عند تسجيلك في المنصة واستخدامها، قد تُزوّد كليفر كلاود المغرب ببيانات مرتبطة بحساب عميلك مثل:',
+                'pp.1c.li1': 'اسمك؛', 'pp.1c.li2': 'حالتك الاجتماعية؛', 'pp.1c.li3': 'عنوان بريدك الإلكتروني؛',
+                'pp.1c.li4': 'رقم هاتفك؛', 'pp.1c.li5': 'عنوانك البريدي؛', 'pp.1c.li6': 'اسم المستخدم الخاص بك؛',
+                'pp.1c.li7': 'المنظمات التي تنتمي إليها؛', 'pp.1c.li8': 'تطبيقاتك والبيانات المرتبطة بها.',
+                'pp.1c.p2': 'يتم الاحتفاظ بهذه البيانات طوال مدة العقد المبرم بينك وبيننا (استناداً إلى القانون 09-08) بهدف إدارة حسابك وتأمينه وإصدار فواتير خدماتنا. كما يمكن الاحتفاظ بها بعد ذلك حتى انتهاء مدد الاحتفاظ المفروضة بموجب قيودنا القانونية والتنظيمية.',
+                'pp.1c.p3': 'لا يُخزَّن كلمة المرور المرتبطة باسم المستخدم لديك بنص صريح من قِبل كليفر كلاود المغرب، ولن يُطلب منك تقديمها في أي مكان آخر غير واجهة تسجيل الدخول إلى المنصة حصرياً من موقع كليفر كلاود المغرب. يمكنك تفعيل المصادقة الثنائية لتعزيز أمان الوصول إلى حسابك.',
+                'pp.1c.p4': 'تُعالج المعلومات المصرفية التي تُدخلها أثناء الدفع حصرياً من قِبل شريك كليفر كلاود المغرب الذي تختاره وقت الدفع:',
+                'pp.1c.li9': 'Stripe، وسياسة الخصوصية الخاصة به متاحة على: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://stripe.com/privacy</a>',
+                'pp.1c.li10': 'Paypal، وسياسة الخصوصية الخاصة به متاحة على: <a href="https://www.paypal.com/fr/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.paypal.com/fr/webapps/mpp/ua/privacy-full</a>',
+                'pp.1d.title': 'الدعم الفني والتجاري',
+                'pp.1d.p1': 'لمعالجة طلبات المساعدة الفنية أو التجارية من عملائها، قد تعالج كليفر كلاود المغرب البيانات التالية استناداً إلى تنفيذ العقد المبرم بينك وبين كليفر كلاود المغرب (القانون 09-08 المتعلق بحماية البيانات الشخصية):',
+                'pp.1d.li1': 'عنوان IP الخاص بك؛', 'pp.1d.li2': 'المنظمات التي يرتبط بها حسابك؛',
+                'pp.1d.li3': 'عنوان بريدك الإلكتروني؛', 'pp.1d.li4': 'رقم هاتفك؛',
+                'pp.1d.li5': 'محتوى رسائلك؛', 'pp.1d.li6': 'تاريخ ووقت آخر نشاط لك.',
+                'pp.1d.p2': 'تتشارك كليفر كلاود المغرب هذه البيانات مع شريكها Crisp حصرياً لمعالجة طلب الدعم الخاص بك، وتتوفر سياسة الخصوصية الخاصة بـ Crisp على: <a href="https://crisp.chat/fr/privacy/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://crisp.chat/fr/privacy/</a>',
+                'pp.1d.p3': 'في هذا السياق، تنشر كليفر كلاود المغرب أداة مراسلة مدمجة في المنصة تستلزم تثبيت ملفات تعريف الارتباط الخاصة بـ Crisp على متصفحك. هذه الملفات ضرورية لاستعادة جلسات الدردشة مع فريق الدعم الفني والحفاظ على استمرارية التبادلات أثناء تصفحك لصفحاتنا.',
+                'pp.1d.p4': 'إذا اتصلت بالخط الساخن، يُحتفظ برقم هاتفك طوال فترة معالجة طلبك. وتُشارَك البيانات مع مزوّد خادم الصوت لدينا Twilio، وتتوفر سياسة خصوصيته على: <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.twilio.com/legal/privacy</a>',
+                'pp.1e.title': 'معالجة الطلبات (التوظيف)',
+                'pp.1e.p1': 'لأنشطتها في مجال التوظيف، واستناداً إلى ضرورة معالجة طلباتك (القانون 09-08)، يتعين على كليفر كلاود المغرب معالجة البيانات الشخصية التي تُقدّمها في سياق طلبك الوظيفي، كاسمك الكامل وتاريخ ميلادك وعناوينك وبيانات الاتصال الهاتفية والسيرة الذاتية والبريد الإلكتروني وتواريخ ونتائج المقابلات والتوقعات الراتبية…',
+                'pp.1e.p2': 'يتم الاحتفاظ بهذه البيانات للمدة اللازمة لمعالجة طلبك وعلى أبعد تقدير 12 شهراً من آخر تواصل، ما لم تأذن بغير ذلك. لن تُحال إلى أطراف ثالثة دون إذنك. إذا تقدمت بطلبك من خلال خدمة طرف ثالث، فيجب عليك قراءة سياسة خصوصية تلك الخدمة والموافقة عليها.',
+                // Section 2
+                'pp.s2.title': '2. تدابير الأمان',
+                'pp.s2.p1': 'تطبّق كليفر كلاود المغرب تدابير تقنية وتنظيمية بهدف تأمين البيانات التي تعهد بها إلينا على أفضل وجه ممكن، على سبيل المثال باستخدام تدابير التشفير بشكل منهجي، أو بتقييد حقوق الوصول إلى البيانات على الموظفين ومزوّدي الخدمات الذين لديهم مصلحة مشروعة في الاطلاع عليها في إطار المهام الموكلة إليهم.',
+                'pp.s2.p2': 'تتضمن عمليات إنشاء خدمات كليفر كلاود المغرب متطلبات صارمة لأمن البيانات منذ البداية، ويتم مراقبتها طوال مراحل التطوير والترقيات اللاحقة، مع تقييم مستمر لمتطلبات الأمان وتحسينها.',
+                'pp.s2.p3': 'تُستضاف جميع البيانات حصرياً على خوادم تُدارها كليفر كلاود المغرب، في مراكز بيانات شديدة الأمان داخل الأراضي المغربية. يمكنك الاطلاع على مزيد من المعلومات حول أمان بياناتك على: <a href="https://www.clever.cloud/security/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.clever.cloud/security/</a>',
+                // Section 3
+                'pp.s3.title': '3. ممارسة حقوقك',
+                'pp.s3.intro': 'وفقاً للقانون المغربي 09-08 المتعلق بحماية البيانات الشخصية، تتمتع بالحقوق التالية:',
+                'pp.s3.li1': 'حق الاطلاع والتصحيح والتحديث واكتمال بياناتك (القانون 09-08)؛',
+                'pp.s3.li2': 'الحق في سحب موافقتك في أي وقت (القانون 09-08)؛',
+                'pp.s3.li3': 'الحق في تقييد معالجة بياناتك (القانون 09-08)؛',
+                'pp.s3.li4': 'حق الاعتراض على معالجة بياناتك (القانون 09-08)؛',
+                'pp.s3.li5': 'حق نقل البيانات التي قدّمتها إلينا عندما تخضع بياناتك لمعالجة آلية استناداً إلى موافقتك أو إلى عقد (القانون 09-08)؛',
+                'pp.s3.li6': 'حق حذف بياناتك الشخصية (القانون 09-08).',
+                'pp.s3.p2': 'وفقاً للقانون 09-08، يجب أن يكون كل طلب لممارسة الحقوق مصحوباً بمعلومات ذات صلة لإثبات هويتك. وفي حال وجود شك معقول، يحق لكليفر كلاود المغرب طلب معلومات إضافية لتأكيد هوية الطالب. يتم الاحتفاظ بالبيانات المتعلقة بممارسة هذه الحقوق لمدة سنة واحدة من تاريخ الرد المرسَل من كليفر كلاود المغرب.',
+                'pp.s3.p3': 'يحق لك أيضاً إعطاؤنا تعليمات بشأن ما يجب فعله ببياناتك بعد وفاتك، واختيار ما إذا كنا نكشف عن بياناتك لطرف ثالث تعيّنه. وفي حال وفاتك وغياب تعليمات منك، نتعهد بتدمير بياناتك إلا إذا كان الاحتفاظ بها ضرورياً لأغراض إثباتية أو لتلبية التزام قانوني.',
+                'pp.s3.p4': 'يمكنك ممارسة هذه الحقوق بمراسلتنا على <a href="mailto:dpo@clever-cloud.com" class="text-[#5754aa] hover:underline">dpo@clever-cloud.com</a> أو بإرسال رسالة بريدية إلى العنوان المذكور في إشعارنا القانوني للعناية بالقسم القانوني.',
+                'pp.s3.p5': 'يمكنك أيضاً تقديم شكوى لدى لجنة حماية المعطيات ذات الطابع الشخصي (CNDP) التي يمكن الوصول إلى موقعها على: <a href="https://www.cndp.ma/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.cndp.ma/</a>',
+                // Revision
+                'pp.rev.title': 'سجل المراجعات', 'pp.rev.col1': 'التاريخ', 'pp.rev.col2': 'الملاحظات',
+                'pp.rev.c1': 'تمت إضافة إشارة في المقدمة إلى اتفاقية معالجة البيانات (DPA) لكليفر كلاود المغرب، المطبّقة بموجب القانون المغربي 09-08 المتعلق بحماية البيانات الشخصية.'
             },
             ber: {
-                // Navigation
-                'nav.menu': 'ⵓⵎⵓⵖⵍⵓ',
-                'nav.home': 'ⴰⵙⵏⵓⴱⴳ',
-                'nav.about': 'ⵅⴼ ⵏⵖ',
-                'nav.benefits': 'ⵜⵉⵏⴼⵓⵜⵉⵏ',
-                'nav.contact': 'ⵎⵢⴰⵡⴰⴹ',
-
-                // Privacy Page
-                'privacy.backToHome': 'ⴰⵔⵓⵢ ⵖⵔ ⴰⵙⵏⵓⴱⴳ',
-                'privacy.title': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
-                'privacy.subtitle': 'ⵜⵓⴹⴼⵉⵜ ⵏⵏⴽ ⵜⵓⵙⵙⴰⵔ ⴼⵍⵍⴰⵏⵖ. ⵜⴰⵙⵔⵜⵉⵜ ⴰⴷ ⵜⵙⵙⴼⵔⵓ ⵎⴰⵎⴽ ⴰⵔⴰ ⵏⵙⵎⵓⵏ, ⵏⵙⵙⵎⵔⵙ ⴷ ⵏⵃⴹⵓ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ.',
-                'privacy.lastUpdated': 'ⴰⵙⴷⵖⵉ ⴰⵎⴳⴳⴰⵔⵓ: ⴱⵕⴰⵢⵕ 2026',
-
-                'privacy.section1.title': '1. ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵏⵙⵎⵓⵏⵏ',
-                'privacy.section1.p1': 'ⵏⵙⵎⵓⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⴰⵖ ⵜⴼⴽⴰⵎ ⵙⵔⵉⴷ ⵎⵉ ⴰⵔⴰ ⵜⵙⵙⵎⵔⵙⵎ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ, ⵙ ⵓⵙⵎⴰⵜⵜⵔ ⵎⵉ ⴰⵔⴰ ⵜⵙⵏⵓⵍⴼⵓⵎ ⴰⵎⵉⴹⴰⵏ, ⵜⴰⵣⵏⵎ ⵉⵙⵓⵜⵔⵏ ⵏⵖ ⵜⵎⵢⴰⵡⴰⴹⵎ ⴰⴽⴷⵏⵖ ⵉ ⵓⵙⴰⴷⴼ.',
-                'privacy.section1.p2': 'ⴰⵢⴰⴷ ⵉⵖⵢ ⴰⴷ ⵢⵉⵍⵉ ⵉⵙⵎ ⵏⵏⴽ, ⵜⴰⵏⵙⴰ ⵏ ⵉⵎⴰⵢⵍ, ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⴼⵓⵏ, ⵜⵉⵏⵖⵎⴰⵙ ⵏ ⵜⵎⵔⵙⴰⵍⵜ ⴷ ⵉⵏⵖⵎⵉⵙⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ ⵅⴼ ⵓⵙⵎⵔⵙ ⵏⵏⴽ.',
-
-                'privacy.section2.title': '2. ⵎⴰⵎⴽ ⴰⵔⴰ ⵏⵙⵙⵎⵔⵙ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ',
-                'privacy.section2.p1': 'ⵏⵙⵙⵎⵔⵙ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵏⵙⵎⵓⵏⵏ ⵉ ⵓⵙⴽⵙⴰⵡ, ⴰⵙⴷⴷⴰⴷ ⴷ ⵓⵙⵏⵔⵏⵉ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ, ⵉ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⵓⵜⵔⵏ ⵏⵏⴽ, ⴷ ⵓⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⴽ ⵅⴼ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ.',
-                'privacy.section2.li1': 'ⵉ ⵓⵙⵙⵉⵜⵉⴹ ⴷ ⵜⵔⴰⵔⵓⵜ ⵅⴼ ⵉⵙⵇⵙⵉⵜⵏ ⴷ ⵉⵙⵓⵜⵔⵏ ⵏⵏⴽ',
-                'privacy.section2.li2': 'ⵉ ⵓⵙⴽⵙⴰⵡ ⵏ ⵓⵙⴰⴷⴼ ⵏ ⵉⵎⵙⴰⵔⴰⴳⵏ ⴷ ⵜⵡⵉⵙⵉ ⵜⴰⵜⵉⴽⵏⵉⴽⵜ',
-                'privacy.section2.li3': 'ⵉ ⵓⵣⵏ ⵏ ⵉⵙⴷⵖⴰⵜⵏ ⵉⵎⵓⵀⵎⵎⴰⵏⵏ ⵅⴼ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ',
-                'privacy.section2.li4': 'ⵉ ⵓⵙⵏⵔⵏⵉ ⴷ ⵓⵙⵏⵉⵍⵙ ⵏ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ',
-
-                'privacy.section3.title': '3. ⴰⵃⵔⴰⵣ ⴷ ⵜⵖⵍⴼⵉⵜ ⵏ ⵉⵙⴼⴽⴰ',
-                'privacy.section3.p1': 'ⵎⴰⵕⵕⴰ ⵉⵙⴼⴽⴰ ⵜⵜⵡⴰⵃⵔⴰⵣⵏⵜ ⴷ ⵜⵜⵡⴰⵙⵙⵉⵜⵉⴹⵏⵜ ⴳ ⵍⵎⵖⵔⵉⴱ. ⵏⵙⵏⴼⴽ ⵉⴳⴰⵎⵎⴰⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ ⴷ ⵡⵓⵏⵙⵉⵖⵏ ⵉⵎⵥⵍⴰⵢⵏ ⵉ ⵓⵃⴹⵓ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵎⴳⴰⵍ ⵓⴽⵛⵛⵓⵎ ⵡⴰⵔ ⵉⵜⵜⵓⵙⵉⵔⴷ, ⴰⵙⵏⴼⵍ, ⴰⵙⵙⴼⵔⵓ ⵏⵖ ⴰⵔⵣⴰⵢ.',
-                'privacy.section3.p2': 'ⴰⴱⵏⵉⵇ ⵏⵏⵖ ⵉⵙⵖⵓⴷⵓ ⴳ ⴰⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ, ⵎⴰⵏⴰⵢⴰ ⵉⵙⵏⵇⴷ ⵜⴰⴳⵍⴷⵉⵜ ⵜⴰⵜⵜⵓⵢⵜ ⵏ ⵉⵙⴼⴽⴰ ⴷ ⵓⵎⵜⵜⵉ ⵉ ⵉⵙⵉⵏⴼⵏ ⵉⴷⵖⴰⵔⴰⵏⵏ.',
-
-                'privacy.section4.title': '4. ⴰⴱⴹⵓ ⵏ ⵉⵙⴼⴽⴰ',
-                'privacy.section4.p1': 'ⵓⵔ ⵏⵙⵙⵏⵥⴰⵕ, ⵓⵔ ⵏⵙⵙⵎⵍⵍⴰ ⵓⵔ ⵏⵙⵙⴽⵔⴰ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵉ ⵡⵉⵢⵢⴰⴹ. ⵏⵖⵢ ⴰⴷ ⵏⴱⴹⵓ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵖⴰⵙ ⴳ ⵜⵎⵀⴰⵍⵉⵏ ⴰⴷ:',
-                'privacy.section4.li1': 'ⵙ ⵓⵙⴰⵔⴰⴳ ⵏⵏⴽ ⵓⵎⵙⵉⴳ',
-                'privacy.section4.li2': 'ⵉ ⵓⵎⵜⵜⵉ ⵉ ⵜⵡⵓⵔⵉⵡⵉⵏ ⵜⵉⵣⵔⴼⴰⵏⵉⵏ',
-                'privacy.section4.li3': 'ⵉ ⵓⵃⴹⵓ ⵏ ⵉⵣⵔⴼⴰⵏ ⴷ ⵜⵖⵍⴼⵉⵜ ⵏⵏⵖ',
-                'privacy.section4.li4': 'ⴰⴽⴷ ⵉⵎⵙⵜⵜⴰⵢⵏ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⴰ ⵉⵙⴰⴷⴼⴰⵏⵏ ⴳ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⵙⵏⵙⵍⵜ ⵏⵏⵖ',
-
-                'privacy.section5.title': '5. ⵉⵣⵔⴼⴰⵏ ⵏⵏⴽ',
-                'privacy.section5.p1': 'ⵖⵓⵔⴽ ⵉⵣⵔⴼ ⵏ ⵓⴽⵛⵛⵓⵎ, ⴰⵙⵙⵖⵜⵉ ⵏⵖ ⴰⴽⴽⵙ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴽ ⵓⴷⵎⴰⵡⴰⵏⵏ. ⵜⵖⵉⵎ ⴰⵡⴷ ⴰⴷ ⵜⴳⵉⵎ ⵎⴳⴰⵍ ⵏⵖ ⴰⴷ ⵜⵙⴽⵔⴼⵎ ⴽⵔⴰ ⵏ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ.',
-                'privacy.section5.p2': 'ⵉ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵣⵔⴼⴰⵏ ⴰⴷ, ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ ⵙ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵏⵖⵎⵉⵙⵏ ⵏⵏⴰ ⵉⵍⵍⴰⵏ ⴳ ⵓⵙⵉⵜ ⵏⵏⵖ ⴰⴷⵙⵍⴰⵏ.',
-
-                'privacy.section6.title': '6. ⵉⴽⵓⴽⵉⵣ ⴷ ⵓⴹⴼⴼⵓⵕ',
-                'privacy.section6.p1': 'ⵏⵙⵙⵎⵔⵙ ⵉⴽⵓⴽⵉⵣ ⴷ ⵜⵉⵜⵉⴽⵏⵓⵍⵓⵊⵉⵜⵉⵏ ⵏ ⵓⴹⴼⴼⵓⵕ ⵉⵎⵢⴰⵎⵎⴰⵏⵏ ⵉ ⵓⵙⵏⵔⵏⵉ ⵏ ⵜⵉⵔⵎⵉⵜ ⵏⵏⴽ ⴳ ⵓⵙⵉⵜ ⵏⵏⵖ. ⵜⵖⵉⵎ ⴰⴷ ⵜⵙⴼⵔⴰⴽⵎ ⵉⵙⵎⴰⵢⵏⵓⵜⵏ ⵏ ⵉⴽⵓⴽⵉⵣ ⵙ ⵉⵙⵎⴰⵢⵏⵓⵜⵏ ⵏ ⵓⵎⵙⵙⴰⵔⴰ ⵏⵏⴽ.',
-
-                'privacy.section7.title': '7. ⵉⵙⵏⴼⴰⵍⵏ ⴳ ⵜⵙⵔⵜⵉⵜ ⴰⴷ',
-                'privacy.section7.p1': 'ⵏⵖⵢ ⴰⴷ ⵏⵙⴷⵖⵉ ⵜⴰⵙⵔⵜⵉⵜ ⴰⴷ ⵏ ⵜⵓⴹⴼⵉⵜ ⵙ ⵢⴰⵏ ⵓⴽⵓⴷ ⵖⵔ ⵢⴰⵏ. ⴰⴷ ⴰⵖ ⵏⵙⵙⴰⵡⵍ ⵎⴰⵢⴰⴷ ⵉⵙⵏⴼⵍⵏ ⵙ ⵓⵙⵙⵉⵜⵉ ⵏ ⵜⵙⵔⵜⵉⵜ ⵜⴰⵎⴰⵢⵏⵓⵜ ⴳ ⵜⴰⵙⵏⴰ ⴰⴷ ⴷ ⵓⵙⴷⵖⵉ ⵏ ⵓⵣⵎⵣ "ⴰⵙⴷⵖⵉ ⴰⵎⴳⴳⴰⵔⵓ".',
-
-                'privacy.contact.title': 'ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ',
-                'privacy.contact.p1': 'ⵎⴽ ⵖⵓⵔⴽ ⵉⵙⵇⵙⵉⵜⵏ ⵅⴼ ⵜⵙⵔⵜⵉⵜ ⴰⴷ ⵏ ⵜⵓⴹⴼⵉⵜ, ⵎⵢⴰⵡⴰⴹ ⴰⴽⴷⵏⵖ:',
-                'privacy.contact.phone': 'ⵜⵉⵍⵉⴼⵓⵏ:',
-                'privacy.contact.location': 'ⴰⴷⵖⴰⵔ:',
-                'privacy.contact.address': 'ⴰⴷⴷⴰⵔⴰⵍⴱⵉⴹⴰ, ⵍⵎⵖⵔⵉⴱ',
-
-                // Footer
+                // Nav & Footer
+                'nav.menu': 'ⵓⵎⵓⵖⵍⵓ', 'nav.home': 'ⴰⵙⵏⵓⴱⴳ', 'nav.about': 'ⵅⴼ ⵏⵖ', 'nav.benefits': 'ⵜⵉⵏⴼⵓⵜⵉⵏ', 'nav.contact': 'ⵎⵢⴰⵡⴰⴹ',
+                'contact.followUs': 'ⴰⵡⴷ ⴰⴽⴷⵏⵖ',
                 'footer.tagline': 'ⵜⴰⵙⵏⵙⵍⵜ ⵏ ⵜⴳⵏⵙⵉⵜ ⵜⴰⴳⵍⴷⴰⵏⵜ ⵏ ⵍⵎⵖⵔⵉⴱ. ⴰⴱⵏⵉⵇ ⴰⵖⵍⵙⴰⵏ ⵉⵜⵜⵓⵙⵖⵓⴷⴰⵏ ⴷⵉⴳⵙ.',
                 'footer.copyright': '© {year} Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵕⵕⴰ ⵉⵣⵔⴼⴰⵏ ⵃⴹⵓⵕⵏ.',
-                'footer.resources': 'ⵜⵉⵎⵙⵔⵉⴷⵉⵏ',
-                'footer.company': 'ⵜⴰⵎⵔⵙⴰⵍⵜ',
-                'footer.legal': 'ⴰⵣⵔⴼⴰⵏ',
-                'footer.documentation': 'ⵜⵉⴷⵍⵉⵙⵉⵏ',
-                'footer.status': 'ⴰⴷⴷⴰⴷ',
-                'footer.github': 'GitHub',
-                'footer.ccEurope': 'Clever Cloud ⵕⵓⴱⴱⴰ',
-                'footer.upProgram': 'ⴰⵖⴰⵡⴰⵙ UP (ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ)',
-                'footer.compliance': 'ⴰⵎⵜⵜⵉ',
-                'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
-                'footer.acceptableUse': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵓⵙⵎⵔⵙ ⵓⵇⴱⵉⵍ',
-                'footer.premiumServices': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵜⵉⴼⴰⵢⵜⵉⵏ'
+                'footer.resources': 'ⵜⵉⵎⵙⵔⵉⴷⵉⵏ', 'footer.company': 'ⵜⴰⵎⵔⵙⴰⵍⵜ', 'footer.legal': 'ⴰⵣⵔⴼⴰⵏ',
+                'footer.documentation': 'ⵜⵉⴷⵍⵉⵙⵉⵏ', 'footer.status': 'ⴰⴷⴷⴰⴷ', 'footer.github': 'GitHub',
+                'footer.ccEurope': 'Clever Cloud ⵕⵓⴱⴱⴰ', 'footer.upProgram': 'ⴰⵖⴰⵡⴰⵙ UP (ⵜⵉⵎⵔⵙⵍⵉⵏ ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ)',
+                'footer.compliance': 'ⴰⵎⵜⵜⵉ', 'footer.privacy': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
+                'footer.acceptableUse': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵓⵙⵎⵔⵙ ⵓⵇⴱⵉⵍ', 'footer.premiumServices': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵜⵉⴼⴰⵢⵜⵉⵏ',
+                // Hero
+                'pp.hero.title': 'ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ',
+                'pp.hero.date': 'ⴰⵙⴷⵖⵉ ⴰⵎⴳⴳⴰⵔⵓ: 05 ⵎⴰⵢⵢⵓ 2022',
+                // Introduction
+                'pp.i.p1': 'ⴰⵃⴹⵓ ⵏ ⵜⵖⵔⵎⴰ ⴷ ⵜⵓⵜⵜⵔⴰ ⵏ ⵉⵙⴼⴽⴰ ⵏ ⵉⵎⵙⵜⴰⵢⵏ ⵏⵏⵖ ⵉⵍⵍⴰ ⴷ ⵜⵓⵏⵏⵉⴳⵜ ⵉⵥⵍⵉⵏ ⵉ Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵎⴰⵏⴰⵢⴰ ⵉⴼⴽ ⴰⵖ ⴰⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵖⴰⵔ ⵎⴰ ⵉⵔⴽⴽⴰⵏ ⵉ ⵓⵙⴽⵙⴰⵡ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ, ⴷ ⵓⵃⵜⵔⴰⵎ ⴰⵜⵉⴽⴽⵉ ⵏ ⵉⵣⵔⴼⴰⵏ ⵏⵏⴽ ⵉⵜⵜⵓⴽⴼⴰⵍⵏ ⵙ ⵓⵙⵔⵜⴰⵏ ⴰⵎⵖⵔⴰⴱⵉ 09-08 ⵅⴼ ⵓⵃⴹⵓ ⵏ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ.',
+                'pp.i.p2': 'ⵙ ⵓⵎⵢⴰⵡⴰⴹ ⴷ ⵓⵙⵜⴰⵢ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴰ ⵜⵙⵙⴰⵔⵎⴷ ⵖⴼ ⵜⵙⵏⵙⵍⵜ, Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵓⵔ ⵜⵙⵙⵎⵔⵙⵜ ⵉⵙⴼⴽⴰ ⵏ ⵉⵎⵙⵜⴰⵢⵏ ⴷ ⵉⵙⵏⴼⴰⵔⵏ ⵏⵏⴽ. ⵜⴰⵙⵔⵜⵉⵜ ⴰⴷ ⵏ ⵜⵓⴹⴼⵉⵜ ⵜⵙⵙⴼⵔⵓ ⵎⴰⵏⵉⴳ ⵉⵙⴼⴽⴰ ⴰⵔⴰ ⵏⵙⵙⵉⵜⵉⴹ, ⵎⴰⵏⵜⴰ ⵜⴰⵏⵏⴰⵢⵜ, ⴷ ⵎⴰⵏⵉⵏ ⵉⵣⵔⴼⴰⵏ ⵏⵏⴽ. ⴽⵓ ⴰⵎⵙⵜⴰⵢ ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵍⵍⴰⵏ ⴷ ⴰⵎⵙⵜⴰⵢ ⵅⴼ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵙⵙⵉⵔⵎⴷ ⵉⵔⵉ ⵙ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵏ ⵉⵙⵎⵔⵙⴰⵜⵏ ⵏⵏⵙ.',
+                // Section 1
+                'pp.s1.title': '1. ⵉⵙⵙⵉⵜⵉⴹⵏ ⵏ ⵉⵙⴼⴽⴰ ⵙⴳ Clever Cloud ⵍⵎⵖⵔⵉⴱ',
+                'pp.s1.intro': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵉⵜⵉⴹ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵉ ⵜⵓⵏⵏⵉⴳⵜ ⵜⵉⵎⴰⵏⴰⵏⵉⵏ:',
+                'pp.1a.title': 'ⴰⵙⴼⵓⴳⵍⵓ ⴰⵎⴰⵜⵜⴰⵢ ⵏ ⵉⵙⵓⵔⵙⵏ ⵏ ⵓⵙⵉⵜ',
+                'pp.1a.p1': 'ⵎⵉ ⴰⵔⴰ ⵜⵙⵓⵔⵙⵎ ⵜⴰⵙⵏⵙⵍⵜ, Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵎⵓⵏ ⵉⵙⴼⴽⴰ ⵉⵔⴽⴽⴰⵏⵏ ⵉ ⵓⴽⵛⵛⵓⵎ ⵏ ⵜⵎⵙⵙⴽⵔⵜ, ⵉ ⵓⵎⴰⵢ ⵏ ⵉⵙⵓⵔⵙⵏ ⵏ ⵜⴰⵙⵏⵙⵍⵜ, ⴷ ⵓⵙⵏⵉⵍⵙ ⵏ ⵜⵙⵏⵙⵍⵜ.',
+                'pp.1a.p2': 'ⵉⵙⴼⴽⴰ ⴰⴷ ⵉⵔⴽⴽⴰⵏⵏ ⵉ ⵓⵙⵖⵓⴷⵓ ⴰⵣⵓⵣⵔ ⵏ ⵜⵙⵏⵙⵍⵜ ⵓⵍⴰ:',
+                'pp.1a.li1': 'ⴰⵎⵥⵥⵉ ⴰⵎⵣⵡⴰⵔⵓ ⵏ ⵓⵙⴰⵏⵓ IP (ⴰⴷⴷⴰ: 192.168.xxx.xxx);',
+                'pp.1a.li2': 'ⵜⴰⵏⵙⴰ ⵏ ⵓⴱⵕⴰⵡⵣⵔ ⵏⵏⴽ;',
+                'pp.1a.li3': 'ⴰⵏⴰⵍⵓⴼ ⵏ ⵓⵙⴱⴷⴷⵉ (ⴰⴷⴷⴰ: Windows, Mac OS, Linux…);',
+                'pp.1a.li4': 'ⴰⵏⴰⵡ ⵏ ⵓⵙⵉⵍⴰⵍ (ⴰⴷⴷⴰ: ⵜⵉⵍⵉⴼⵓⵏ, ⵓⵔⴷⵉⵏⴰⵜⵓⵕ…) ⴷ ⵜⵔⵔⵓⵎⵓⵙⵜ ⵏ ⵜⵥⵕⵕⵉ;',
+                'pp.1a.li5': 'ⴰⵏⵙⴰ URL ⵏ ⵜⴰⵙⵏⴰ ⵜⵓⵙⵔⵉⵎⵜ ⵏⵖ ⴰⵏⴰⵡ ⵏ ⵜⵡⵓⵔⵉ;',
+                'pp.1a.li6': 'ⴰⵎⵎⴰⴳ ⵓⵙⵉⵏⴰⵏ.',
+                'pp.1a.p3': 'ⵜⵜⵓⵃⵔⴰⵣⵏⵜ ⴷ ⵜⵜⵓⵙⵙⵉⵜⵉⴹⵏⵜ 180 ⵡⴰⵙⵙ ⴳ ⵓⴽⴰⵍ Matomo Analytics ⵉⵜⵜⵓⵙⵙⴰⵔⴰⵎⵏ ⵙ Clever Cloud ⵍⵎⵖⵔⵉⴱ, ⴷ ⵓⵔ ⵜⵜⵓⴱⴹⴰⵏⵜ ⵖⵔ ⵡⵉⵢⵢⴰⴹ. ⵎⴽ ⵓⵔ ⵜⵔⵉⵎ ⴰⴷ ⵜⵜⵓⵔⵣⵓⵏ ⵉⵙⵓⵔⵙⵏ ⵏⵏⴽ, ⵣⵓⵔ ⵉⵏⵙⵜⵔⵓⵙⵢⵓⵏⵏ ⴰⴷ:',
+                'pp.1a.p4': 'ⴰⵙⵙⵉⵜⵉⴹ ⴰⴷ ⵉⵜⵜⵓⴽⵛⵛⵓⵎ ⵙ ⵓⵔⵎⵎⵓⵙ ⵓⵙⵔⵉⴷ ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉ ⵓⵙⴼⵓⴳⵍⵓ ⵏ ⵜⴰⵔⵏⵓⵜ ⵏ ⵓⵙⵉⵜ ⵏⵏⵙ (ⴰⵙⵔⵜⴰⵏ 09-08 ⵅⴼ ⵓⵃⴹⵓ ⵏ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ).',
+                'pp.1b.title': 'ⵜⴰⵖⵍⴼⵉⵜ ⵏ ⵜⵙⵏⵙⵍⵜ, ⵓⵙⵉⵔⴷ ⵏ ⵜⵎⵙⵙⴽⵔⵜ ⴷ ⵉⵔⵣⵣⵓ ⵏ ⵓⴽⵛⵛⵓⵎ',
+                'pp.1b.p1': 'ⵉ ⵓⵃⴹⵓ ⵏ ⵜⵙⵏⵙⵍⵜ, Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵉⵜⵉⴹ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⴰⵎ:',
+                'pp.1b.li1': 'ⴰⵙⴰⵏⵓ IP ⵏⵏⴽ;',
+                'pp.1b.li2': 'User Agent ⵏ ⵓⴱⵕⴰⵡⵣⵔ ⵏⵏⴽ;',
+                'pp.1b.li3': 'ⴰⵎⵎⴰⴳ ⴷ ⵜⴱⵔⵉⴷⵜ ⵏⵏⴽ;',
+                'pp.1b.li4': 'ⴰⴽⵓⴷ ⴰⵎⵙⴷⴰⵔ ⵏ ⵉⵙⵏⵜⵉⵏ ⵏⵏⴽ (ⴰⴷⴷⴰ: ⵉ ⵓⵙⵙⵉⴽⵍ ⴰⵣⵎⴰⵣⵍ ⵏ ⵉⵙⵡⵉ ⵏ ⵉⵙⵡⵉⵔⵏ);',
+                'pp.1b.li5': 'ⴰⵔⵣⵣⵓ ⵏ ⵉⵡⵓⵔⵉⵡⵏ ⴷ ⵜⵎⵙⵙⴽⵔⵜ ⵏⵏⴽ ⵖⴼ ⵜⵙⵏⵙⵍⵜ.',
+                'pp.1b.p2': 'ⵉⵙⵙⵉⵜⵉⴹⵏ ⴰⴷ ⵜⵜⵓⴽⵛⵛⵓⵎⵏ ⵙ ⵓⵔⵎⵎⵓⵙ ⵓⵙⵔⵉⴷ ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉ ⵓⵃⴹⵓ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵙ ⴷ ⵉⵙⴼⴽⴰ ⵏ ⵉⵎⵙⵜⴰⵢⵏ ⵏⵏⵙ (ⴰⵙⵔⵜⴰⵏ 09-08).',
+                'pp.1b.p3': 'ⴰⵡⴷ, Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵃⵔⴰⵣ 1 ⴰⵙⴳⴳⵯⴰⵙ ⵉⵙⴼⴽⴰ ⵉⵥⵍⵉⵏ ⵙ ⵜⵡⵓⵔⵉⵡⵉⵏ ⵏ ⵓⵙⵏⴽⴽⴷ, ⵓⵙⵏⴼⵍ ⵏⵖ ⵓⵙⵎⵙⵉ ⵏ ⵓⴽⵓⴷ ⵏⵏⴽ (ⴰⴽⵓⴷ ⴰⵎⵙⴷⴰⵔ). ⴰⵎⵙⵜⴰⵢ ⵉⵖⵢ ⴰⴷ ⵉⵙⵎⵓⵏ ⴷ ⵉⵃⵔⴰⵣ ⵉⵙⴼⴽⴰ ⵏ ⵓⴽⵛⵛⵓⵎ ⵏ ⵉⵙⵎⵔⵙⴰⵜⵏ ⵏⵏⵙ.',
+                'pp.1c.title': 'ⵓⵙⵉⵔⴷ ⴷ ⵓⵎⵏⵙⵓ ⵏ ⵓⵎⵉⴹⴰⵏ ⵏ ⵓⵎⵙⵜⴰⵢ',
+                'pp.1c.p1': 'ⵎⵉ ⴰⵔⴰ ⵜⵏⵙⴽⵔⵎ ⵖⴼ ⵜⵙⵏⵙⵍⵜ ⴷ ⵜⵙⵙⵎⵔⵙⵎ ⵜ, ⵜⵖⵉⵎ ⴰⴷ ⵜⵙⴼⴽⴷ ⵉ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵙⴼⴽⴰ ⵢⵓⵣⵏ ⴰⵎⵉⴹⴰⵏ ⵏⵏⴽ ⴰⵎ:',
+                'pp.1c.li1': 'ⵉⵙⵎ ⵏⵏⴽ;', 'pp.1c.li2': 'ⵜⴰⴷⵡⵉⵍⵜ ⵏⵏⴽ;', 'pp.1c.li3': 'ⵜⴰⵏⵙⴰ ⵏ ⵉⵎⴰⵢⵍ ⵏⵏⴽ;',
+                'pp.1c.li4': 'ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⴼⵓⵏ ⵏⵏⴽ;', 'pp.1c.li5': 'ⵜⴰⵏⵙⴰ ⵏ ⵓⵙⵓⵎⵔ ⵏⵏⴽ;', 'pp.1c.li6': 'ⴰⵎⵎⴰⴳ ⵏⵏⴽ;',
+                'pp.1c.li7': 'ⵉⵎⵙⵙⴽⴰⵔⵏ ⵉⵎⵓⵣⵣⵡⵏ ⴰⴽⴷⴽ;', 'pp.1c.li8': 'ⵉⵙⵏⵜⵉⵏ ⵏⵏⴽ ⴷ ⵉⵙⴼⴽⴰ ⵉⵙⵙⵓⴽⵙⵔⵏ.',
+                'pp.1c.p2': 'ⵉⵙⴼⴽⴰ ⴰⴷ ⵜⵜⵓⵃⵔⴰⵣⵏ ⵖ ⵓⵣⵎⵣ ⵏ ⵓⵙⵖⵣⵏ ⴳⵉⵏⵏⵖ (ⵙ ⵓⵙⵔⵜⴰⵏ 09-08) ⵉ ⵓⵙⵉⵔⴷ ⴷ ⵓⵃⴹⵓ ⵏ ⵓⵎⵉⴹⴰⵏ ⵏⵏⴽ ⴷ ⵓⵎⵏⵙⵓ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏⵏⵖ.',
+                'pp.1c.p3': 'ⵜⴱⵔⵉⴷⵜ ⵏⵏⴽ ⵓⵔ ⵜⵜⵡⴰⵃⵔⴰⵣⵜ ⴱⴰⵀⵔⴰ ⵙⴳ Clever Cloud ⵍⵎⵖⵔⵉⴱ. ⵉⵖⵢ ⴰⴷ ⵜⵙⵙⴼⴽⴷ ⴰⵙⵙⵉⴼⵔ ⴰⵙⵉⵏ ⵉ ⵓⵃⴹⵓ ⵏ ⵓⴽⵛⵛⵓⵎ ⵙ ⵓⵎⵉⴹⴰⵏ ⵏⵏⴽ.',
+                'pp.1c.p4': 'ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵓⵙⵓⴼⵖ ⵉⵜⵜⵓⵙⵙⵉⵜⵉⴹⵏ ⵙ ⵓⵎⵙⵡⴰⴽⵉⵍ ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵏⵏⴰ ⵜⵙⵜⴰⵢⵎ:',
+                'pp.1c.li9': 'Stripe: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://stripe.com/privacy</a>',
+                'pp.1c.li10': 'Paypal: <a href="https://www.paypal.com/fr/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.paypal.com/fr/webapps/mpp/ua/privacy-full</a>',
+                'pp.1d.title': 'ⵜⴰⵡⵉⵙⵉ ⵜⴰⵜⵉⴽⵏⵉⴽⵜ ⴷ ⵜⵉⵊⵊⴰⵔⵜ',
+                'pp.1d.p1': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵉⵜⵉⴹ ⵉⵙⴼⴽⴰ ⴰⴷ ⵉ ⵜⵡⵉⵙⵉ ⵏ ⵉⵎⵙⵜⴰⵢⵏ (ⵙ ⵓⵙⵔⵜⴰⵏ 09-08):',
+                'pp.1d.li1': 'ⴰⵙⴰⵏⵓ IP ⵏⵏⴽ;', 'pp.1d.li2': 'ⵉⵎⵙⵙⴽⴰⵔⵏ ⵉⵎⵓⵣⵣⵡⵏ ⴰⴽⴷ ⵓⵎⵉⴹⴰⵏ ⵏⵏⴽ;',
+                'pp.1d.li3': 'ⵜⴰⵏⵙⴰ ⵏ ⵉⵎⴰⵢⵍ ⵏⵏⴽ;', 'pp.1d.li4': 'ⵓⵟⵟⵓⵏ ⵏ ⵜⵉⵍⵉⴼⵓⵏ ⵏⵏⴽ;',
+                'pp.1d.li5': 'ⴰⵏⵎⴰⴳⴳⵉ ⵏ ⵉⵎⵉⵍⵉⵏ ⵏⵏⴽ;', 'pp.1d.li6': 'ⵜⵉⴳⴳⵉⵜ ⴷ ⵜⵙⵔⴰⴳⵜ ⵏ ⵜⵡⵓⵔⵉ ⵜⴰⵎⴳⴳⴰⵔⵓⵜ.',
+                'pp.1d.p2': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⴱⴹⵓ ⵉⵙⴼⴽⴰ ⴰⴷ ⴰⴽⴷ ⵓⵎⵙⵡⴰⴽⵉⵍ ⵏⵏⵙ Crisp ⵉ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵓⵙⵓⵜⵔ ⵏⵏⴽ ⴷ ⵉⵙ ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵓⴹⴼⵉⵜ ⵏ Crisp ⵜⵍⵍⴰ ⵖ: <a href="https://crisp.chat/fr/privacy/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://crisp.chat/fr/privacy/</a>',
+                'pp.1d.p3': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵎⵔⵙ ⴰⴽⴰⵍ ⵏ ⵓⵎⵢⴰⵡⴰⴹ ⵉⵎⵓⵣⵣⵡ ⵖ ⵜⵙⵏⵙⵍⵜ ⵉⵔⴰ ⵜⵉⴽⵓⴽⵉⵣ ⵏ Crisp ⵖ ⵓⴱⵕⴰⵡⵣⵔ ⵏⵏⴽ ⵉ ⵓⵎⵓⵏ ⵏ ⵜⵣⵉⵔⴻⴳⵜ ⴰⴽⴷ ⵜⴳⵔⴰⵡⵜ ⵏ ⵜⵡⵉⵙⵉ.',
+                'pp.1d.p4': 'ⵎⴽ ⵜⵙⵓⵖⵓⵍ ⵙ ⵜⵉⵍⵉⴼⵓⵏ, ⵓⵟⵟⵓⵏ ⵏⵏⴽ ⵉⵜⵜⵓⵃⵔⴰⵣ. ⵉⵙⴼⴽⴰ ⵜⵜⵓⴱⴹⴰⵏⵜ ⴰⴽⴷ Twilio: <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.twilio.com/legal/privacy</a>',
+                'pp.1e.title': 'ⵓⵙⵉⵔⴷ ⵏ ⵉⵙⵓⵜⵔⵏ (ⴰⵙⵎⵙⴷⵓ)',
+                'pp.1e.p1': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵉⵜⵉⴹ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵏⵏⴰ ⵜⵙⴼⴽⴷ ⵖ ⵜⵎⴰⵙⵙⴰⵏⵜ ⵏ ⵓⵙⵓⵜⵔ ⵏⵏⴽ ⴰⵎ ⵉⵙⵎ, ⴰⴱⵔⵉⴷ ⵏ ⵜⵍⴰⵍⵉⵜ, ⵜⴰⵏⵙⴰⵡⵉⵏ, ⵉⵎⴰⵢⵍⵏ, ⵉⵣⵎⵎⵓⵔⵏ ⴷ ⵉⵔⵎⵓⴷⵏ ⵏ ⵜⵎⵍⵉⵍⵉⵡⵉⵏ…',
+                'pp.1e.p2': 'ⵉⵙⴼⴽⴰ ⴰⴷ ⵜⵜⵓⵃⵔⴰⵣⵏ 12 ⵢⵉⵔⵡⴰ ⵙⴳ ⵓⵎⵢⴰⵡⴰⴹ ⴰⵎⴳⴳⴰⵔⵓ, ⵡⴰⵔ ⵜⴰⵣⵣⵍⵉⵜ ⵏⵏⴽ. ⵓⵔ ⵢⵓⴳⵓ ⵖⵔ ⵡⵉⵢⵢⴰⴹ ⵡⴰⵔ ⵓⵙⴰⵔⴰⴳ ⵏⵏⴽ.',
+                // Section 2
+                'pp.s2.title': '2. ⵉⴳⴰⵎⵎⴰⵏ ⵏ ⵜⵖⵍⴼⵉⵜ',
+                'pp.s2.p1': 'Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵎⵔⵙ ⵉⴳⴰⵎⵎⴰⵏ ⵉⵜⵉⴽⵏⵉⴽⵏ ⴷ ⵡⵓⵏⵙⵉⵖⵏ ⵉ ⵓⵃⴹⵓ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⵙ ⵓⵙⵙⵎⵔⵙ ⵏ ⵜⵎⵉⵔⵉⵡⵉⵏ ⵏ ⵓⵙⵙⵜⵓⵏ ⵏⵖ ⵙ ⵓⴽⵕⵕⴹ ⵏ ⵉⵣⵔⴼⴰⵏ ⵏ ⵓⴽⵛⵛⵓⵎ ⵖⵔ ⵉⵙⵍⵎⴰⴷⵏ ⴷ ⵉⵎⵙⵜⴰⵢⵏ ⵏ ⵜⵎⵙⴰⵔⵉⵏ.',
+                'pp.s2.p2': 'ⵉⴱⵓⵔⵔⴰⵏⵏ ⵏ ⵓⵙⵏⴽⵔ ⵏ ⵜⵎⵙⴰⵔⵉⵏ ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵉⵣⴷⵉ ⴷ ⵉⵙⵓⵙⵙⵏ ⵉⴽⵕⵕⴹⵏ ⵏ ⵜⵖⵍⴼⵉⵜ ⵏ ⵉⵙⴼⴽⴰ ⵙⴳ ⵓⵣⵡⵍ, ⴷ ⵜⵜⵓⵎⴰⵢⵏⵜ ⵖ ⵓⵣⵎⵣ ⵏ ⵓⵙⴷⵖⵉ, ⵙ ⵓⵙⵙⵉⵜⵉⴹ ⵓⴷⵉⵙⴰⵏ ⴷ ⵓⵙⵏⵔⵏⵉ ⵏ ⵉⵙⵓⵙⵙⵏ ⵏ ⵜⵖⵍⴼⵉⵜ.',
+                'pp.s2.p3': 'ⵉⵙⴼⴽⴰ ⵜⵜⵓⵙⵙⴰⵔⴰⵎⵏ ⵖ ⵉⵙⵓⵏⴱⵓⵜⵏ ⵉⵙⵙⵉⵔⵏ ⵙⴳ Clever Cloud ⵍⵎⵖⵔⵉⴱ, ⴳ ⵉⵡⵙⴰⵏ ⵏ ⵉⵙⴼⴽⴰ ⵉⴳⵍⵍⵉⴷⵏ ⵖ ⵓⴽⴰⵍ ⴰⵎⵖⵔⴰⴱⵉ. ⵜⵣⵔⵉⴷ ⴰⵎⵣⵔⵓⵢ ⵅⴼ ⵜⵖⵍⴼⵉⵜ ⵖ: <a href="https://www.clever.cloud/security/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.clever.cloud/security/</a>',
+                // Section 3
+                'pp.s3.title': '3. ⴰⵙⵙⵎⵔⵙ ⵏ ⵉⵣⵔⴼⴰⵏ ⵏⵏⴽ',
+                'pp.s3.intro': 'ⵙ ⵓⵙⵔⵜⴰⵏ ⴰⵎⵖⵔⴰⴱⵉ 09-08, ⵖⵓⵔⴽ ⵉⵣⵔⴼⴰⵏ ⴰⴷ ⵅⴼ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵏⵏⴽ:',
+                'pp.s3.li1': 'ⵉⵣⵔⴼ ⵏ ⵓⴽⵛⵛⵓⵎ, ⵓⵙⵙⵖⵜⵉ, ⵓⵙⴷⵖⵉ ⴷ ⵓⴽⵎⵎⵍ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ (ⴰⵙⵔⵜⴰⵏ 09-08);',
+                'pp.s3.li2': 'ⵉⵣⵔⴼ ⵏ ⵓⴽⵛⵛⵓⵎ ⵏ ⵓⵙⴰⵔⴰⴳ ⴳ ⵡⴰⵙⵙ ⵢⵉⴳⴰⵏ (ⴰⵙⵔⵜⴰⵏ 09-08);',
+                'pp.s3.li3': 'ⵉⵣⵔⴼ ⵏ ⵓⵙⴽⵔⴼ ⵏ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ (ⴰⵙⵔⵜⴰⵏ 09-08);',
+                'pp.s3.li4': 'ⵉⵣⵔⴼ ⵏ ⵓⴳⵎⴰⵎ ⵅⴼ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ (ⴰⵙⵔⵜⴰⵏ 09-08);',
+                'pp.s3.li5': 'ⵉⵣⵔⴼ ⵏ ⵓⵙⵔⵓ ⵏ ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⵉⵜⵜⵓⵙⵙⵉⵜⵉⴹⵏ ⵙ ⵓⵙⴰⵔⴰⴳ ⵏⵏⴽ ⵏⵖ ⵙ ⵓⵙⵖⵣⵏ (ⴰⵙⵔⵜⴰⵏ 09-08);',
+                'pp.s3.li6': 'ⵉⵣⵔⴼ ⵏ ⵓⴽⴽⵙ ⵏ ⵉⵙⴼⴽⴰ ⵓⴷⵎⴰⵡⴰⵏⵏ ⵏⵏⴽ (ⴰⵙⵔⵜⴰⵏ 09-08).',
+                'pp.s3.p2': 'ⴽⵓ ⵓⵙⵓⵜⵔ ⵏ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵣⵔⴼⴰⵏ ⵉⵍⵍⴰ ⴷ ⵉⵏⵖⵎⵉⵙⵏ ⵉⵣⵓⵣⵣⵔⵏ ⵉ ⵓⵙⵙⵏ ⵏ ⵜⵡⵉⵙⵉ ⵏⵏⴽ. Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵃⵔⴰⵣ ⵉⵙⴼⴽⴰ ⵏ ⵓⵙⵙⵎⵔⵙ ⵏ ⵉⵣⵔⴼⴰⵏ ⵙ 1 ⴰⵙⴳⴳⵯⴰⵙ ⵙⴳ ⵜⵔⴰⵔⵓⵜ.',
+                'pp.s3.p3': 'ⵖⵓⵔⴽ ⴰⵡⴷ ⵉⵣⵔⴼ ⵏ ⵓⵙⴼⴽ ⵏ ⵉⵙⵉⵏⴼⵏ ⵅⴼ ⵉⵙⴼⴽⴰ ⵏⵏⴽ ⴰⵜⵔⴰⵙ ⵏ ⵜⵎⵜⵜⴰⵏⵜ ⵏⵏⴽ. ⵎⴽ ⵜⵎⵎⵓⵜⴷ ⵡⴰⵔ ⵉⵙⵉⵏⴼⵏ, Clever Cloud ⵍⵎⵖⵔⵉⴱ ⵜⵙⵙⵎⴽⵜⵉ ⴰⴷ ⵜⵙⵎⵢⵉ ⵉⵙⴼⴽⴰ ⵏⵏⴽ.',
+                'pp.s3.p4': 'ⵜⵖⵉⵎ ⴰⴷ ⵜⵙⵙⵎⵔⵙⴷ ⵉⵣⵔⴼⴰⵏ ⴰⴷ ⵙ ⵓⵣⵓⵣⵣⵔ ⵖ <a href="mailto:dpo@clever-cloud.com" class="text-[#5754aa] hover:underline">dpo@clever-cloud.com</a>.',
+                'pp.s3.p5': 'ⵜⵖⵉⵎ ⴰⵡⴷ ⴰⴷ ⵜⴼⴽⴷ ⵜⴰⵎⵍⵓⵙⵜ ⵖⵔ CNDP ⵏⵏⴰ ⵜⵣⵔⵉⴷ ⴰⵙⵉⵜ ⵏⵏⵙ ⵖ: <a href="https://www.cndp.ma/" target="_blank" rel="noopener noreferrer" class="text-[#5754aa] hover:underline">https://www.cndp.ma/</a>',
+                // Revision
+                'pp.rev.title': 'ⴰⵎⵣⵔⵓⵢ ⵏ ⵉⵙⵏⴼⴰⵍⵏ', 'pp.rev.col1': 'ⴰⵣⵎⵣ', 'pp.rev.col2': 'ⵉⵎⵙⴽⴰⵔⵏ',
+                'pp.rev.c1': 'ⴳ ⵓⵙⴰⵜⵉ, ⵜⵜⵓⵙⵙⵓⴼⵖ ⵜⵉⵎⵉⵜⴰⵔ ⵉ ⵓⵙⵖⵣⵏ ⵏ ⵓⵙⵙⵉⵜⵉⴹ ⵏ ⵉⵙⴼⴽⴰ (DPA) ⵏ Clever Cloud ⵍⵎⵖⵔⵉⴱ, ⵉⵎⵓⵍⵍⵓⵔⵏ ⵙ ⵓⵙⵔⵜⴰⵏ ⴰⵎⵖⵔⴰⴱⵉ 09-08.'
             }
         };
 
@@ -535,13 +748,11 @@
         const currentLang = document.getElementById('currentLang');
         const langOptions = document.querySelectorAll('.lang-option');
 
-        // Get language from URL query parameter
         function getLangFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('lang');
         }
 
-        // Update URL with language query parameter
         function updateURL(lang) {
             const urlParams = new URLSearchParams(window.location.search);
             if (lang === 'en') {
@@ -554,26 +765,21 @@
             window.history.pushState({}, '', newURL);
         }
 
-        // Toggle dropdown
         langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             langDropdown.classList.toggle('hidden');
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', () => {
             langDropdown.classList.add('hidden');
         });
 
-        // Language selection
         langOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const lang = option.getAttribute('data-lang');
                 const langName = option.getAttribute('data-name');
-
                 currentFlag.innerHTML = option.querySelector('svg').outerHTML;
                 currentLang.textContent = langName;
-
                 applyTranslations(lang);
                 updateURL(lang);
                 langDropdown.classList.add('hidden');
@@ -581,7 +787,6 @@
             });
         });
 
-        // Initialize with URL language, saved language, or default to English
         const urlLang = getLangFromURL();
         const savedLang = localStorage.getItem('language');
         const initialLang = urlLang || savedLang || 'en';
@@ -591,7 +796,6 @@
             currentFlag.innerHTML = initialOption.querySelector('svg').outerHTML;
             currentLang.textContent = initialOption.getAttribute('data-name');
             applyTranslations(initialLang);
-
             if (!urlLang && initialLang !== 'en') {
                 updateURL(initialLang);
             }
@@ -599,40 +803,27 @@
 
         function applyTranslations(lang) {
             const isRTL = lang === 'ar' || lang === 'ber';
-            const docEl = document.documentElement;
-
-            docEl.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-            docEl.setAttribute('lang', lang);
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', lang);
             document.body.style.textAlign = isRTL ? 'right' : 'left';
 
             const langData = translations[lang];
             if (!langData) return;
 
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(el => {
+            document.querySelectorAll('[data-translate]').forEach(el => {
                 const key = el.getAttribute('data-translate');
                 const translation = langData[key];
-
                 if (!translation) return;
-
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = translation;
-                } else {
-                    el.innerHTML = translation;
-                }
+                el.innerHTML = translation;
             });
 
-            // Update copyright year dynamically
             updateCopyrightYear();
         }
 
-        // Function to update copyright year dynamically
         function updateCopyrightYear() {
             const currentYear = new Date().getFullYear();
             const yearSpan = document.getElementById('currentYear');
-            if (yearSpan) {
-                yearSpan.textContent = currentYear;
-            }
+            if (yearSpan) yearSpan.textContent = currentYear;
 
             const copyrightText = document.getElementById('copyrightText');
             if (copyrightText) {
@@ -640,13 +831,44 @@
                 const langData = translations[lang];
                 if (langData && langData['footer.copyright']) {
                     const copyrightWithYear = langData['footer.copyright'].replace('{year}', currentYear);
-                    copyrightText.innerHTML = copyrightWithYear.replace(currentYear, `<span id="currentYear">${currentYear}</span>`);
+                    copyrightText.innerHTML = copyrightWithYear.replace(String(currentYear), `<span id="currentYear">${currentYear}</span>`);
                 }
             }
         }
 
-        // Initialize copyright year
         updateCopyrightYear();
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        let isOpen = false;
+
+        function toggleMenu() {
+            isOpen = !isOpen;
+            if (isOpen) {
+                sidebar.style.maxHeight = '450px';
+                sidebar.style.opacity = '1';
+                menuBtn.innerHTML = `
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>`;
+            } else {
+                sidebar.style.maxHeight = '0';
+                sidebar.style.opacity = '0';
+                menuBtn.innerHTML = `
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>`;
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Mark translations as loaded
+        document.body.classList.add('translations-loaded');
     </script>
 </body>
 </html>
